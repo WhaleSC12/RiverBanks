@@ -9,8 +9,9 @@ public class Comment {
         this.author = author;
         this.content = content;
     }
-    public ArrayList<Comment> fetchReplies(){
 
+    public ArrayList<Comment> fetchReplies() {
+        return replyList;
     }
 
     @Override

@@ -1,3 +1,4 @@
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -10,7 +11,8 @@ public class RegisteredUser {
     protected String UID;
     protected String username;
     protected String password;
-    private ArrayList<Course,Integer> courses;
+    // <Course, Completed Lessons>
+    private ArrayList<AbstractMap.SimpleEntry<Course,Integer>> courses;
 
     public RegisteredUser(String firstName, String lastName, String email, Date dateOfBirth, String phoneNumber, String username, String password) {
         this.firstName = firstName;
@@ -25,6 +27,6 @@ public class RegisteredUser {
 
     }
     public double getCourseProgress(Course course){
-
+        return 0; // TODO: much wow, very yes
     }
 }

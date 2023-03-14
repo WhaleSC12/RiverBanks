@@ -15,11 +15,12 @@ public class Course {
         this.author = author;
     }
 
-    public double getProgress(){
-
+    public double getProgress(double userProgress) {
+        return userProgress/lessons.size();
     }
-    public ArrayList<Comment> getComments(){
 
+    public ArrayList<Comment> getComments() {
+        return comments;
     }
 
 }

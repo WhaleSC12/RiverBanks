@@ -14,6 +14,6 @@ public class Lesson {
     }
 
     public Comment getResponse() {
-
+        return response;
     }
 }
