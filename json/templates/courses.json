@@ -1,0 +1,38 @@
+{
+  "UUID": {
+    "AuthorUUID": "AuthorUUID",
+    "Lessons": [
+      {
+        "Title": "Title",
+        "Content": "Content",
+        "Test": [
+          {
+            "Question": "QuestionPrompt",
+            "Answers": [
+              {
+                "text": "answerTextShownToStudent",
+                "correct": 0
+              },
+              {}
+            ]
+          },
+          {}
+        ]
+      },
+      {}
+    ],
+    "Test": [
+      {
+        "Question": "QuestionPrompt",
+        "Answers": [
+          {
+            "text": "answerTextShownToStudent",
+            "correct": 0
+          },
+          {}
+        ]
+      },
+      {}
+    ]
+  }
+}
