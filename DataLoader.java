@@ -2,6 +2,8 @@
  * Data Load loads the users
  */
 
+import java.time.LocalDate;
+import java.util.Locale;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -27,7 +29,7 @@ public class DataLoader extends DataConstants {
                 String firstName = (String) userJSON.get(USERS_FIRST_NAME);
                 String lastName = (String) userJSON.get(USERS_LAST_NAME);
                 String email = (String) userJSON.get(USERS_EMAIL_STRING);
-                String DOB = (String) userJSON.get(USERS_DOB);// have to change from type String to type Date
+                LocalDate DOB = (LocalDate) userJSON.get(USERS_DOB);// have to change from type String to type Date
                 String phoneNumber = (String) userJSON.get(USERS_PHONE_NUMBER);
                 String userName = (String) userJSON.get(USERS_USER_NAME);
                 String password = (String) userJSON.get(USERS_PASSWORD);
