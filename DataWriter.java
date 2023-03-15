@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.UUID;
 
 public class DataWriter {
     private static final String UserFilePath = "json/dat/users.json"; // to point refs later more easily
@@ -20,7 +21,7 @@ public class DataWriter {
     public static int writeUser(RegisteredUser user) {
 
         // putting all references to RegisteredUser user at top to improve readability
-        String userUUID = user.getUID();
+        UUID userUUID = user.getUID();
         HashMap<String, Object> tempData = new HashMap<>();
         tempData.put("firstName", user.getFirstName());
         tempData.put("lastName", user.getLastName());
@@ -42,6 +43,7 @@ public class DataWriter {
 
         // outdated library using raw data. nice yellow highlight for me. lovely.
         // note this will simply create a new entry if the current UUID does not exist
+        // and if the uuid does exist, old will have the old value, else null
         var old = allData.put(userUUID, tempData);
 
         // write back to json
