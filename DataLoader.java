@@ -5,14 +5,9 @@
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
-import java.util.UUID;
 
 ;
 
@@ -50,57 +45,5 @@ public class DataLoader extends DataConstants {
         return null;
     }
 
-    /**
-     * Writes the user into users.json to be saved
-     *
-     * @param user the user to be written into storage
-     * @return 0 on success, -1 if file not found, -2 if failed to parse existing data
-     * @author Raymond
-     */
-    public static int writeUser(RegisteredUser user) {
 
-        // NOTE: we should really just hash using UID as the key
-
-        // doesn't currenlty encode lessondata
-        JSONObject data = new JSONObject();
-        data.put(USERS_FIRST_NAME, user.getFirstName());
-        data.put(USERS_LAST_NAME, user.getLastName());
-        data.put(USERS_EMAIL_STRING, user.getEmail());
-        data.put(USERS_DOB, user.getDateOfBirth());
-        data.put(USERS_PHONE_NUMBER, user.getPhoneNumber());
-        data.put(USERS_USER_NAME, user.getUsername());
-        data.put(USERS_PASSWORD, user.getPassword());
-        JSONObject studentDat = new JSONObject();
-        studentDat.put("id", user.getUID());
-        data.put("Students", studentDat);
-
-        // userData is basically the whole file
-        JSONArray userData;
-        try (FileReader reader = new FileReader(USERS_FILE_NAME)) {
-            userData = (JSONArray) new JSONParser().parse(reader);
-        } catch (IOException e) {
-            return -1;
-        } catch (ParseException e) {
-            return -2;
-        }
-
-        // check if user already exists
-        boolean found = false;
-        for (int i = 0; i < userData.size(); i++) { // can't generify? :(
-            JSONObject objectData = (JSONObject) userData.get(i);
-            boolean isTeacher = (boolean) objectData.get("isTeacher");
-            // not sure what to do about teachers since they have no id
-            String studentID = (String) ((JSONObject) objectData.get("Students")).get("id");
-            if (Objects.equals(user.getUID(), studentID)) {
-                userData.set(i, data);
-                found = true;
-                break;
-            }
-        }
-        if (!found) userData.add(data);
-
-
-
-        return 0;
-    }
 }
