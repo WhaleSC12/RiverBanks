@@ -5,7 +5,7 @@ public class Teacher extends RegisteredUser {
 
     private ArrayList<Course> courseList;
 
-    public Teacher(String firstName, String lastName, String email, Date dateOfBirth, String phoneNumber, String username, String password) {
+    public Teacher(String firstName, String lastName, String email, String dateOfBirth, String phoneNumber, String username, String password) {
         super(firstName, lastName, email, dateOfBirth, phoneNumber, username, password);
     }
 
