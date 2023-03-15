@@ -13,6 +13,16 @@ public class RegisteredUser {
     protected String UID;
     protected String username;
 
+    public String getClearance() {
+        return clearance;
+    }
+
+    public void setClearance(String clearance) {
+        this.clearance = clearance;
+    }
+
+    protected String clearance;
+
     public String getUsername() {
         return username;
     }
