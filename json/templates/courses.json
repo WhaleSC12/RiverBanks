@@ -1,5 +1,10 @@
 {
+  "Languages": {
+
+  },
   "UUID": {
+    "LessonTitle": "LessonTitle",
+    "Lanugage": "LanguageNumberFromLanguagesToCompareAgainst",
     "AuthorUUID": "AuthorUUID",
     "Lessons": [
       {
