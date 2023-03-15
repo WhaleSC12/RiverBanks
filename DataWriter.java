@@ -14,7 +14,7 @@ public class DataWriter {
      * Writes the user into users.json to be saved
      *
      * @param user the user to be written into storage
-     * @return 0 on success, -1 if user does not exist, -2 if failed to open file, -3 if failed to parse json
+     * @return 1 if newly created, 0 if overwrote existing, -1 if user does not exist, -2 if failed to open file, -3 if failed to parse json
      * @author Raymond
      */
     public static int writeUser(RegisteredUser user) {
@@ -40,9 +40,9 @@ public class DataWriter {
             return -3;
         }
 
-        // lovely. outdated library using raw data. nice yellow highlight for me.
+        // outdated library using raw data. nice yellow highlight for me. lovely.
         // note this will simply create a new entry if the current UUID does not exist
-        allData.put(userUUID, tempData);
+        var old = allData.put(userUUID, tempData);
 
         // write back to json
         try (FileWriter fileWriter = new FileWriter(UserFilePath)) {
@@ -51,6 +51,7 @@ public class DataWriter {
             return -2;
         }
 
-        return 0;
+        // old will be null if there was no existing data at allData.userUUID
+        return (old == null) ? 1 : 0;
     }
 }
