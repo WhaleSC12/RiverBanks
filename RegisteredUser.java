@@ -3,6 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.UUID;
 
 public class RegisteredUser {
     protected String firstName;
@@ -10,7 +11,7 @@ public class RegisteredUser {
     protected String email;
     protected LocalDate dateOfBirth;
     protected String phoneNumber;
-    protected String UID;
+    protected UUID UID;
     protected String username;
 
     public String getClearance() {
@@ -63,7 +64,7 @@ public class RegisteredUser {
         return courses;
     }
 
-    public String getUID() {
+    public UUID getUID() {
         return UID;
     }
 
