@@ -1,111 +1,115 @@
 [
-"type","student",
-{ 
-    "firstname" : "Bob",
-    "lastname" : "Hillton", 
-    "email" : "BobHillton11@gmail.com",
+  "type",
+  "student",
+  {
+    "firstname": "Bob",
+    "lastname": "Hillton",
+    "email": "BobHillton11@gmail.com",
     "password": "Password123",
-    
-    "Students": [ 
-    { 
+    "Students": [
+      {
         "id": "33",
-        "lessonsCompleted": 4, 
-        "grades": [9.9,7.88,2.33] 
-    }
-],
-"isTeacher": 0,
-"createdCourse": []
-},
-
-"type","student",{ 
-    "firstname" : " Tim",
-    "lastname" : "Thompson", 
-    "email" : "ThompsonTimmy@gmail.com",
+        "lessonsCompleted": 4,
+        "grades": [
+          9.9,
+          7.88,
+          2.33
+        ]
+      }
+    ],
+    "isTeacher": 0,
+    "createdCourse": []
+  },
+  "type",
+  "student",
+  {
+    "firstname": " Tim",
+    "lastname": "Thompson",
+    "email": "ThompsonTimmy@gmail.com",
     "password": "TimTim22",
-    
-"isTeacher": 0,
-"createdCourse": [],
-"Students": [ 
-    { 
+    "isTeacher": 0,
+    "createdCourse": [],
+    "Students": [
+      {
         "id": "78",
-        "lessonsCompleted": 3, 
-        "grades": [10,8.66,7.89] 
-    }
-]
-},
-
-{ 
-    "firstname" : "Hank",
-    "lastname" : "Stauk", 
-    "email" : "StaukHam33@gmail,com",
+        "lessonsCompleted": 3,
+        "grades": [
+          10,
+          8.66,
+          7.89
+        ]
+      }
+    ]
+  },
+  {
+    "firstname": "Hank",
+    "lastname": "Stauk",
+    "email": "StaukHam33@gmail,com",
     "password": "Stawk14Hank",
-"isTeacher": 1,
-"createdCourse": [1],
-"Lesson": [
-    { 
+    "isTeacher": 1,
+    "createdCourse": [
+      1
+    ],
+    "Lesson": [
+      {
         "number": 1,
         "title": "What's python",
         "contents": "intro the python powerpoint",
         "LessonQuestions": [
-            { 
-                "Question": 1,
-                "prompt":"What is 1+1",
-                "answers":
-                [
-                    {
-                        "answer":"1",
-                        "correct": 0
-                    },
-                    { 
-                        "answer": "2",
-                        "correct": 1
-                    }
-                ]
-            },
-            { 
-                "Question": 62,
-                "prompt":"Is coding important?",
-                "answers":[
-                    { 
-                        "answer":" Yes, it's used in almost all the technology we use",
-                        "correct": 1
-                    },
-                    { 
-                        "answer":"Naw, it for lonely people",
-                        "correct":0
-                    },
-                    { 
-                        "answer":"Only a little bit",
-                        "correct":0 
-                    },
-                    { 
-                        "answer":"I don't know, i didn't look at the powerpoint :( ",
-                        "correct":0
-                    }
-                ]
-            },
-            {}
+          {
+            "Question": 1,
+            "prompt": "What is 1+1",
+            "answers": [
+              {
+                "answer": "1",
+                "correct": 0
+              },
+              {
+                "answer": "2",
+                "correct": 1
+              }
+            ]
+          },
+          {
+            "Question": 62,
+            "prompt": "Is coding important?",
+            "answers": [
+              {
+                "answer": " Yes, it's used in almost all the technology we use",
+                "correct": 1
+              },
+              {
+                "answer": "Naw, it for lonely people",
+                "correct": 0
+              },
+              {
+                "answer": "Only a little bit",
+                "correct": 0
+              },
+              {
+                "answer": "I don't know, i didn't look at the powerpoint :( ",
+                "correct": 0
+              }
+            ]
+          },
+          {}
         ]
-
-    }
-],
-"finalExamQuestions": [ 
-    { 
-"prompt": "what is 4*4",
-"answers":[ 
-    { 
-        "answer":"10",
-        "correct":0
-    },
-    { 
-      "answer":"16",
-      "coorect":1  
-    }
-]
-    }
-]
-}
-
-
-
+      }
+    ],
+    "finalExamQuestions": [
+      {
+        "prompt": "what is 4*4",
+        "answers": [
+          {
+            "answer": "10",
+            "correct": 0
+          },
+          {
+            "answer": "16",
+            "coorect": 1
+          }
+        ]
+      }
+    ]
+  }
 ]
