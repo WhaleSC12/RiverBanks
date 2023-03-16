@@ -1,7 +1,6 @@
 import java.util.ArrayList;
-import java.util.Date;
 
-public class Teacher extends RegisteredUser {
+public class Teacher extends User {
 
     private ArrayList<Course> courseList;
 
