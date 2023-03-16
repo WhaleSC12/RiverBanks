@@ -1,36 +1,22 @@
 {
-
-  "UUID": {
-    "LessonTitle": "LessonTitle",
-    "Lanugage": "C++|Python|etc. (not safe but easier to use)",
-    "AuthorUUID": "AuthorUUID",
-    "Lessons": [
+  "courseUUID": {
+    "courseTitle": "CourseTitle",
+    "language": "C++|Python|etc. (not safe but easier to use)",
+    "authorUUID": "AuthorUUID",
+    "lessons": [
       {
-        "Title": "Title",
-        "Content": "Content",
-        "Test": [
+        "title": "Title",
+        "content": "Content",
+        "test": [
           {
-            "Question": "QuestionPrompt",
-            "Answers": [
+            "question": "QuestionPrompt",
+            "answers": [
               {
                 "text": "answerTextShownToStudent",
                 "correct": 0
               },
               {}
             ]
-          },
-          {}
-        ]
-      },
-      {}
-    ],
-    "Test": [
-      {
-        "Question": "QuestionPrompt",
-        "Answers": [
-          {
-            "text": "answerTextShownToStudent",
-            "correct": 0
           },
           {}
         ]
