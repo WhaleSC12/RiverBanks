@@ -1,7 +1,6 @@
 {
-  "userUUID": [
-    {
-      "courseUUID": "CourseUUID",
+  "userUUID": {
+    "courseUUID": {
       "lessonsCompleted": 0,
       "lessonGrades": [
         0,
@@ -10,5 +9,5 @@
       ],
       "finalGrade": 0
     }
-  ]
+  }
 }

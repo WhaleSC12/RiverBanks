@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.UUID;
 
 /**
@@ -64,25 +65,37 @@ public abstract class User {
         this.clearance = clearance;
     }
 
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
     private final UUID uuid;
     private String username;
     private String password;
     private String firstName;
     private String lastName;
+    private LocalDate dateOfBirth;
+
+
     private String email;
     private String phoneNumber;
     private String clearance;
 
     /**
      * Constructor meant to be called when loading user from existing data
-     * @param uuid UserUniqueIdentifier, the unique string used to differentiate users
-     * @param username Username the user uses to log in
-     * @param password Password the user uses to log in
-     * @param firstName User's first name
-     * @param lastName User's last name
-     * @param email User's email address
+     *
+     * @param uuid        UserUniqueIdentifier, the unique string used to differentiate users
+     * @param username    Username the user uses to log in
+     * @param password    Password the user uses to log in
+     * @param firstName   User's first name
+     * @param lastName    User's last name
+     * @param email       User's email address
      * @param phoneNumber User's phone number
-     * @param clearance User's clearance level
+     * @param clearance   User's clearance level
      */
     public User(UUID uuid, String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) {
         this.uuid = uuid;
@@ -99,13 +112,14 @@ public abstract class User {
     /**
      * Constructor meant to be called when creating a new user
      * Generates a new UUID and assigns it on construction
-     * @param username Username the user uses to log in
-     * @param password Password the user uses to log in
-     * @param firstName User's first name
-     * @param lastName User's last name
-     * @param email User's email address
+     *
+     * @param username    Username the user uses to log in
+     * @param password    Password the user uses to log in
+     * @param firstName   User's first name
+     * @param lastName    User's last name
+     * @param email       User's email address
      * @param phoneNumber User's phone number
-     * @param clearance User's clearance level
+     * @param clearance   User's clearance level
      */
     public User(String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) {
         this.uuid = UUID.randomUUID();
@@ -120,15 +134,6 @@ public abstract class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "uuid=" + uuid +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", clearance='" + clearance + '\'' +
-                '}';
+        return "User{" + "uuid=" + uuid + ", username='" + username + '\'' + ", password='" + password + '\'' + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", email='" + email + '\'' + ", phoneNumber='" + phoneNumber + '\'' + ", clearance='" + clearance + '\'' + '}';
     }
 }
