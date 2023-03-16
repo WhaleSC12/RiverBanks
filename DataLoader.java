@@ -29,13 +29,12 @@ public class DataLoader extends DataConstants {
                 String firstName = (String) userJSON.get(USERS_FIRST_NAME);
                 String lastName = (String) userJSON.get(USERS_LAST_NAME);
                 String email = (String) userJSON.get(USERS_EMAIL_STRING);
-                LocalDate DOB = (LocalDate) userJSON.get(USERS_DOB);// have to change from type String to type Date
+                String DOB = (String) userJSON.get(USERS_DOB);// have to change from type String to type Date
                 String phoneNumber = (String) userJSON.get(USERS_PHONE_NUMBER);
                 String userName = (String) userJSON.get(USERS_USER_NAME);
                 String password = (String) userJSON.get(USERS_PASSWORD);
-                /* got to change DOB type to Date and gotta ask Portia or a TA
-                 * users.add(new RegisteredUser(firstName, lastName, email, DOB, phoneNumber, userName, password));
-                 */
+                
+                 users.add(new RegisteredUser(firstName, lastName, email, DOB, phoneNumber, userName, password));
             }
 
             return users;
