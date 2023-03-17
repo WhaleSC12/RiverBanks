@@ -134,6 +134,16 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "uuid=" + uuid + ", username='" + username + '\'' + ", password='" + password + '\'' + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", email='" + email + '\'' + ", phoneNumber='" + phoneNumber + '\'' + ", clearance='" + clearance + '\'' + '}';
+        return "User{" +
+                "uuid=" + uuid +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", clearance='" + clearance + '\'' +
+                '}';
     }
 }
