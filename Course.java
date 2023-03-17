@@ -1,38 +1,9 @@
+import org.json.simple.JSONObject;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
 public class Course {
-    private String title;
-    private String description;
-    private User author;
-    private ArrayList<Lesson> lessons;
-    private int userProgress;
-    private Language language;
-    private UUID uuid;
-
-    public Course(String title, String description, User author, ArrayList<Lesson> lessons, int userProgress, Language language, double finalGrade) {
-        this.uuid = UUID.randomUUID();
-        this.title = title;
-        this.description = description;
-        this.author = author;
-        this.lessons = lessons;
-        this.userProgress = userProgress;
-        this.language = language;
-        this.finalGrade = finalGrade;
-    }
-
-    public Course(String title, String description, User author, ArrayList<Lesson> lessons, int userProgress, Language language, UUID uuid, double finalGrade) {
-        this.title = title;
-        this.description = description;
-        this.author = author;
-        this.lessons = lessons;
-        this.userProgress = userProgress;
-        this.language = language;
-        this.uuid = uuid;
-        this.finalGrade = finalGrade;
-    }
-
-    private double finalGrade;
 
     public double getFinalGrade() {
         return finalGrade;
@@ -44,11 +15,6 @@ public class Course {
 
     public UUID getUUID() {
         return uuid;
-    }
-
-    public Course(String title, User author) {
-        this.title = title;
-        this.author = author;
     }
 
     public String getTitle() {
@@ -67,12 +33,12 @@ public class Course {
         this.description = description;
     }
 
-    public User getAuthor() {
-        return author;
+    public UUID getAuthorUUID() {
+        return authorUUID;
     }
 
-    public void setAuthor(User author) {
-        this.author = author;
+    public void setAuthorUUID(UUID authorUUID) {
+        this.authorUUID = authorUUID;
     }
 
     public ArrayList<Lesson> getLessons() {
@@ -99,6 +65,47 @@ public class Course {
         this.language = language;
     }
 
+    private String title;
+    private String description;
+    private UUID authorUUID;
+    private ArrayList<Lesson> lessons;
+    private int userProgress;
+    private Language language;
+    private final UUID uuid;
+    private double finalGrade;
+
+    public Course(String title, String description, UUID authorUUID, ArrayList<Lesson> lessons, int userProgress, Language language, double finalGrade) {
+        this.uuid = UUID.randomUUID();
+        this.title = title;
+        this.description = description;
+        this.authorUUID = authorUUID;
+        this.lessons = lessons;
+        this.userProgress = userProgress;
+        this.language = language;
+        this.finalGrade = finalGrade;
+    }
+
+    public Course(String title, String description, UUID authorUUID, ArrayList<Lesson> lessons, int userProgress, Language language, UUID uuid, double finalGrade) {
+        this.title = title;
+        this.description = description;
+        this.authorUUID = authorUUID;
+        this.lessons = lessons;
+        this.userProgress = userProgress;
+        this.language = language;
+        this.uuid = uuid;
+        this.finalGrade = finalGrade;
+    }
+
+    public JSONObject getUserCourseData() {
+        JSONObject stuff = new JSONObject();
+        stuff.put("courseTitle", title);
+        stuff.put("description", description);
+        stuff.put("authorUUID", authorUUID.toString()); // FIX
+        stuff.put("language", language.toString());
+        stuff.put("lessons", null); // TODO properly implement jsonaware instead of this trash
+        return stuff;
+    }
+
     /**
      * @return returns an arraylist of a student's grades in each lesson (this is in the same order as the lesson arraylist)
      */
@@ -106,6 +113,17 @@ public class Course {
         ArrayList<Double> grades = new ArrayList<>();
         for (var l : lessons) grades.add(l.getGrade());
         return grades;
+    }
+
+    private void appendToStringBuilderJSONStyle(String key, String value, StringBuilder sb) {
+        // looks like "key":"value"
+        sb.append('"');
+        sb.append(key);
+        sb.append('"');
+        sb.append(":");
+        sb.append('"');
+        sb.append(value);
+        sb.append('"');
     }
 
 }

@@ -1,13 +1,6 @@
 import javax.xml.stream.events.Comment;
 
 public class Lesson {
-    private String title;
-    private String description;
-    private String topic;
-    private String content;
-    private Test test;
-    private Comment response;
-    private double grade;
 
     public Lesson(String title, String description) {
         this.title = title;
@@ -54,10 +47,6 @@ public class Lesson {
         this.test = test;
     }
 
-    public void setResponse(Comment response) {
-        this.response = response;
-    }
-
     public double getGrade() {
         return grade;
     }
@@ -66,7 +55,10 @@ public class Lesson {
         this.grade = grade;
     }
 
-    public Comment getResponse() {
-        return response;
-    }
+    private String title;
+    private String description;
+    private String topic;
+    private String content;
+    private Test test;
+    private double grade;
 }
