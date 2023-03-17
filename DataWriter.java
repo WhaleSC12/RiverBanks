@@ -1,4 +1,5 @@
 import org.json.simple.JSONArray;
+import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -38,7 +39,7 @@ public class DataWriter {
          * @throws IOException    if the given file does not exist, IOException is thrown
          * @throws ParseException if the given JSON cannot be parsed, ParseException is thrown
          */
-        protected JSONWriter(String filePath) throws IOException, ParseException {
+        public JSONWriter(String filePath) throws IOException, ParseException {
             this.filePath = filePath;
             this.root = fetchRoot(filePath);
         }
@@ -81,22 +82,26 @@ public class DataWriter {
         /**
          * Write the data at newData into the JSON file used to create this writer.
          * This empties the key stack and sets the current object to the root, returning the writer to its default.
+         * To write with this, an Object must be JSONAware. This can either be done by manually filling a new JSONObject
+         * or JSONArray with values, or by implementing the JSONAware interface.
          *
-         * @param newData data to be written into the object at the current position
+         * @param newData JSONAware object to be written into the file opened on instantiation of this writer
          * @return -1 on failure (IOException), else 0
          */
-        protected int write(JSONObject newData) {
-            JSONObject currentJSONObject = newData;
+        protected int write(JSONAware newData) {
+            JSONAware data = newData;
             // logarithmic complexity go BRRRRRR
             while (!keyStack.isEmpty()) {
-                JSONObject place = root;
+                JSONObject currentObject = root;
                 String backwardKey = keyStack.pop();
-                for (String forwardKey : keyStack) place = (JSONObject) place.get(forwardKey);
-                place.put(backwardKey, currentJSONObject);
-                currentJSONObject = place;
+                for (String forwardKey : keyStack) currentObject = (JSONObject) currentObject.get(forwardKey);
+                currentObject.put(backwardKey, data);
+                data = currentObject;
             }
             try (FileWriter fileWriter = new FileWriter(filePath)) {
-                currentJSONObject.writeJSONString(fileWriter);
+                // after traversing the keystack, we should return to root,
+                // and thus can now write out without modifying the rest of the file
+                root.writeJSONString(fileWriter);
             } catch (IOException e) {
                 return -1;
             }
@@ -112,23 +117,10 @@ public class DataWriter {
      * @return -1 on failure, 0 otherwise
      */
     public static int writeUserData(User user) {
-        // putting all references to RegisteredUser user at top to improve readability
-        UUID userUUID = user.getUUID();
-        JSONObject tempData = new JSONObject();
-        tempData.put("firstName", user.getFirstName());
-        tempData.put("lastName", user.getLastName());
-        tempData.put("dateOfBirth",user.getDateOfBirth().toString());
-        tempData.put("email", user.getEmail());
-        tempData.put("phoneNumber", user.getPhoneNumber());
-        tempData.put("clearance", user.getClearance());
-        tempData.put("username", user.getUsername());
-        tempData.put("password", user.getPassword());
-
-
         try {
             return new JSONWriter(USERS_JSON)
-                    .atKey(userUUID.toString())
-                    .write(tempData);
+                    .atKey(user.getUUID().toString())
+                    .write(user);
         } catch (IOException | ParseException e) {
             return -1;
         }
@@ -168,7 +160,7 @@ public class DataWriter {
         courseData.put("courseTitle", course.getTitle());
         courseData.put("description", course.getDescription());
         courseData.put("language", course.getLanguage());
-        courseData.put("authorUUID", course.getAuthor().getUUID());
+        courseData.put("authorUUID", course.getAuthorUUID().toString());
         JSONArray lessonList = new JSONArray();
         for (Lesson l : course.getLessons()) {
             Test test = l.getTest();

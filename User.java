@@ -1,10 +1,12 @@
+import org.json.simple.JSONAware;
+
 import java.time.LocalDate;
 import java.util.UUID;
 
 /**
  * Basic abstract user to provide functionality to teachers and students
  */
-public class User {
+public class User implements JSONAware {
     public UUID getUUID() {
         return uuid;
     }
@@ -145,5 +147,42 @@ public class User {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", clearance='" + clearance + '\'' +
                 '}';
+    }
+
+    private void appendToStringBuilderJSONStyle(String key, String value, StringBuilder sb) {
+        // looks like "key":"value"
+        sb.append('"');
+        sb.append(key);
+        sb.append('"');
+        sb.append(":");
+        sb.append('"');
+        sb.append(value);
+        sb.append('"');
+    }
+
+    @Override
+    public String toJSONString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append('{');
+
+        appendToStringBuilderJSONStyle("firstName", firstName, sb);
+        sb.append(',');
+        appendToStringBuilderJSONStyle("lastName", lastName, sb);
+        sb.append(',');
+        appendToStringBuilderJSONStyle("email", email, sb);
+        sb.append(',');
+        appendToStringBuilderJSONStyle("phoneNumber", phoneNumber, sb);
+        sb.append(',');
+        appendToStringBuilderJSONStyle("dateOfBirth", dateOfBirth.toString(), sb);
+        sb.append(',');
+        appendToStringBuilderJSONStyle("username", username, sb);
+        sb.append(',');
+        appendToStringBuilderJSONStyle("password", password, sb);
+        sb.append(',');
+        appendToStringBuilderJSONStyle("clearance", clearance, sb);
+
+        sb.append('}');
+
+        return sb.toString();
     }
 }
