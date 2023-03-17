@@ -11,8 +11,14 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.UUID;
 
+/**
+ * Used to write user and course data into their respective JSONs.
+ * This is achieved by pulling the entire JSON file into memory,
+ * replacing the part we want saved with new data,
+ * then writing back to the JSON.
+ */
 public class DataWriter {
-    private static final String USERS_JSON = "json/dat/users.json"; // to point refs later more easily
+    private static final String USERS_JSON = "json/dat/users.json"; // to point refs later more easily, ideally we use a singleton or something
     private static final String USER_COURSE_DATA_JSON = "json/dat/userCourseData.json";
     private static final String COURSES_JSON = "json/dat/courses.json";
 
