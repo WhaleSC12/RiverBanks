@@ -4,13 +4,13 @@ import java.util.UUID;
 public class Course {
     private String title;
     private String description;
-    private Teacher author;
+    private User author;
     private ArrayList<Lesson> lessons;
     private int userProgress;
     private Language language;
     private UUID uuid;
 
-    public Course(String title, String description, Teacher author, ArrayList<Lesson> lessons, int userProgress, Language language, double finalGrade) {
+    public Course(String title, String description, User author, ArrayList<Lesson> lessons, int userProgress, Language language, double finalGrade) {
         this.uuid = UUID.randomUUID();
         this.title = title;
         this.description = description;
@@ -21,7 +21,7 @@ public class Course {
         this.finalGrade = finalGrade;
     }
 
-    public Course(String title, String description, Teacher author, ArrayList<Lesson> lessons, int userProgress, Language language, UUID uuid, double finalGrade) {
+    public Course(String title, String description, User author, ArrayList<Lesson> lessons, int userProgress, Language language, UUID uuid, double finalGrade) {
         this.title = title;
         this.description = description;
         this.author = author;
@@ -46,7 +46,7 @@ public class Course {
         return uuid;
     }
 
-    public Course(String title, Teacher author) {
+    public Course(String title, User author) {
         this.title = title;
         this.author = author;
     }
@@ -67,11 +67,11 @@ public class Course {
         this.description = description;
     }
 
-    public Teacher getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(Teacher author) {
+    public void setAuthor(User author) {
         this.author = author;
     }
 
