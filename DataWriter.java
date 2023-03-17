@@ -6,9 +6,9 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 import java.util.UUID;
 
 public class DataWriter {
@@ -16,80 +16,85 @@ public class DataWriter {
     private static final String USER_COURSE_DATA_JSON = "json/dat/userCourseData.json";
     private static final String COURSES_JSON = "json/dat/courses.json";
 
+    /**
+     * Writes into the given file at a certain point. Created for use with JSON files structured around Hashmaps,
+     * does not support adding arrays
+     * Use .atKey() to traverse down from the root until you reach the key whose value you wish to replace,
+     * then use .write() to write in the data you want at that value
+     */
     private static class JSONWriter {
-        private String filePath;
-        private JSONObject allData;
-        private JSONObject currentJSONObject;
-        private ArrayList<UUID> keyStack = new ArrayList<>();
+        private final String filePath;
+        private final JSONObject root;
+        private Stack<String> keyStack = new Stack<>();
 
-        protected JSONWriter(String filePath) {
+        /**
+         * @param filePath JSON file which contains the object being written into
+         * @throws IOException    if the given file does not exist, IOException is thrown
+         * @throws ParseException if the given JSON cannot be parsed, ParseException is thrown
+         */
+        protected JSONWriter(String filePath) throws IOException, ParseException {
             this.filePath = filePath;
+            this.root = fetchRoot(filePath);
         }
 
-        protected JSONWriter obj(UUID key) {
-            currentJSONObject = (JSONObject) currentJSONObject.get(key);
+        /**
+         * Fetches the JSON object from the given file
+         *
+         * @param targetFile file which contains the json object
+         * @return the JSON object from the file
+         */
+        private JSONObject fetchRoot(String targetFile) throws IOException, ParseException {
+            FileReader fileReader = new FileReader(targetFile);
+            return (JSONObject) new JSONParser().parse(fileReader);
+        }
+
+        /**
+         * Use to traverse downwards from the root in the JSON file this JSONWriter was created at
+         * Can be chained
+         *
+         * @param key key of the value being traversed into
+         * @return returns an instance of self for the purpose of method chaining
+         */
+        protected JSONWriter atKey(String key) {
             keyStack.add(key);
             return this;
         }
 
-        protected void write() {
+        /**
+         * @return the current value the JSONWriter is at from .at()
+         * if no traversal has been initiated, will return root
+         */
+        protected JSONObject getCurrentJSONObject() {
+            JSONObject place = root;
+            for (String forwardKey : keyStack) place = (JSONObject) place.get(forwardKey);
+            return place;
+        }
 
-        }
-    }
+        /**
+         * Write the data at newData into the JSON file used to create this writer.
+         * This empties the key stack and sets the current object to the root, returning the writer to its default.
+         *
+         * @param newData data to be written into the object at the current position
+         * @return -1 on failure (IOException), else 0
+         */
+        protected int write(JSONObject newData) {
+            JSONObject currentJSONObject = newData;
+            // logarithmic complexity go BRRRRRR
+            while (!keyStack.isEmpty()) {
+                JSONObject place = root;
+                String backwardKey = keyStack.pop();
+                for (String forwardKey : keyStack) place = (JSONObject) place.get(forwardKey);
+                place.put(backwardKey, currentJSONObject);
+                currentJSONObject = place;
+            }
+            try (FileWriter fileWriter = new FileWriter(filePath)) {
+                currentJSONObject.writeJSONString(fileWriter);
+            } catch (IOException e) {
+                return -1;
+            }
 
-    /**
-     * Writes data into a JSON file at the given key as a value
-     *
-     * @param targetFile   the JSON within which to write
-     * @param dataToWrite  the JSONObject which should be written into the file at the key
-     * @param keyToWriteAt the key within the target file in which the data should be written
-     * @return -1 upon exception or failure, otherwise 0
-     * @author Raymond Konarski
-     */
-    private static int writeDataAtKey(String targetFile, JSONObject dataToWrite, UUID keyToWriteAt) {
-        // yes, i realize i'm reading the whole file into memory, but we don't currently have a singleton for all data
-        // catching for the sake of doing something with the code later, but otherwise this doesn't do anything but slow everything down
-        JSONObject allData;
-        try (FileReader fileReader = new FileReader(targetFile)) {
-            allData = (JSONObject) new JSONParser().parse(fileReader);
-        } catch (IOException | ParseException e) {
-            return -1;
+            return 0;
         }
-        allData.put(keyToWriteAt.toString(), dataToWrite);
-        try (FileWriter fileWriter = new FileWriter(targetFile)) {
-            allData.writeJSONString(fileWriter);
-        } catch (IOException e) {
-            return -1;
-        }
-        return 0;
-    }
-
-    /**
-     * Writes data into a JSON file at the given key within another JSON object at the keyToWriteWithin as a value
-     *
-     * @param targetFile       the JSON within which to write
-     * @param dataToWrite      the JSONObject which should be written into the file at the key
-     * @param keyToWriteAt     the key within the target file in which the data should be written
-     * @param keyToWriteWithin the key within which the object which the keyToWriteAt points to reside
-     * @return -1 upon exception or failure, otherwise 0
-     * @author Raymond Konarski
-     */
-    private static int writeDataWithinKeyAtKey(String targetFile, JSONObject dataToWrite, UUID keyToWriteAt, UUID keyToWriteWithin) {
-        JSONObject allData;
-        try (FileReader fileReader = new FileReader(targetFile)) {
-            allData = (JSONObject) new JSONParser().parse(fileReader);
-        } catch (IOException | ParseException e) {
-            return -1;
-        }
-        JSONObject targetToWriteWithin = (JSONObject) allData.get(keyToWriteWithin);
-        targetToWriteWithin.put(keyToWriteAt, dataToWrite);
-        allData.put(keyToWriteWithin, targetToWriteWithin);
-        try (FileWriter fileWriter = new FileWriter(targetFile)) {
-            allData.writeJSONString(fileWriter);
-        } catch (IOException e) {
-            return -1;
-        }
-        return 0;
     }
 
     /**
@@ -99,7 +104,6 @@ public class DataWriter {
      * @return -1 on failure, 0 otherwise
      */
     public static int writeUserData(User user) {
-
         // putting all references to RegisteredUser user at top to improve readability
         UUID userUUID = user.getUUID();
         JSONObject tempData = new JSONObject();
@@ -111,7 +115,14 @@ public class DataWriter {
         tempData.put("username", user.getUsername());
         tempData.put("password", user.getPassword());
 
-        return writeDataAtKey(USERS_JSON, tempData, userUUID);
+
+        try {
+            return new JSONWriter(USERS_JSON)
+                    .atKey(userUUID.toString())
+                    .write(tempData);
+        } catch (IOException | ParseException e) {
+            return -1;
+        }
     }
 
     /**
@@ -122,13 +133,19 @@ public class DataWriter {
      * @return -1 on failure, else 0
      */
     public static int writeUserCourseData(UUID userUUID, Course course) {
-        JSONObject userCourses = new JSONObject();
         JSONObject courseData = new JSONObject();
         courseData.put("lessonsCompleted", course.getUserProgress());
         courseData.put("lessonGrades", course.fetchGrades());
         courseData.put("finalGrade", course.getFinalGrade());
 
-        return writeDataWithinKeyAtKey(USER_COURSE_DATA_JSON, courseData, course.getUUID(), userUUID);
+        try {
+            return new JSONWriter(USER_COURSE_DATA_JSON)
+                    .atKey(userUUID.toString())
+                    .atKey(course.getUUID().toString())
+                    .write(courseData);
+        } catch (IOException | ParseException e) {
+            return -1;
+        }
     }
 
     /**
@@ -142,17 +159,39 @@ public class DataWriter {
         courseData.put("courseTitle", course.getTitle());
         courseData.put("language", course.getLanguage());
         courseData.put("authorUUID", course.getAuthor().getUUID());
+
         JSONArray lessonList = new JSONArray();
         for (Lesson l : course.getLessons()) {
+            Test test = l.getTest();
+            JSONArray testData = new JSONArray();
+            for (Question q :
+                    test.getQuestions()) {
+                JSONObject questionData = new JSONObject();
+                questionData.put("prompt", q.getPrompt());
+                JSONArray answersArr = new JSONArray();
+                for (var v : q.getAnswerList()) {
+                    JSONObject answerData = new JSONObject();
+                    answerData.put(v.getKey(), v.getValue() ? 1 : 0);
+                    answersArr.add(answerData);
+                }
+                questionData.put("answers", answersArr);
+                testData.add(questionData);
+            }
             Map<String, Object> tMap = Map.of(
                     "title", l.getTitle(),
                     "content", l.getContent(),
-                    "test", l.getTest() // TODO: don't write an objet to JSON, unless the lib supports that, still haven't tried
+                    "test", testData
             );
             lessonList.add(new HashMap<>(tMap));
         }
         courseData.put("lessons", lessonList);
 
-        return writeDataAtKey(COURSES_JSON, courseData, course.getUUID());
+        try {
+            return new JSONWriter(COURSES_JSON)
+                    .atKey(course.getUUID().toString())
+                    .write(courseData);
+        } catch (IOException | ParseException e) {
+            return -1;
+        }
     }
 }
