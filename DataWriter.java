@@ -111,6 +111,7 @@ public class DataWriter {
         JSONObject tempData = new JSONObject();
         tempData.put("firstName", user.getFirstName());
         tempData.put("lastName", user.getLastName());
+        tempData.put("dateOfBirth",user.getDateOfBirth().toString());
         tempData.put("email", user.getEmail());
         tempData.put("phoneNumber", user.getPhoneNumber());
         tempData.put("clearance", user.getClearance());

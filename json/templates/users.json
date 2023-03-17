@@ -1,9 +1,10 @@
 {
   "UUID": {
-    "firstName": "FirstName",
-    "lastName": "LastName",
+    "firstName": "First Name",
+    "lastName": "Last Name",
     "email": "Email",
-    "phoneNumber": "PhoneNumber",
+    "phoneNumber": "Phone Number",
+    "dateOfBirth": "Date of Birth",
     "username": "Username",
     "password": "Password",
     "clearance": "student|teacher|admin"
