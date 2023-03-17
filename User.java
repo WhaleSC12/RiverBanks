@@ -4,7 +4,7 @@ import java.util.UUID;
 /**
  * Basic abstract user to provide functionality to teachers and students
  */
-public abstract class User {
+public class User {
     public UUID getUUID() {
         return uuid;
     }
