@@ -159,6 +159,7 @@ public class DataWriter {
     public static int writeCourseData(Course course) {
         JSONObject courseData = new JSONObject();
         courseData.put("courseTitle", course.getTitle());
+        courseData.put("description", course.getDescription());
         courseData.put("language", course.getLanguage());
         courseData.put("authorUUID", course.getAuthor().getUUID());
         JSONArray lessonList = new JSONArray();

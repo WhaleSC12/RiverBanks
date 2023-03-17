@@ -1,6 +1,7 @@
 {
   "courseUUID": {
     "courseTitle": "CourseTitle",
+    "description": "desc",
     "language": "C++|Python|etc. (not safe but easier to use)",
     "authorUUID": "AuthorUUID",
     "lessons": [
