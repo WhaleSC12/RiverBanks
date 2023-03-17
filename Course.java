@@ -6,10 +6,32 @@ public class Course {
     private String description;
     private Teacher author;
     private ArrayList<Lesson> lessons;
-    private ArrayList<Comment> comments;
     private int userProgress;
     private Language language;
     private UUID uuid;
+
+    public Course(String title, String description, Teacher author, ArrayList<Lesson> lessons, int userProgress, Language language, double finalGrade) {
+        this.uuid = UUID.randomUUID();
+        this.title = title;
+        this.description = description;
+        this.author = author;
+        this.lessons = lessons;
+        this.userProgress = userProgress;
+        this.language = language;
+        this.finalGrade = finalGrade;
+    }
+
+    public Course(String title, String description, Teacher author, ArrayList<Lesson> lessons, int userProgress, Language language, UUID uuid, double finalGrade) {
+        this.title = title;
+        this.description = description;
+        this.author = author;
+        this.lessons = lessons;
+        this.userProgress = userProgress;
+        this.language = language;
+        this.uuid = uuid;
+        this.finalGrade = finalGrade;
+    }
+
     private double finalGrade;
 
     public double getFinalGrade() {
@@ -61,10 +83,6 @@ public class Course {
         this.lessons = lessons;
     }
 
-    public void setComments(ArrayList<Comment> comments) {
-        this.comments = comments;
-    }
-
     public int getUserProgress() {
         return userProgress;
     }
@@ -81,14 +99,9 @@ public class Course {
         this.language = language;
     }
 
-    public double getProgress(double userProgress) {
-        return userProgress / lessons.size();
-    }
-
-    public ArrayList<Comment> getComments() {
-        return comments;
-    }
-
+    /**
+     * @return returns an arraylist of a student's grades in each lesson (this is in the same order as the lesson arraylist)
+     */
     public ArrayList<Double> fetchGrades() {
         ArrayList<Double> grades = new ArrayList<>();
         for (var l : lessons) grades.add(l.getGrade());
