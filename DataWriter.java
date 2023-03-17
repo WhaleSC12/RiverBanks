@@ -25,7 +25,7 @@ public class DataWriter {
     private static class JSONWriter {
         private final String filePath;
         private final JSONObject root;
-        private Stack<String> keyStack = new Stack<>();
+        private final Stack<String> keyStack = new Stack<>();
 
         /**
          * @param filePath JSON file which contains the object being written into
