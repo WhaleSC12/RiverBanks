@@ -9,7 +9,7 @@
         "content": "Content",
         "test": [
           {
-            "question": "QuestionPrompt",
+            "prompt": "QuestionPrompt",
             "answers": [
               {
                 "text": "answerTextShownToStudent",
