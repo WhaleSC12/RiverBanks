@@ -45,7 +45,9 @@ public class DataWriter {
          */
         private JSONObject fetchRoot(String targetFile) throws IOException, ParseException {
             FileReader fileReader = new FileReader(targetFile);
-            return (JSONObject) new JSONParser().parse(fileReader);
+            JSONObject data = (JSONObject) new JSONParser().parse(fileReader);
+            fileReader.close();
+            return data;
         }
 
         /**
@@ -159,7 +161,6 @@ public class DataWriter {
         courseData.put("courseTitle", course.getTitle());
         courseData.put("language", course.getLanguage());
         courseData.put("authorUUID", course.getAuthor().getUUID());
-
         JSONArray lessonList = new JSONArray();
         for (Lesson l : course.getLessons()) {
             Test test = l.getTest();
