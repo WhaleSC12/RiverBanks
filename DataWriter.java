@@ -32,6 +32,7 @@ public class DataWriter {
     private static class JSONWriter {
         private final String filePath;
         private final JSONObject root;
+        private JSONObject currentPlace;
         private final Stack<String> keyStack = new Stack<>();
 
         /**
@@ -66,6 +67,7 @@ public class DataWriter {
          */
         protected JSONWriter atKey(String key) {
             keyStack.add(key);
+            currentPlace = (JSONObject) currentPlace.get(key);
             return this;
         }
 
@@ -74,14 +76,11 @@ public class DataWriter {
          * if no traversal has been initiated, will return root
          */
         protected JSONObject getCurrentJSONObject() {
-            JSONObject place = root;
-            for (String forwardKey : keyStack) place = (JSONObject) place.get(forwardKey);
-            return place;
+            return currentPlace;
         }
 
         /**
          * Write the data at newData into the JSON file used to create this writer.
-         * This empties the key stack and sets the current object to the root, returning the writer to its default.
          * To write with this, an Object must be JSONAware. This can either be done by manually filling a new JSONObject
          * or JSONArray with values, or by implementing the JSONAware interface.
          *
@@ -89,18 +88,27 @@ public class DataWriter {
          * @return -1 on failure (IOException), else 0
          */
         protected int write(JSONAware newData) {
-            JSONAware data = newData;
-            // logarithmic complexity go BRRRRRR
-            while (!keyStack.isEmpty()) {
-                JSONObject currentObject = root;
-                String backwardKey = keyStack.pop();
-                for (String forwardKey : keyStack) currentObject = (JSONObject) currentObject.get(forwardKey);
-                currentObject.put(backwardKey, data);
-                data = currentObject;
-            }
+            currentPlace.put(keyStack.peek(), newData);
+
             try (FileWriter fileWriter = new FileWriter(filePath)) {
-                // after traversing the keystack, we should return to root,
-                // and thus can now write out without modifying the rest of the file
+                root.writeJSONString(fileWriter);
+            } catch (IOException e) {
+                return -1;
+            }
+
+            return 0;
+        }
+        /**
+         * Write the String at newData into the JSON file used to create this writer at getCurrentJSONObject()
+         * Take note that the string in newData will be surrounded by quotes.
+         *
+         * @param newData JSONAware object to be written into the file opened on instantiation of this writer
+         * @return -1 on failure (IOException), else 0
+         */
+        protected int write(String newData) {
+            currentPlace.put(keyStack.peek(), newData);
+
+            try (FileWriter fileWriter = new FileWriter(filePath)) {
                 root.writeJSONString(fileWriter);
             } catch (IOException e) {
                 return -1;

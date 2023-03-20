@@ -1,4 +1,5 @@
-import javax.xml.stream.events.Comment;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 public class Lesson {
 
@@ -61,4 +62,18 @@ public class Lesson {
     private String content;
     private Test test;
     private double grade;
+
+    public JSONObject getLessonData() {
+        JSONObject jobj = new JSONObject();
+        jobj.put("title", title);
+        jobj.put("content", content);
+        JSONArray test = new JSONArray();
+        for (Question q :
+                getTest().getQuestions()) {
+            test.add(q);
+        }
+        jobj.put("test", test);
+
+        return jobj;
+    }
 }

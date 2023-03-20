@@ -102,7 +102,12 @@ public class Course {
         stuff.put("description", description);
         stuff.put("authorUUID", authorUUID.toString()); // FIX
         stuff.put("language", language.toString());
-        stuff.put("lessons", null); // TODO properly implement jsonaware instead of this trash
+        ArrayList<JSONObject> lessonArr = new ArrayList<>();
+        for (Lesson l :
+                getLessons()) {
+            lessonArr.add(l.getLessonData());
+        }
+        stuff.put("lessons", lessonArr); // TODO properly implement jsonaware instead of this trash
         return stuff;
     }
 

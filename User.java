@@ -185,4 +185,15 @@ public class User implements JSONAware {
 
         return sb.toString();
     }
+
+    /**
+     * Wrapper function to prevent confusion, since other classes use a similar call to
+     * create JSONAware objects containing only the data they need, whilst User itself is JSONAware
+     * It is good practice to call this instead of the user itself.
+     *
+     * @return An instance of self.
+     */
+    public JSONAware getUserData() {
+        return this;
+    }
 }
