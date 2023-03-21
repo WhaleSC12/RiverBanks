@@ -65,6 +65,12 @@ public class Course {
         this.language = language;
     }
 
+    //3-21-22 searching courses
+    public boolean searchCourse(String courseName)
+    { 
+        return true;
+    }
+
     private String title;
     private String description;
     private UUID authorUUID;

@@ -3,7 +3,7 @@ import org.json.simple.JSONAware;
 import java.time.LocalDate;
 import java.util.UUID;
 
-/**
+/*
  * Basic abstract user to provide functionality to teachers and students
  */
 public class User implements JSONAware {
@@ -74,8 +74,8 @@ public class User implements JSONAware {
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
-
-    private final UUID uuid;
+// changed from private final UUID uuid to private UUID uuid 
+    private UUID uuid;
     private String username;
     private String password;
     private String firstName;
@@ -90,6 +90,8 @@ public class User implements JSONAware {
     /**
      * Constructor meant to be called when loading user from existing data
      *
+     * 3/21/23 changed to void type so the data can be entered without expecting any return 
+     * 
      * @param uuid        UserUniqueIdentifier, the unique string used to differentiate users
      * @param username    Username the user uses to log in
      * @param password    Password the user uses to log in
@@ -99,7 +101,7 @@ public class User implements JSONAware {
      * @param phoneNumber User's phone number
      * @param clearance   User's clearance level
      */
-    public User(UUID uuid, String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) {
+    public void User(UUID uuid, String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) {
         this.uuid = uuid;
         this.username = username;
         this.password = password;
@@ -115,6 +117,8 @@ public class User implements JSONAware {
      * Constructor meant to be called when creating a new user
      * Generates a new UUID and assigns it on construction
      *
+     * 3/21/23 changed to void type so the data can be entered without expecting any return 
+     * 
      * @param username    Username the user uses to log in
      * @param password    Password the user uses to log in
      * @param firstName   User's first name
@@ -123,7 +127,7 @@ public class User implements JSONAware {
      * @param phoneNumber User's phone number
      * @param clearance   User's clearance level
      */
-    public User(String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) {
+    public void User(String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) {
         this.uuid = UUID.randomUUID();
         this.username = username;
         this.password = password;
