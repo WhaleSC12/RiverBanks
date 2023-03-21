@@ -20,40 +20,28 @@ public class DataLoader {
         return null;
     }
 
-    public static class UserData {
-        private static HashMap<String, HashMap<String, String>> userData;
+    private static HashMap<String, HashMap<String, String>> userData;
 
-        private static HashMap<String, HashMap<String, String>> getUserData() {
-            if (userData != null) return userData;
-            JSONObject root = fetchRoot("json/dat/users.json");
-            userData = (HashMap<String, HashMap<String, String>>) new HashMap(root);
-            return userData;
-        }
-
-        public User getUser(String username) {
-            for (var entry : userData.entrySet()) {
-                var val = entry.getValue();
-                if (Objects.equals(val.get("username"), username))
-                    return new User(UUID.fromString(entry.getKey()), val.get("username"),
-                            val.get("password"), val.get("firstName"), val.get("lastName"),
-                            val.get("email"), val.get("phoneNumber"), val.get("clearance"));
-            }
-            return null;
-        }
-
-        public User getUser(UUID uuid) {
-            var val = userData.get("uuid");
-            return new User(uuid, val.get("username"),
-                    val.get("password"), val.get("firstName"), val.get("lastName"),
-                    val.get("email"), val.get("phoneNumber"), val.get("clearance"));
-        }
+    private static HashMap<String, HashMap<String, String>> getUserData() {
+        if (userData != null) return userData;
+        JSONObject root = fetchRoot("json/dat/users.json");
+        userData = (HashMap<String, HashMap<String, String>>) new HashMap(root);
+        return userData;
     }
 
-    public static class CourseData {
-        private static JSONObject courseData;
+    public static User getUser(String username) {
+        if (userData == null) getUserData();
+        for (var entry : userData.entrySet()) {
+            var val = entry.getValue();
+            if (Objects.equals(val.get("username"), username))
+                return new User(UUID.fromString(entry.getKey()), val.get("username"), val.get("password"), val.get("firstName"), val.get("lastName"), val.get("email"), val.get("phoneNumber"), val.get("clearance"));
+        }
+        return null;
     }
 
-    public static class UserCourseData {
-
+    public static User getUser(UUID uuid) {
+        if (userData == null) getUserData();
+        var val = userData.get("uuid");
+        return new User(uuid, val.get("username"), val.get("password"), val.get("firstName"), val.get("lastName"), val.get("email"), val.get("phoneNumber"), val.get("clearance"));
     }
 }
