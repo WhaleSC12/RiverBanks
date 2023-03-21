@@ -5,6 +5,8 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Objects;
+import java.util.UUID;
 
 public class DataLoader {
 
@@ -18,12 +20,40 @@ public class DataLoader {
         return null;
     }
 
-    public static HashMap<Object, Object> fetchData(String file) {
-        JSONObject data = fetchRoot(file);
-        if (data == null) {
-            return null; // TODO: custom exception
+    public static class UserData {
+        private static HashMap<String, HashMap<String, String>> userData;
+
+        private static HashMap<String, HashMap<String, String>> getUserData() {
+            if (userData != null) return userData;
+            JSONObject root = fetchRoot("json/dat/users.json");
+            userData = (HashMap<String, HashMap<String, String>>) new HashMap(root);
+            return userData;
         }
-        return new HashMap<Object, Object>(data);
+
+        public User getUser(String username) {
+            for (var entry : userData.entrySet()) {
+                var val = entry.getValue();
+                if (Objects.equals(val.get("username"), username))
+                    return new User(UUID.fromString(entry.getKey()), val.get("username"),
+                            val.get("password"), val.get("firstName"), val.get("lastName"),
+                            val.get("email"), val.get("phoneNumber"), val.get("clearance"));
+            }
+            return null;
+        }
+
+        public User getUser(UUID uuid) {
+            var val = userData.get("uuid");
+            return new User(uuid, val.get("username"),
+                    val.get("password"), val.get("firstName"), val.get("lastName"),
+                    val.get("email"), val.get("phoneNumber"), val.get("clearance"));
+        }
     }
 
+    public static class CourseData {
+        private static JSONObject courseData;
+    }
+
+    public static class UserCourseData {
+
+    }
 }

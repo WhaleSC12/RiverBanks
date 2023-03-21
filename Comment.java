@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 
 public class Comment {
-    private RegisteredUser author;
+    private User author;
     private String content;
     private ArrayList<Comment> replyList;
 
-    public Comment(RegisteredUser author, String content) {
+    public Comment(User author, String content) {
         this.author = author;
         this.content = content;
     }

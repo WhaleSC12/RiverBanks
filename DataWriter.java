@@ -7,9 +7,9 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Stack;
 import java.util.UUID;
 
 /**
@@ -33,7 +33,7 @@ public class DataWriter {
         private final String filePath;
         private final JSONObject root;
         private JSONObject currentPlace;
-        private final Stack<String> keyStack = new Stack<>();
+        private final ArrayList<String> keys = new ArrayList<>();
 
         /**
          * @param filePath JSON file which contains the object being written into
@@ -43,6 +43,7 @@ public class DataWriter {
         public JSONWriter(String filePath) throws IOException, ParseException {
             this.filePath = filePath;
             this.root = fetchRoot(filePath);
+            this.currentPlace = root;
         }
 
         /**
@@ -66,17 +67,8 @@ public class DataWriter {
          * @return returns an instance of self for the purpose of method chaining
          */
         protected JSONWriter atKey(String key) {
-            keyStack.add(key);
-            currentPlace = (JSONObject) currentPlace.get(key);
+            keys.add(key);
             return this;
-        }
-
-        /**
-         * @return the current value the JSONWriter is at from .at()
-         * if no traversal has been initiated, will return root
-         */
-        protected JSONObject getCurrentJSONObject() {
-            return currentPlace;
         }
 
         /**
@@ -88,16 +80,20 @@ public class DataWriter {
          * @return -1 on failure (IOException), else 0
          */
         protected int write(JSONAware newData) {
-            currentPlace.put(keyStack.peek(), newData);
+            for (int i = 0; i < keys.size() - 1; i++) {
+                currentPlace.get(keys.get(i));
+            }
+            currentPlace.put(keys.get(keys.size() - 1), newData);
 
             try (FileWriter fileWriter = new FileWriter(filePath)) {
                 root.writeJSONString(fileWriter);
             } catch (IOException e) {
-                return -1;
+                throw new RuntimeException(e);
             }
 
             return 0;
         }
+
         /**
          * Write the String at newData into the JSON file used to create this writer at getCurrentJSONObject()
          * Take note that the string in newData will be surrounded by quotes.
@@ -106,12 +102,14 @@ public class DataWriter {
          * @return -1 on failure (IOException), else 0
          */
         protected int write(String newData) {
-            currentPlace.put(keyStack.peek(), newData);
-
+            for (int i = 0; i < keys.size() - 1; i++) {
+                currentPlace.get(keys.get(i));
+            }
+            currentPlace.put(keys.get(keys.size() - 1), newData);
             try (FileWriter fileWriter = new FileWriter(filePath)) {
                 root.writeJSONString(fileWriter);
             } catch (IOException e) {
-                return -1;
+                throw new RuntimeException(e);
             }
 
             return 0;
@@ -130,7 +128,7 @@ public class DataWriter {
                     .atKey(user.getUUID().toString())
                     .write(user);
         } catch (IOException | ParseException e) {
-            return -1;
+            throw new RuntimeException(e);
         }
     }
 
