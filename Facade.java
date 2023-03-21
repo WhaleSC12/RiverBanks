@@ -3,10 +3,14 @@ import java.util.UUID;
 //Where all the method will go that will be used in the LearningUI 
 public class Facade {
     private User user;
+
+    private User registeredUser;
+
     private Course course;
     private Lesson lesson;
     private Test test;
     private Question question;
+
 
     public void Login(UUID uuid, String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) 
     {
@@ -45,6 +49,7 @@ public class Facade {
       user.setPhoneNumber(null);
       user.setClearance(null);
     }
+
 
 
 }

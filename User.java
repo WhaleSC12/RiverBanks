@@ -177,8 +177,6 @@ public class User implements JSONAware {
         sb.append(',');
         appendToStringBuilderJSONStyle("phoneNumber", phoneNumber, sb);
         sb.append(',');
-        appendToStringBuilderJSONStyle("dateOfBirth", dateOfBirth.toString(), sb);
-        sb.append(',');
         appendToStringBuilderJSONStyle("username", username, sb);
         sb.append(',');
         appendToStringBuilderJSONStyle("password", password, sb);
