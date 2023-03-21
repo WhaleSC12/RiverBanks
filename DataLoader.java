@@ -8,8 +8,19 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Class for loading data into program memory from JSONs
+ * Functions by pulling the entire file into memory as a large Map, then
+ * using helper functions to parse it and return usable data.
+ */
 public class DataLoader {
 
+    /**
+     * Pulls the file root (toplevel of the JSONObject) from the file
+     *
+     * @param file relative file path to the file to be pulled
+     * @return returns the JSONObject representing the root, else null
+     */
     private static JSONObject fetchRoot(String file) {
         try (FileReader fileReader = new FileReader(file)) {
             JSONParser jsonParser = new JSONParser();
