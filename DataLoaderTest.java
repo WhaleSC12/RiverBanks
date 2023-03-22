@@ -6,5 +6,8 @@ public class DataLoaderTest {
         CourseList courseList = CourseList.getInstance();
         Course course = courseList.getCourse("CourseTitle");
         System.out.println(course);
+        UserCourseDataList userCourseDataList = UserCourseDataList.getInstance();
+        UserCourseData userCourseData = userCourseDataList.getUserCourseData(user.getUUID(), course.getUUID());
+        System.out.println(userCourseData);
     }
 }

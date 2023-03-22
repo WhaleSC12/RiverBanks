@@ -10,6 +10,13 @@ public class UserCourseData implements JSONAware {
     int lessonsCompleted;
     ArrayList<Double> lessonGrades;
 
+    public UserCourseData(UUID userUUID, UUID courseUUID, int lessonsCompleted, ArrayList<Double> lessonGrades) {
+        this.userUUID = userUUID;
+        this.courseUUID = courseUUID;
+        this.lessonsCompleted = lessonsCompleted;
+        this.lessonGrades = lessonGrades;
+    }
+
     public UUID getUserUUID() {
         return userUUID;
     }
@@ -34,11 +41,9 @@ public class UserCourseData implements JSONAware {
         this.lessonGrades = lessonGrades;
     }
 
-    public UserCourseData(UUID userUUID, UUID courseUUID, int lessonsCompleted, ArrayList<Double> lessonGrades) {
-        this.userUUID = userUUID;
-        this.courseUUID = courseUUID;
-        this.lessonsCompleted = lessonsCompleted;
-        this.lessonGrades = lessonGrades;
+    @Override
+    public String toString() {
+        return "UserCourseData{" + "userUUID=" + userUUID + ", courseUUID=" + courseUUID + ", lessonsCompleted=" + lessonsCompleted + ", lessonGrades=" + lessonGrades + '}';
     }
 
     @Override

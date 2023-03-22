@@ -86,9 +86,23 @@ public class DataLoader {
         return courseList;
     }
 
-
-    private static HashMap<String, HashMap<String, Object>> getUserCourseData() {
+    public static HashMap<UUID, HashMap<UUID, UserCourseData>> getUserCourses() {
+        HashMap<UUID, HashMap<UUID, UserCourseData>> out = new HashMap<>();
         JSONObject root = fetchRoot("json/dat/userCourses.json");
-        return (HashMap<String, HashMap<String, Object>>) new HashMap(root);
+        for (Object key : root.keySet()) {
+            UUID userUUID = UUID.fromString((String) key);
+            HashMap<String, HashMap<String, Object>> value = (HashMap<String, HashMap<String, Object>>) root.get(key);
+            HashMap<UUID, UserCourseData> dat = new HashMap<>();
+            for (var v : value.entrySet()) {
+                UUID courseUUID = UUID.fromString(v.getKey());
+                HashMap<String, Object> val = v.getValue();
+                JSONArray arr = (JSONArray) val.get("lessonGrades");
+                ArrayList<Double> gradeList = new ArrayList<>(arr);
+                UserCourseData userCourseData = new UserCourseData(userUUID, courseUUID, Math.toIntExact((long) val.get("lessonsCompleted")), gradeList);
+                dat.put(UUID.fromString(v.getKey()), userCourseData);
+            }
+            out.put(userUUID, dat);
+        }
+        return out;
     }
 }
