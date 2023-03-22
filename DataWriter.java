@@ -1,16 +1,9 @@
 import org.json.simple.JSONArray;
-import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Used to write user and course data into their respective JSONs.
@@ -38,6 +31,24 @@ public class DataWriter {
     }
 
     /**
+     * Save the user's data (not course progress and grades) into the User JSON
+     * Iterates over any iterable collection of users
+     *
+     * @param userList list of users whose data should be saved
+     * @return -1 on failure, 0 otherwise
+     */
+    public static int writeUserData(Collection<User> userList) {
+        try (JSONWriter jsonWriter = new JSONWriter(USERS_JSON)) {
+            for (User user : userList) {
+                jsonWriter.atKey(user.getUUID().toString()).write(user);
+            }
+            return 0;
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
      * Store's a user's progress and grades within a course
      *
      * @param userUUID user whose course progress is being written
@@ -46,11 +57,8 @@ public class DataWriter {
      */
     public static int writeUserCourseData(UUID userUUID, Course course) {
         JSONObject courseData = new JSONObject();
-        courseData.put("lessonsCompleted", course.getUserProgress());
-        courseData.put("lessonGrades", course.fetchGrades());
-        courseData.put("finalGrade", course.getFinalGrade());
 
-        try(JSONWriter jsonWriter = new JSONWriter(USER_COURSE_DATA_JSON)) {
+        try (JSONWriter jsonWriter = new JSONWriter(USER_COURSE_DATA_JSON)) {
             return jsonWriter.atKey(userUUID.toString()).atKey(course.getUUID().toString()).write(courseData);
         } catch (IOException | ParseException e) {
             return -1;
@@ -70,10 +78,10 @@ public class DataWriter {
         courseData.put("language", course.getLanguage());
         courseData.put("authorUUID", course.getAuthorUUID().toString());
         JSONArray lessonList = new JSONArray();
-        for (Lesson l : course.getLessons()) {
-            Test test = l.getTest();
+        for (Course.Lesson l : course.getLessons()) {
+            Course.Lesson.Test test = l.getTest();
             JSONArray testData = new JSONArray();
-            for (Question q : test.getQuestions()) {
+            for (Course.Lesson.Test.Question q : test.getQuestions()) {
                 JSONObject questionData = new JSONObject();
                 questionData.put("prompt", q.getPrompt());
                 JSONArray answersArr = new JSONArray();
@@ -90,7 +98,7 @@ public class DataWriter {
         }
         courseData.put("lessons", lessonList);
 
-        try(JSONWriter jsonWriter = new JSONWriter(COURSES_JSON)) {
+        try (JSONWriter jsonWriter = new JSONWriter(COURSES_JSON)) {
             return jsonWriter.atKey(course.getUUID().toString()).write(courseData);
         } catch (IOException | ParseException e) {
             return -1;

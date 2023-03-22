@@ -16,11 +16,10 @@ import java.util.ArrayList;
  * then use .write() to write in the data you want at that value
  */
 public class JSONWriter implements AutoCloseable {
-    private final String filePath;
     private final JSONObject root;
     private JSONObject currentPlace;
     private final ArrayList<String> keys = new ArrayList<>();
-    private FileWriter fileWriter;
+    private final FileWriter fileWriter;
 
     /**
      * @param filePath JSON file which contains the object being written into
@@ -28,7 +27,6 @@ public class JSONWriter implements AutoCloseable {
      * @throws ParseException if the given JSON cannot be parsed, ParseException is thrown
      */
     public JSONWriter(String filePath) throws IOException, ParseException {
-        this.filePath = filePath;
         this.root = fetchRoot(filePath);
         this.currentPlace = root;
         try {
@@ -90,4 +88,3 @@ public class JSONWriter implements AutoCloseable {
         fileWriter.close();
     }
 }
-

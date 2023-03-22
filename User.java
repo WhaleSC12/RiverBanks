@@ -67,22 +67,12 @@ public class User implements JSONAware {
         this.clearance = clearance;
     }
 
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
 // changed from private final UUID uuid to private UUID uuid 
     private UUID uuid;
     private String username;
     private String password;
     private String firstName;
     private String lastName;
-    private LocalDate dateOfBirth;
-
-
     private String email;
     private String phoneNumber;
     private String clearance;
@@ -146,7 +136,6 @@ public class User implements JSONAware {
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", clearance='" + clearance + '\'' +

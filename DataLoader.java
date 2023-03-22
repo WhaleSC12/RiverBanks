@@ -1,11 +1,13 @@
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -31,60 +33,62 @@ public class DataLoader {
         return null;
     }
 
-    public static class UserData {
-        private static HashMap<String, HashMap<String, String>> userData;
+    private static HashMap<String, HashMap<String, String>> getUserData() {
+        JSONObject root = fetchRoot("json/dat/users.json");
+        return (HashMap<String, HashMap<String, String>>) new HashMap(root);
+    }
 
-        private static HashMap<String, HashMap<String, String>> getUserData() {
-            if (userData != null) return userData;
-            JSONObject root = fetchRoot("json/dat/users.json");
-            userData = (HashMap<String, HashMap<String, String>>) new HashMap(root);
-            return userData;
+    public static ArrayList<User> getUsers() {
+        ArrayList<User> userList = new ArrayList<>();
+        for (var entry : getUserData().entrySet()) {
+            var val = entry.getValue();
+            User user = new User(UUID.fromString(entry.getKey()), val.get("username"), val.get("password"), val.get("firstName"), val.get("lastName"), val.get("email"), val.get("phoneNumber"), val.get("clearance"));
+            userList.add(user);
         }
+        return userList;
+    }
 
-        public static User getUser(String username) {
-            var tmp = getUserData();
-            for (var entry : tmp.entrySet()) {
-                var val = entry.getValue();
-                if (Objects.equals(val.get("username"), username))
-                    return new User(UUID.fromString(entry.getKey()), val.get("username"), val.get("password"), val.get("firstName"), val.get("lastName"), val.get("email"), val.get("phoneNumber"), val.get("clearance"));
+    public static ArrayList<Course> getCourses() {
+        ArrayList<Course> courseList = new ArrayList<>();
+        JSONObject courseData = fetchRoot("json/dat/courses.json");
+        for (Object objectKey : courseData.keySet()) {
+            String key = (String) objectKey;
+            HashMap<String, Object> value = (HashMap<String, Object>) courseData.get(objectKey);
+            Course course = new Course(UUID.fromString(key), (String) value.get("courseTitle"), (String) value.get("description"), UUID.fromString((String) value.get("authorUUID")), Language.valueOf((String) value.get("language")));
+            ArrayList<Course.Lesson> lessonList = new ArrayList<>();
+            JSONArray jsonLessonList = (JSONArray) value.get("lessons");
+            for (var l : jsonLessonList) {
+                HashMap<String, Object> entry = (HashMap<String, Object>) l;
+                Course.Lesson.Test test = new Course.Lesson.Test();
+                ArrayList<Course.Lesson.Test.Question> questionList = new ArrayList<>();
+                JSONArray jsonQuestionArray = (JSONArray) entry.get("test");
+                for (var obj : jsonQuestionArray) {
+                    JSONObject jsonQuestion = (JSONObject) obj;
+                    Course.Lesson.Test.Question question = new Course.Lesson.Test.Question();
+                    question.setPrompt((String) jsonQuestion.get("prompt"));
+                    JSONArray jsonQuestionAnswerList = (JSONArray) jsonQuestion.get("answers");
+                    ArrayList<AbstractMap.SimpleEntry<String, Boolean>> answerList = new ArrayList<>();
+                    for (var objAnswer : jsonQuestionAnswerList) {
+                        JSONObject answer = (JSONObject) objAnswer;
+                        boolean correct = (long) answer.get("correct") == 1;
+                        AbstractMap.SimpleEntry<String, Boolean> answerData = new AbstractMap.SimpleEntry<>((String) answer.get("text"), correct);
+                        answerList.add(answerData);
+                    }
+                    question.setAnswerList(answerList);
+                    questionList.add(question);
+                }
+                test.setQuestions(questionList);
+                Course.Lesson lesson = new Course.Lesson((String) entry.get("title"), (String) entry.get("description"), (String) entry.get("content"), test);
+                course.addLesson(lesson);
             }
-            return null;
+            courseList.add(course);
         }
-
-        public static User getUser(UUID uuid) {
-            var tmp = getUserData();
-            var val = tmp.get("uuid");
-            return new User(uuid, val.get("username"), val.get("password"), val.get("firstName"), val.get("lastName"), val.get("email"), val.get("phoneNumber"), val.get("clearance"));
-        }
+        return courseList;
     }
 
-    public static class CourseData {
-        private static HashMap<String, HashMap<String, String>> userData;
 
-        private static HashMap<String, HashMap<String, String>> getUserData() {
-            if (userData != null) return userData;
-            JSONObject root = fetchRoot("json/dat/courses.json");
-            userData = (HashMap<String, HashMap<String, String>>) new HashMap(root);
-            return userData;
-        }
-
-        public static Course getCourse(UUID uuid) {
-            var tmp = getUserData();
-            var val = tmp.get("uuid");
-//            return new User(uuid, val.get("username"), val.get("password"), val.get("firstName"), val.get("lastName"), val.get("email"), val.get("phoneNumber"), val.get("clearance"));
-            return null;
-            // TODO: simplify course constructor
-        }
-    }
-
-    public static class UserCourseData {
-        private static HashMap<String, HashMap<String, String>> userData;
-
-        private static HashMap<String, HashMap<String, String>> getUserData() {
-            if (userData != null) return userData;
-            JSONObject root = fetchRoot("json/dat/userCourses.json");
-            userData = (HashMap<String, HashMap<String, String>>) new HashMap(root);
-            return userData;
-        }
+    private static HashMap<String, HashMap<String, Object>> getUserCourseData() {
+        JSONObject root = fetchRoot("json/dat/userCourses.json");
+        return (HashMap<String, HashMap<String, Object>>) new HashMap(root);
     }
 }
