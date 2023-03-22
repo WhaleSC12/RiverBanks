@@ -3,9 +3,10 @@ import org.json.simple.JSONObject;
 
 public class Lesson {
 
-    public Lesson(String title, String description) {
+    public Lesson(String title, String description, Test test) {
         this.title = title;
         this.description = description;
+        this.test = test;
     }
 
     public String getTitle() {
@@ -24,14 +25,6 @@ public class Lesson {
         this.description = description;
     }
 
-    public String getTopic() {
-        return topic;
-    }
-
-    public void setTopic(String topic) {
-        this.topic = topic;
-    }
-
     public String getContent() {
         return content;
     }
@@ -48,20 +41,10 @@ public class Lesson {
         this.test = test;
     }
 
-    public double getGrade() {
-        return grade;
-    }
-
-    public void setGrade(double grade) {
-        this.grade = grade;
-    }
-
     private String title;
     private String description;
-    private String topic;
     private String content;
     private Test test;
-    private double grade;
 
     public JSONObject getLessonData() {
         JSONObject jobj = new JSONObject();
