@@ -1,6 +1,6 @@
 public class DataLoaderTest {
     public static void main(String[] args) {
-        User testUser = DataLoader.getUser("username");
+        User testUser = DataLoader.UserStuff.getUser("username");
         System.out.println(testUser.toString());
     }
 }

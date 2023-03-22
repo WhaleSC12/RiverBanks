@@ -31,28 +31,30 @@ public class DataLoader {
         return null;
     }
 
-    private static HashMap<String, HashMap<String, String>> userData;
+    public static class UserStuff {
+        private static HashMap<String, HashMap<String, String>> userData;
 
-    private static HashMap<String, HashMap<String, String>> getUserData() {
-        if (userData != null) return userData;
-        JSONObject root = fetchRoot("json/dat/users.json");
-        userData = (HashMap<String, HashMap<String, String>>) new HashMap(root);
-        return userData;
-    }
-
-    public static User getUser(String username) {
-        if (userData == null) getUserData();
-        for (var entry : userData.entrySet()) {
-            var val = entry.getValue();
-            if (Objects.equals(val.get("username"), username))
-                return new User(UUID.fromString(entry.getKey()), val.get("username"), val.get("password"), val.get("firstName"), val.get("lastName"), val.get("email"), val.get("phoneNumber"), val.get("clearance"));
+        private static HashMap<String, HashMap<String, String>> getUserData() {
+            if (userData != null) return userData;
+            JSONObject root = fetchRoot("json/dat/users.json");
+            userData = (HashMap<String, HashMap<String, String>>) new HashMap(root);
+            return userData;
         }
-        return null;
-    }
 
-    public static User getUser(UUID uuid) {
-        if (userData == null) getUserData();
-        var val = userData.get("uuid");
-        return new User(uuid, val.get("username"), val.get("password"), val.get("firstName"), val.get("lastName"), val.get("email"), val.get("phoneNumber"), val.get("clearance"));
+        public static User getUser(String username) {
+            var tmp = getUserData();
+            for (var entry : tmp.entrySet()) {
+                var val = entry.getValue();
+                if (Objects.equals(val.get("username"), username))
+                    return new User(UUID.fromString(entry.getKey()), val.get("username"), val.get("password"), val.get("firstName"), val.get("lastName"), val.get("email"), val.get("phoneNumber"), val.get("clearance"));
+            }
+            return null;
+        }
+
+        public static User getUser(UUID uuid) {
+            var tmp = getUserData();
+            var val = tmp.get("uuid");
+            return new User(uuid, val.get("username"), val.get("password"), val.get("firstName"), val.get("lastName"), val.get("email"), val.get("phoneNumber"), val.get("clearance"));
+        }
     }
 }

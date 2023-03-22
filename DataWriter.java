@@ -29,11 +29,12 @@ public class DataWriter {
      * Use .atKey() to traverse down from the root until you reach the key whose value you wish to replace,
      * then use .write() to write in the data you want at that value
      */
-    private static class JSONWriter {
+    public static class JSONWriter implements AutoCloseable {
         private final String filePath;
         private final JSONObject root;
         private JSONObject currentPlace;
         private final ArrayList<String> keys = new ArrayList<>();
+        private FileWriter fileWriter;
 
         /**
          * @param filePath JSON file which contains the object being written into
@@ -44,6 +45,11 @@ public class DataWriter {
             this.filePath = filePath;
             this.root = fetchRoot(filePath);
             this.currentPlace = root;
+            try {
+                fileWriter = new FileWriter(filePath);
+            } catch (IOException e) {
+                throw new RuntimeException(e); // TODO: exception bad
+            }
         }
 
         /**
@@ -84,8 +90,7 @@ public class DataWriter {
                 currentPlace.get(keys.get(i));
             }
             currentPlace.put(keys.get(keys.size() - 1), newData);
-
-            try (FileWriter fileWriter = new FileWriter(filePath)) {
+            try {
                 root.writeJSONString(fileWriter);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -101,18 +106,23 @@ public class DataWriter {
          * @param newData JSONAware object to be written into the file opened on instantiation of this writer
          * @return -1 on failure (IOException), else 0
          */
-        protected int write(String newData) {
+        protected int write(String newData) { // TODO: create a helper class to discriminate between strings to be "" and JSONStrings
             for (int i = 0; i < keys.size() - 1; i++) {
                 currentPlace.get(keys.get(i));
             }
             currentPlace.put(keys.get(keys.size() - 1), newData);
-            try (FileWriter fileWriter = new FileWriter(filePath)) {
+            try {
                 root.writeJSONString(fileWriter);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
 
             return 0;
+        }
+
+        @Override
+        public void close() throws IOException {
+            fileWriter.close();
         }
     }
 
@@ -123,10 +133,8 @@ public class DataWriter {
      * @return -1 on failure, 0 otherwise
      */
     public static int writeUserData(User user) {
-        try {
-            return new JSONWriter(USERS_JSON)
-                    .atKey(user.getUUID().toString())
-                    .write(user);
+        try (JSONWriter jsonWriter = new JSONWriter(USERS_JSON)) {
+            return jsonWriter.atKey(user.getUUID().toString()).write(user);
         } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
@@ -145,11 +153,8 @@ public class DataWriter {
         courseData.put("lessonGrades", course.fetchGrades());
         courseData.put("finalGrade", course.getFinalGrade());
 
-        try {
-            return new JSONWriter(USER_COURSE_DATA_JSON)
-                    .atKey(userUUID.toString())
-                    .atKey(course.getUUID().toString())
-                    .write(courseData);
+        try(JSONWriter jsonWriter = new JSONWriter(USER_COURSE_DATA_JSON)) {
+            return jsonWriter.atKey(userUUID.toString()).atKey(course.getUUID().toString()).write(courseData);
         } catch (IOException | ParseException e) {
             return -1;
         }
@@ -171,8 +176,7 @@ public class DataWriter {
         for (Lesson l : course.getLessons()) {
             Test test = l.getTest();
             JSONArray testData = new JSONArray();
-            for (Question q :
-                    test.getQuestions()) {
+            for (Question q : test.getQuestions()) {
                 JSONObject questionData = new JSONObject();
                 questionData.put("prompt", q.getPrompt());
                 JSONArray answersArr = new JSONArray();
@@ -184,19 +188,13 @@ public class DataWriter {
                 questionData.put("answers", answersArr);
                 testData.add(questionData);
             }
-            Map<String, Object> tMap = Map.of(
-                    "title", l.getTitle(),
-                    "content", l.getContent(),
-                    "test", testData
-            );
+            Map<String, Object> tMap = Map.of("title", l.getTitle(), "content", l.getContent(), "test", testData);
             lessonList.add(new HashMap<>(tMap));
         }
         courseData.put("lessons", lessonList);
 
-        try {
-            return new JSONWriter(COURSES_JSON)
-                    .atKey(course.getUUID().toString())
-                    .write(courseData);
+        try(JSONWriter jsonWriter = new JSONWriter(COURSES_JSON)) {
+            return jsonWriter.atKey(course.getUUID().toString()).write(courseData);
         } catch (IOException | ParseException e) {
             return -1;
         }
