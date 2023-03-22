@@ -1,5 +1,6 @@
 import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -71,27 +72,6 @@ public class JSONWriter implements AutoCloseable {
      * @return -1 on failure (IOException), else 0
      */
     public int write(JSONAware newData) {
-        for (int i = 0; i < keys.size() - 1; i++) {
-            currentPlace.get(keys.get(i));
-        }
-        currentPlace.put(keys.get(keys.size() - 1), newData);
-        try {
-            root.writeJSONString(fileWriter);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        return 0;
-    }
-
-    /**
-     * Write the String at newData into the JSON file used to create this writer at getCurrentJSONObject()
-     * Take note that the string in newData will be surrounded by quotes.
-     *
-     * @param newData JSONAware object to be written into the file opened on instantiation of this writer
-     * @return -1 on failure (IOException), else 0
-     */
-    public int write(String newData) { // TODO: create a helper class to discriminate between strings to be "" and JSONStrings
         for (int i = 0; i < keys.size() - 1; i++) {
             currentPlace.get(keys.get(i));
         }
