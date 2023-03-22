@@ -31,7 +31,7 @@ public class DataLoader {
         return null;
     }
 
-    public static class UserStuff {
+    public static class UserData {
         private static HashMap<String, HashMap<String, String>> userData;
 
         private static HashMap<String, HashMap<String, String>> getUserData() {
@@ -55,6 +55,36 @@ public class DataLoader {
             var tmp = getUserData();
             var val = tmp.get("uuid");
             return new User(uuid, val.get("username"), val.get("password"), val.get("firstName"), val.get("lastName"), val.get("email"), val.get("phoneNumber"), val.get("clearance"));
+        }
+    }
+
+    public static class CourseData {
+        private static HashMap<String, HashMap<String, String>> userData;
+
+        private static HashMap<String, HashMap<String, String>> getUserData() {
+            if (userData != null) return userData;
+            JSONObject root = fetchRoot("json/dat/courses.json");
+            userData = (HashMap<String, HashMap<String, String>>) new HashMap(root);
+            return userData;
+        }
+
+        public static Course getCourse(UUID uuid) {
+            var tmp = getUserData();
+            var val = tmp.get("uuid");
+//            return new User(uuid, val.get("username"), val.get("password"), val.get("firstName"), val.get("lastName"), val.get("email"), val.get("phoneNumber"), val.get("clearance"));
+            return null;
+            // TODO: simplify course constructor
+        }
+    }
+
+    public static class UserCourseData {
+        private static HashMap<String, HashMap<String, String>> userData;
+
+        private static HashMap<String, HashMap<String, String>> getUserData() {
+            if (userData != null) return userData;
+            JSONObject root = fetchRoot("json/dat/userCourses.json");
+            userData = (HashMap<String, HashMap<String, String>>) new HashMap(root);
+            return userData;
         }
     }
 }
