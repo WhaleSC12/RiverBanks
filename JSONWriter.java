@@ -57,7 +57,7 @@ public class JSONWriter implements AutoCloseable {
      * @param key key of the value being traversed into
      * @return returns an instance of self for the purpose of method chaining
      */
-    protected JSONWriter atKey(String key) {
+    public JSONWriter atKey(String key) {
         keys.add(key);
         return this;
     }
@@ -70,7 +70,7 @@ public class JSONWriter implements AutoCloseable {
      * @param newData JSONAware object to be written into the file opened on instantiation of this writer
      * @return -1 on failure (IOException), else 0
      */
-    protected int write(JSONAware newData) {
+    public int write(JSONAware newData) {
         for (int i = 0; i < keys.size() - 1; i++) {
             currentPlace.get(keys.get(i));
         }
@@ -91,7 +91,7 @@ public class JSONWriter implements AutoCloseable {
      * @param newData JSONAware object to be written into the file opened on instantiation of this writer
      * @return -1 on failure (IOException), else 0
      */
-    protected int write(String newData) { // TODO: create a helper class to discriminate between strings to be "" and JSONStrings
+    public int write(String newData) { // TODO: create a helper class to discriminate between strings to be "" and JSONStrings
         for (int i = 0; i < keys.size() - 1; i++) {
             currentPlace.get(keys.get(i));
         }
