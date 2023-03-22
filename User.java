@@ -101,7 +101,7 @@ public class User implements JSONAware {
      * @param phoneNumber User's phone number
      * @param clearance   User's clearance level
      */
-    public void User(UUID uuid, String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) {
+    public User(UUID uuid, String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) {
         this.uuid = uuid;
         this.username = username;
         this.password = password;
@@ -127,7 +127,7 @@ public class User implements JSONAware {
      * @param phoneNumber User's phone number
      * @param clearance   User's clearance level
      */
-    public void User(String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) {
+    public User(String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) {
         this.uuid = UUID.randomUUID();
         this.username = username;
         this.password = password;
