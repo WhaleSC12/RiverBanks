@@ -14,13 +14,13 @@ public class Facade {
 
     public void Login(UUID uuid, String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) 
     {
-      user.User(uuid,username,password,firstName, lastName, email, phoneNumber, clearance);
+      user = new User(uuid,username,password,firstName, lastName, email, phoneNumber, clearance);
     }
 
 
     public void createLogin(UUID uuid, String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance)
     { 
-      user.User(username,password,firstName, lastName, email, phoneNumber, clearance);
+      user = new User(username,password,firstName, lastName, email, phoneNumber, clearance);
     }
 
   /* search function that searches by name of course
