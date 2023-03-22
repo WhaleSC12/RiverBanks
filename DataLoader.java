@@ -88,7 +88,7 @@ public class DataLoader {
 
     public static HashMap<UUID, HashMap<UUID, UserCourseData>> getUserCourses() {
         HashMap<UUID, HashMap<UUID, UserCourseData>> out = new HashMap<>();
-        JSONObject root = fetchRoot("json/dat/userCourses.json");
+        JSONObject root = fetchRoot("json/dat/userCourseData.json");
         for (Object key : root.keySet()) {
             UUID userUUID = UUID.fromString((String) key);
             HashMap<String, HashMap<String, Object>> value = (HashMap<String, HashMap<String, Object>>) root.get(key);

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class DataWriterTest {
@@ -7,6 +8,20 @@ public class DataWriterTest {
                 "password", "first name",
                 "last name", "email",
                 "phone number", "clearance");
-        System.out.println(DataWriter.writeUserData(testUser));
+        DataWriter.writeUserData(testUser);
+
+        Course testCourse = new Course("course title", "course desc", testUUID, Language.Cpp);
+        Course.Lesson.Test test = new Course.Lesson.Test(); //TODO: see
+        Course.Lesson lesson = new Course.Lesson("lesson title", "lesson description", "lesson content", test);
+        testCourse.addLesson(lesson);
+
+        ArrayList<Double> lessonGrades = new ArrayList<>();
+        lessonGrades.add(100.0);
+        lessonGrades.add(90.0);
+        lessonGrades.add(80.0);
+        lessonGrades.add(70.0);
+        lessonGrades.add(60.0);
+        UserCourseData userCourseData = new UserCourseData(testUUID, UUID.randomUUID(), 5, lessonGrades);
+        DataWriter.writeUserCourseData(userCourseData);
     }
 }

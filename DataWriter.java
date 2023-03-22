@@ -3,7 +3,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Used to write user and course data into their respective JSONs.
@@ -51,17 +53,32 @@ public class DataWriter {
     /**
      * Store's a user's progress and grades within a course
      *
-     * @param userUUID user whose course progress is being written
-     * @param course   course whose data is being saved
-     * @return -1 on failure, else 0
+     * @param userCourseData object being written into JSON
      */
-    public static int writeUserCourseData(UUID userUUID, Course course) {
-        JSONObject courseData = new JSONObject();
-
+    public static void writeUserCourseData(UserCourseData userCourseData) {
         try (JSONWriter jsonWriter = new JSONWriter(USER_COURSE_DATA_JSON)) {
-            return jsonWriter.atKey(userUUID.toString()).atKey(course.getUUID().toString()).write(courseData);
+            jsonWriter
+                    .atKey(userCourseData.getUserUUID().toString())
+                    .atKey(userCourseData.getCourseUUID().toString())
+                    .write(userCourseData);
         } catch (IOException | ParseException e) {
-            return -1;
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Store's a user's progress and grades within a course
+     *
+     * @param userCourseDataList collection of courses being written into JSON
+     */
+    public static void writeUserCourseData(Collection<UserCourseData> userCourseDataList) {
+        try (JSONWriter jsonWriter = new JSONWriter(USERS_JSON)) {
+            for (UserCourseData userCourseData : userCourseDataList) {
+                jsonWriter.atKey(userCourseData.userUUID.toString()).atKey(userCourseData.courseUUID.toString()).write(userCourseData);
+                jsonWriter.emptyKeys();
+            }
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
         }
     }
 

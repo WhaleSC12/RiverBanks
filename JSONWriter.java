@@ -1,6 +1,5 @@
 import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -62,16 +61,41 @@ public class JSONWriter implements AutoCloseable {
     }
 
     /**
+     * Empties the key list so that traversal can being from root without recreating JSONWriter
+     *
+     * @return instance of self for method chaining
+     */
+    public JSONWriter emptyKeys() {
+        keys.clear();
+        return this;
+    }
+
+    /**
+     * Traverses the key list upwards count number of times
+     *
+     * @param count Number of keys to reverse
+     * @return self for method chain
+     */
+    public JSONWriter backKey(int count) {
+        if (keys.size() > keys.size() - 1 - count + 1) {
+            keys.subList(keys.size() - 1 - count + 1, keys.size()).clear();
+        }
+        return this;
+    }
+
+    /**
      * Write the data at newData into the JSON file used to create this writer.
      * To write with this, an Object must be JSONAware. This can either be done by manually filling a new JSONObject
      * or JSONArray with values, or by implementing the JSONAware interface.
+     * Removes the last key.
      *
      * @param newData JSONAware object to be written into the file opened on instantiation of this writer
      * @return -1 on failure (IOException), else 0
      */
     public int write(JSONAware newData) {
+        currentPlace = root;
         for (int i = 0; i < keys.size() - 1; i++) {
-            currentPlace.get(keys.get(i));
+            currentPlace = (JSONObject) currentPlace.get(keys.get(i));
         }
         currentPlace.put(keys.get(keys.size() - 1), newData);
         try {
@@ -79,7 +103,7 @@ public class JSONWriter implements AutoCloseable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
+        keys.remove(keys.size() - 1);
         return 0;
     }
 

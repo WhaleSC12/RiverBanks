@@ -46,8 +46,43 @@ public class UserCourseData implements JSONAware {
         return "UserCourseData{" + "userUUID=" + userUUID + ", courseUUID=" + courseUUID + ", lessonsCompleted=" + lessonsCompleted + ", lessonGrades=" + lessonGrades + '}';
     }
 
+    private void appendToStringBuilderJSONStyle(String key, Object value, StringBuilder sb) {
+        // looks like "key":"value"
+        sb.append('"');
+        sb.append(key);
+        sb.append('"');
+        sb.append(":");
+        sb.append('"');
+        sb.append(value);
+        sb.append('"');
+    }
+
     @Override
     public String toJSONString() {
-        return null;
+        StringBuilder sb = new StringBuilder();
+        sb.append('{');
+        sb.append('"');
+        sb.append("lessonsCompleted");
+        sb.append('"');
+        sb.append(":");
+        sb.append(lessonsCompleted);
+        sb.append(',');
+
+        sb.append('"');
+        sb.append("lessonGrades");
+        sb.append('"');
+        sb.append(":");
+        sb.append('[');
+        boolean first = true;
+        for (double grade : lessonGrades) {
+            if (!first) sb.append(",");
+            else first = false;
+            sb.append(grade);
+        }
+        sb.append(']');
+
+        sb.append('}');
+
+        return sb.toString();
     }
 }
