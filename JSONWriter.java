@@ -83,6 +83,7 @@ public class JSONWriter implements AutoCloseable {
      * Removes the last key, done for the purpose of chaining data at the same key.
      *
      * @param newData JSONAware object to be written into the file opened on instantiation of this writer
+     * @return self for method chaining (IMPORTANT! - the key last entry of the key list is removed)
      */
     public JSONWriter data(JSONAware newData) {
         currentPlace = root;
