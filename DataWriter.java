@@ -24,7 +24,7 @@ public class DataWriter {
      */
     public static void writeUserData(User user) {
         try (JSONWriter jsonWriter = new JSONWriter(USERS_JSON)) {
-            jsonWriter.atKey(user.getUUID().toString()).write(user);
+            jsonWriter.atKey(user.getUUID().toString()).data(user).write();
         } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
@@ -39,8 +39,11 @@ public class DataWriter {
     public static void writeUserData(Collection<User> userList) {
         try (JSONWriter jsonWriter = new JSONWriter(USERS_JSON)) {
             for (User user : userList) {
-                jsonWriter.atKey(user.getUUID().toString()).write(user);
+                jsonWriter
+                        .atKey(user.getUUID().toString())
+                        .data(user);
             }
+            jsonWriter.write();
         } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
@@ -56,7 +59,7 @@ public class DataWriter {
             jsonWriter
                     .atKey(userCourse.getUserUUID().toString())
                     .atKey(userCourse.getCourseUUID().toString())
-                    .write(userCourse);
+                    .data(userCourse).write();
         } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
@@ -68,14 +71,15 @@ public class DataWriter {
      * @param userCourseCol collection of courses being written into JSON
      */
     public static void writeUserCourseData(Collection<UserCourse> userCourseCol) {
-        try (JSONWriter jsonWriter = new JSONWriter(USERS_JSON)) {
+        try (JSONWriter jsonWriter = new JSONWriter(USER_COURSE_DATA_JSON)) {
             for (UserCourse userCourse : userCourseCol) {
                 jsonWriter
                         .atKey(userCourse.userUUID.toString())
                         .atKey(userCourse.courseUUID.toString())
-                        .write(userCourse);
+                        .data(userCourse);
                 jsonWriter.emptyKeys();
             }
+            jsonWriter.write();
         } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
@@ -87,17 +91,17 @@ public class DataWriter {
      * @param userCourseDataMap map of courses being written into JSON
      */
     public static void writeUserCourseData(HashMap<UUID, HashMap<UUID, UserCourse>> userCourseDataMap) {
-        try (JSONWriter jsonWriter = new JSONWriter(USERS_JSON)) {
+        try (JSONWriter jsonWriter = new JSONWriter(USER_COURSE_DATA_JSON)) {
             for (var entry : userCourseDataMap.entrySet()) {
                 jsonWriter.atKey(entry.getKey().toString());
-                HashMap<UUID, UserCourse> value = entry.getValue();
-                for (var v : value.entrySet()) {
+                for (var v : entry.getValue().entrySet()) {
                     jsonWriter
                             .atKey(v.getKey().toString())
-                            .write(v.getValue());
-                    jsonWriter.emptyKeys();
+                            .data(v.getValue());
                 }
+                    jsonWriter.emptyKeys();
             }
+            jsonWriter.write();
         } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
@@ -111,7 +115,7 @@ public class DataWriter {
     public static void writeCourseData(Course course) {
 
         try (JSONWriter jsonWriter = new JSONWriter(COURSES_JSON)) {
-            jsonWriter.atKey(course.getUUID().toString()).write(course);
+            jsonWriter.atKey(course.getUUID().toString()).data(course).write();
         } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
@@ -126,8 +130,9 @@ public class DataWriter {
 
         try (JSONWriter jsonWriter = new JSONWriter(COURSES_JSON)) {
             for (Course c : courseList) {
-                jsonWriter.atKey(c.getUUID().toString()).write(c);
+                jsonWriter.atKey(c.getUUID().toString()).data(c);
             }
+            jsonWriter.write();
         } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }

@@ -58,12 +58,9 @@ public class JSONWriter implements AutoCloseable {
 
     /**
      * Empties the key list so that traversal can being from root without recreating JSONWriter
-     *
-     * @return instance of self for method chaining
      */
-    public JSONWriter emptyKeys() {
+    public void emptyKeys() {
         keys.clear();
-        return this;
     }
 
     /**
@@ -80,25 +77,37 @@ public class JSONWriter implements AutoCloseable {
     }
 
     /**
-     * Write the data at newData into the JSON file used to create this writer.
+     * Put the data at newData into the JSON object created from the old file
      * To write with this, an Object must be JSONAware. This can either be done by manually filling a new JSONObject
      * or JSONArray with values, or by implementing the JSONAware interface.
-     * Removes the last key.
+     * Removes the last key, done for the purpose of chaining data at the same key.
      *
      * @param newData JSONAware object to be written into the file opened on instantiation of this writer
+     * @return
      */
-    public void write(JSONAware newData) {
+    public JSONWriter data(JSONAware newData) {
         currentPlace = root;
         for (int i = 0; i < keys.size() - 1; i++) {
+            if (!currentPlace.containsKey(keys.get(i))) currentPlace.put(keys.get(i), new JSONObject());
             currentPlace = (JSONObject) currentPlace.get(keys.get(i));
         }
         currentPlace.put(keys.get(keys.size() - 1), newData);
+
+        keys.remove(keys.size() - 1);
+        return this;
+    }
+
+    /**
+     * Writes the data in the JSONWriter
+     * This closes the file, as a new filewriter must be created to write again
+     */
+    public void write() throws IOException {
         try {
             root.writeJSONString(fileWriter);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        keys.remove(keys.size() - 1);
+        this.close();
     }
 
     @Override

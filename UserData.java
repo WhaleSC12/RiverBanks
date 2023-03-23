@@ -24,7 +24,7 @@ public class UserData {
 
     public User getUser(UUID uuid) {
         for (User u : userData) {
-            if (u.getUUID() == uuid) return u;
+            if (uuid.equals(u.getUUID())) return u;
         }
         return null;
     }

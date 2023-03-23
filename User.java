@@ -68,7 +68,7 @@ public class User implements JSONAware {
     }
 
 // changed from private final UUID uuid to private UUID uuid 
-    private UUID uuid;
+    private final UUID uuid;
     private String username;
     private String password;
     private String firstName;

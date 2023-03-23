@@ -1,5 +1,15 @@
 {
   "8c3eedf7-ae54-4543-b60e-30750467b1d1": {
+    "55284772-dfa1-4818-b31a-58bd393c52f7": {
+      "lessonGrades": [
+        100.0,
+        90.0,
+        80.0,
+        70.0,
+        60.0
+      ],
+      "lessonsCompleted": 5
+    },
     "55284772-dfa0-4818-b31a-58bd393c52f7": {
       "lessonGrades": [
         100.0,
@@ -10,17 +20,7 @@
       ],
       "lessonsCompleted": 5
     },
-    "a746606e-51ff-4140-afaf-d988df57aae1": {
-      "lessonGrades": [
-        100.0,
-        90.0,
-        80.0,
-        70.0,
-        60.0
-      ],
-      "lessonsCompleted": 5
-    },
-    "4936afff-f899-4f5c-a3f8-f63bf189a85b": {
+    "6c79c260-0dbc-43e3-958e-f385f48de2d4": {
       "lessonsCompleted": 5,
       "lessonGrades": [
         100.0,
@@ -29,66 +29,6 @@
         70.0,
         60.0
       ]
-    },
-    "7cf4ac12-3f76-4119-b66c-f6477fd15311": {
-      "lessonGrades": [
-        100.0,
-        90.0,
-        80.0,
-        70.0,
-        60.0
-      ],
-      "lessonsCompleted": 5
-    },
-    "62a4fda4-fac3-4af8-907c-3c8e90835935": {
-      "lessonGrades": [
-        100.0,
-        90.0,
-        80.0,
-        70.0,
-        60.0
-      ],
-      "lessonsCompleted": 5
-    },
-    "c26cc65f-222d-4a55-8dd0-e7ea40307bcd": {
-      "lessonGrades": [
-        100.0,
-        90.0,
-        80.0,
-        70.0,
-        60.0
-      ],
-      "lessonsCompleted": 5
-    },
-    "1a6de3d1-058f-45bf-b617-91d0ba4a3a02": {
-      "lessonGrades": [
-        100.0,
-        90.0,
-        80.0,
-        70.0,
-        60.0
-      ],
-      "lessonsCompleted": 5
-    },
-    "5d748b0a-79d7-42d7-86a4-ddb325384086": {
-      "lessonGrades": [
-        100.0,
-        90.0,
-        80.0,
-        70.0,
-        60.0
-      ],
-      "lessonsCompleted": 5
-    },
-    "ab53be21-1832-4881-afa7-b5297010a463": {
-      "lessonGrades": [
-        100.0,
-        90.0,
-        80.0,
-        70.0,
-        60.0
-      ],
-      "lessonsCompleted": 5
     }
   }
 }
