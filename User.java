@@ -79,7 +79,6 @@ public class User implements JSONAware {
     /**
      * Constructor meant to be called when loading user from existing data
      *
-     * 3/21/23 changed to void type so the data can be entered without expecting any return 
      * 
      * @param uuid        UserUniqueIdentifier, the unique string used to differentiate users
      * @param username    Username the user uses to log in
@@ -106,7 +105,6 @@ public class User implements JSONAware {
      * Constructor meant to be called when creating a new user
      * Generates a new UUID and assigns it on construction
      *
-     * 3/21/23 changed to void type so the data can be entered without expecting any return 
      * 
      * @param username    Username the user uses to log in
      * @param password    Password the user uses to log in

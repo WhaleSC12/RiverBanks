@@ -5,31 +5,40 @@ public class Facade {
     private User user;
 
     private User registeredUser;
-
+    private UserData currenUserData;
     private Course course;
     private Course.Lesson lesson;
     private Course.Lesson.Test test;
     private Course.Lesson.Test.Question question;
 
 
-    public void Login(UUID uuid, String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) {
-        user = new User(uuid, username, password, firstName, lastName, email, phoneNumber, clearance);
+    /* 
+     * still needs to be finished 
+     */
+    public void Login(String username, String password) 
+    {
+        currenUserData.getUser(username);
     }
 
 
-    public void createLogin(UUID uuid, String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) {
+    public void createLogin(UUID uuid, String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) 
+    {
         user = new User(username, password, firstName, lastName, email, phoneNumber, clearance);
     }
 
     /* search function that searches by name of course
      * can be modified if needed to
      */
-    public boolean searchCourse(String courseName) {
+    public boolean searchCourse(String courseName) 
+    {
         return false;
     }
-
-    public void createCourse() {
-
+// will start working over weekend
+    public void createCourse() 
+    {
+       /* work on using Course that holds all method 
+        * for creating a courses, i.e, lessons, test and questions
+        */
     }
 
     /*
