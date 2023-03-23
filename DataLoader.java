@@ -33,11 +33,21 @@ public class DataLoader {
         return null;
     }
 
+    /**
+     * Helper for getUsers which fetches the user file and casts it to a useful datatype
+     *
+     * @return hashmap representation of the jsonobject in user file
+     */
     private static HashMap<String, HashMap<String, String>> getUserData() {
         JSONObject root = fetchRoot("json/dat/users.json");
         return (HashMap<String, HashMap<String, String>>) new HashMap(root);
     }
 
+    /**
+     * loads an arraylist containing all users and returns it
+     *
+     * @return an arraylist containing all users
+     */
     public static ArrayList<User> getUsers() {
         ArrayList<User> userList = new ArrayList<>();
         for (var entry : getUserData().entrySet()) {
@@ -48,6 +58,11 @@ public class DataLoader {
         return userList;
     }
 
+    /**
+     * returns an arraylist containing all courses in the course file and returns it
+     *
+     * @return arraylist of courses
+     */
     public static ArrayList<Course> getCourses() {
         ArrayList<Course> courseList = new ArrayList<>();
         JSONObject courseData = fetchRoot("json/dat/courses.json");
@@ -85,6 +100,11 @@ public class DataLoader {
         return courseList;
     }
 
+    /**
+     * returns a map of usercoursedata sorted by useruuid and course uuid
+     *
+     * @return a hashmap<useruuid, hashmap<courseuuid, usercoursedata>> containing all data in file
+     */
     public static HashMap<UUID, HashMap<UUID, UserCourseData>> getUserCourses() {
         HashMap<UUID, HashMap<UUID, UserCourseData>> out = new HashMap<>();
         JSONObject root = fetchRoot("json/dat/userCourseData.json");
