@@ -4,7 +4,6 @@
     "lastName": "Last Name",
     "email": "Email",
     "phoneNumber": "Phone Number",
-    "dateOfBirth": "Date of Birth",
     "username": "Username",
     "password": "Password",
     "clearance": "student|teacher|admin"

@@ -3,9 +3,9 @@
     "courseUUID": {
       "lessonsCompleted": 0,
       "lessonGrades": [
-        0,
-        0,
-        0
+        0.0,
+        0.0,
+        0.0
       ]
     }
   }

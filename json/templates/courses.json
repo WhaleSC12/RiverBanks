@@ -1,12 +1,13 @@
 {
   "courseUUID": {
-    "courseTitle": "CourseTitle",
+    "title": "CourseTitle",
     "description": "desc",
-    "language": "C++|Python|etc. (not safe but easier to use)",
+    "language": "C++|Python|etc.",
     "authorUUID": "AuthorUUID",
     "lessons": [
       {
         "title": "Title",
+        "description": "lesson description",
         "content": "Content",
         "test": [
           {
@@ -14,7 +15,7 @@
             "answers": [
               {
                 "text": "answerTextShownToStudent",
-                "correct": 0
+                "correct": false
               },
               {}
             ]
