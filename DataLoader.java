@@ -105,20 +105,20 @@ public class DataLoader {
      *
      * @return a hashmap<useruuid, hashmap<courseuuid, usercoursedata>> containing all data in file
      */
-    public static HashMap<UUID, HashMap<UUID, UserCourseData>> getUserCourses() {
-        HashMap<UUID, HashMap<UUID, UserCourseData>> out = new HashMap<>();
+    public static HashMap<UUID, HashMap<UUID, UserCourse>> getUserCourses() {
+        HashMap<UUID, HashMap<UUID, UserCourse>> out = new HashMap<>();
         JSONObject root = fetchRoot("json/dat/userCourseData.json");
         for (Object key : root.keySet()) {
             UUID userUUID = UUID.fromString((String) key);
             HashMap<String, HashMap<String, Object>> value = (HashMap<String, HashMap<String, Object>>) root.get(key);
-            HashMap<UUID, UserCourseData> dat = new HashMap<>();
+            HashMap<UUID, UserCourse> dat = new HashMap<>();
             for (var v : value.entrySet()) {
                 UUID courseUUID = UUID.fromString(v.getKey());
                 HashMap<String, Object> val = v.getValue();
                 JSONArray arr = (JSONArray) val.get("lessonGrades");
                 ArrayList<Double> gradeList = new ArrayList<>(arr);
-                UserCourseData userCourseData = new UserCourseData(userUUID, courseUUID, Math.toIntExact((long) val.get("lessonsCompleted")), gradeList);
-                dat.put(UUID.fromString(v.getKey()), userCourseData);
+                UserCourse userCourse = new UserCourse(userUUID, courseUUID, Math.toIntExact((long) val.get("lessonsCompleted")), gradeList);
+                dat.put(UUID.fromString(v.getKey()), userCourse);
             }
             out.put(userUUID, dat);
         }

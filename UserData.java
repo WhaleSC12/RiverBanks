@@ -2,30 +2,31 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
 
-public class UserList {
-    private static UserList instance;
-    private final ArrayList<User> userList;
+public class UserData {
+    private static UserData instance;
+    public final ArrayList<User> userData;
 
-    private UserList(ArrayList<User> userList) {
-        this.userList = userList;
+    private UserData(ArrayList<User> userData) {
+        this.userData = userData;
     }
 
-    public static UserList getInstance() {
-        if (instance == null) instance = new UserList(DataLoader.getUsers());
+    public static UserData getInstance() {
+        if (instance == null) instance = new UserData(DataLoader.getUsers());
         return instance;
     }
 
     public User getUser(String username) {
-        for (User u : userList) {
+        for (User u : userData) {
             if (Objects.equals(u.getUsername(), username)) return u;
         }
         return null;
     }
 
     public User getUser(UUID uuid) {
-        for (User u : userList) {
+        for (User u : userData) {
             if (u.getUUID() == uuid) return u;
         }
         return null;
     }
+
 }

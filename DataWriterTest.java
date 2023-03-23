@@ -32,7 +32,7 @@ public class DataWriterTest {
         lessonGrades.add(80.0);
         lessonGrades.add(70.0);
         lessonGrades.add(60.0);
-        UserCourseData userCourseData = new UserCourseData(testUUID, UUID.randomUUID(), 5, lessonGrades);
-        DataWriter.writeUserCourseData(userCourseData);
+        UserCourse userCourse = new UserCourse(testUUID, UUID.randomUUID(), 5, lessonGrades);
+        DataWriter.writeUserCourseData(userCourse);
     }
 }

@@ -1,7 +1,10 @@
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * Used to write user and course data into their respective JSONs.
@@ -46,14 +49,14 @@ public class DataWriter {
     /**
      * Store's a user's progress and grades within a course
      *
-     * @param userCourseData object being written into JSON
+     * @param userCourse object being written into JSON
      */
-    public static void writeUserCourseData(UserCourseData userCourseData) {
+    public static void writeUserCourseData(UserCourse userCourse) {
         try (JSONWriter jsonWriter = new JSONWriter(USER_COURSE_DATA_JSON)) {
             jsonWriter
-                    .atKey(userCourseData.getUserUUID().toString())
-                    .atKey(userCourseData.getCourseUUID().toString())
-                    .write(userCourseData);
+                    .atKey(userCourse.getUserUUID().toString())
+                    .atKey(userCourse.getCourseUUID().toString())
+                    .write(userCourse);
         } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
@@ -62,16 +65,38 @@ public class DataWriter {
     /**
      * Store's a user's progress and grades within a course
      *
-     * @param userCourseDataList collection of courses being written into JSON
+     * @param userCourseCol collection of courses being written into JSON
      */
-    public static void writeUserCourseData(Collection<UserCourseData> userCourseDataList) {
+    public static void writeUserCourseData(Collection<UserCourse> userCourseCol) {
         try (JSONWriter jsonWriter = new JSONWriter(USERS_JSON)) {
-            for (UserCourseData userCourseData : userCourseDataList) {
+            for (UserCourse userCourse : userCourseCol) {
                 jsonWriter
-                        .atKey(userCourseData.userUUID.toString())
-                        .atKey(userCourseData.courseUUID.toString())
-                        .write(userCourseData);
+                        .atKey(userCourse.userUUID.toString())
+                        .atKey(userCourse.courseUUID.toString())
+                        .write(userCourse);
                 jsonWriter.emptyKeys();
+            }
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Store's a user's progress and grades within a course
+     *
+     * @param userCourseDataMap map of courses being written into JSON
+     */
+    public static void writeUserCourseData(HashMap<UUID, HashMap<UUID, UserCourse>> userCourseDataMap) {
+        try (JSONWriter jsonWriter = new JSONWriter(USERS_JSON)) {
+            for (var entry : userCourseDataMap.entrySet()) {
+                jsonWriter.atKey(entry.getKey().toString());
+                HashMap<UUID, UserCourse> value = entry.getValue();
+                for (var v : value.entrySet()) {
+                    jsonWriter
+                            .atKey(v.getKey().toString())
+                            .write(v.getValue());
+                    jsonWriter.emptyKeys();
+                }
             }
         } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
@@ -90,5 +115,30 @@ public class DataWriter {
         } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Store's course information, such as lessons, content, tests, etc. into the courses json
+     *
+     * @param courseList list of courses whose data is being saved
+     */
+    public static void writeCourseData(ArrayList<Course> courseList) {
+
+        try (JSONWriter jsonWriter = new JSONWriter(COURSES_JSON)) {
+            for (Course c : courseList) {
+                jsonWriter.atKey(c.getUUID().toString()).write(c);
+            }
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void saveAll() {
+        UserData userData = UserData.getInstance();
+        writeUserData(userData.userData);
+        UserCourseData userCourseData = UserCourseData.getInstance();
+        writeUserCourseData(userCourseData.userCourseData);
+        CourseData courseData = CourseData.getInstance();
+        writeCourseData(courseData.courseData);
     }
 }

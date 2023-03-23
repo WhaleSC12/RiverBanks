@@ -1,13 +1,13 @@
 public class DataLoaderTest {
     public static void main(String[] args) {
-        UserList userList = UserList.getInstance();
-        User user = userList.getUser("username");
+        UserData userData = UserData.getInstance();
+        User user = userData.getUser("username");
         System.out.println(user);
-        CourseList courseList = CourseList.getInstance();
-        Course course = courseList.getCourse("CourseTitle");
+        CourseData courseData = CourseData.getInstance();
+        Course course = courseData.getCourse("CourseTitle");
         System.out.println(course);
-        UserCourseDataList userCourseDataList = UserCourseDataList.getInstance();
-        UserCourseData userCourseData = userCourseDataList.getUserCourseData(user.getUUID(), course.getUUID());
-        System.out.println(userCourseData);
+        UserCourseData userCourseData = UserCourseData.getInstance();
+        UserCourse userCourse = userCourseData.getUserCourseData(user.getUUID(), course.getUUID());
+        System.out.println(userCourse);
     }
 }
