@@ -27,10 +27,9 @@ public class DataLoader {
         try (FileReader fileReader = new FileReader(file)) {
             JSONParser jsonParser = new JSONParser();
             return (JSONObject) new JSONParser().parse(fileReader);
-        } catch (IOException | ParseException ignored) {
-            // TODO: someone handle the exception in a better way
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
     /**
