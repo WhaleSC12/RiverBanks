@@ -1,6 +1,9 @@
 import java.util.HashMap;
 import java.util.UUID;
 
+/**
+ * Singleton which holds a map of all user course objects
+ */
 public class UserCourseData {
     private static UserCourseData instance;
     public final HashMap<UUID, HashMap<UUID, UserCourse>> userCourseData;

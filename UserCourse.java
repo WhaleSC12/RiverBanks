@@ -3,6 +3,9 @@ import org.json.simple.JSONAware;
 import java.util.ArrayList;
 import java.util.UUID;
 
+/**
+ * Data class which holds user data pertaining to courses
+ */
 public class UserCourse implements JSONAware {
 
     UUID userUUID;

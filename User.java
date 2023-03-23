@@ -1,10 +1,9 @@
 import org.json.simple.JSONAware;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
-/*
- * Basic abstract user to provide functionality to teachers and students
+/**
+ * User data object which holds pertinent user personal data
  */
 public class User implements JSONAware {
     public UUID getUUID() {

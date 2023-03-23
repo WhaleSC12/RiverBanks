@@ -1,12 +1,13 @@
 import org.json.simple.JSONAware;
-import org.json.simple.JSONObject;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.UUID;
 
+/**
+ * Data structure which holds course data such as the course's title, contents, and lessons
+ */
 public class Course implements JSONAware {
-
     private final UUID uuid;
     private String title;
     private String description;

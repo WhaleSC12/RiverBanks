@@ -1,3 +1,6 @@
+/**
+ * Enum for valid languages for courses
+ */
 public enum Language {
     Java,
     Python,

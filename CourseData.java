@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Singleton containing a list of all courses
+ */
 public class CourseData {
     private static CourseData instance;
     public final ArrayList<Course> courseData;

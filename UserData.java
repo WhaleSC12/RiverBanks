@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Singleton which holds a list of all user objects
+ */
 public class UserData {
     private static UserData instance;
     public final ArrayList<User> userData;
