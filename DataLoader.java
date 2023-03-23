@@ -69,7 +69,7 @@ public class DataLoader {
         for (Object objectKey : courseData.keySet()) {
             String key = (String) objectKey;
             HashMap<String, Object> value = (HashMap<String, Object>) courseData.get(objectKey);
-            Course course = new Course(UUID.fromString(key), (String) value.get("courseTitle"), (String) value.get("description"), UUID.fromString((String) value.get("authorUUID")), Language.valueOf((String) value.get("language")));
+            Course course = new Course(UUID.fromString(key), (String) value.get("title"), (String) value.get("description"), UUID.fromString((String) value.get("authorUUID")), Language.valueOf((String) value.get("language")));
             ArrayList<Course.Lesson> lessonList = new ArrayList<>();
             JSONArray jsonLessonList = (JSONArray) value.get("lessons");
             for (var l : jsonLessonList) {

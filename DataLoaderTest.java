@@ -13,9 +13,9 @@ public class DataLoaderTest {
 //        UserCourseData userCourseData = UserCourseData.getInstance();
 //        CourseData courseData = CourseData.getInstance();
 //        userData.getUser(UUID.fromString("f025f1f5-7697-4c64-beaa-dec0ddde9359")).setEmail("totally an email");
-//        DataWriter.saveAll();
-        UserCourseData userCourseData = UserCourseData.getInstance();
-        DataWriter.writeUserCourseData(userCourseData.userCourseData);
+        DataWriter.saveAll();
+//        UserCourseData userCourseData = UserCourseData.getInstance();
+//        DataWriter.writeUserCourseData(userCourseData.userCourseData);
 //        DataWriter.writeUserData(userData.userData.get(0));
 //        User user1 = userData.userData.get(0);
 //        user1.setEmail("emailtest11");
