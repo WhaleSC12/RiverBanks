@@ -32,6 +32,19 @@ public class JSONWriter implements AutoCloseable {
     }
 
     /**
+     * @param filePath JSON file which contains the object being written into
+     * @param overwrite if true, completely overwrites the file completely
+     * @throws IOException    if the given file does not exist, IOException is thrown
+     * @throws ParseException if the given JSON cannot be parsed, ParseException is thrown
+     */
+    public JSONWriter(String filePath, boolean overwrite) throws IOException, ParseException {
+        if (overwrite) this.root = new JSONObject();
+        else this.root = fetchRoot(filePath);
+        this.currentPlace = root;
+        fileWriter = new FileWriter(filePath);
+    }
+
+    /**
      * Fetches the JSON object from the given file
      *
      * @param targetFile file which contains the json object
