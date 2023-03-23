@@ -86,7 +86,6 @@ public class JSONWriter implements AutoCloseable {
      * Removes the last key.
      *
      * @param newData JSONAware object to be written into the file opened on instantiation of this writer
-     * @return -1 on failure (IOException), else 0
      */
     public void write(JSONAware newData) {
         currentPlace = root;
