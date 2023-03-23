@@ -70,14 +70,13 @@ public class DataLoader {
                     ArrayList<AbstractMap.SimpleEntry<String, Boolean>> answerList = new ArrayList<>();
                     for (var objAnswer : jsonQuestionAnswerList) {
                         JSONObject answer = (JSONObject) objAnswer;
-                        boolean correct = (long) answer.get("correct") == 1;
-                        AbstractMap.SimpleEntry<String, Boolean> answerData = new AbstractMap.SimpleEntry<>((String) answer.get("text"), correct);
+                        AbstractMap.SimpleEntry<String, Boolean> answerData = new AbstractMap.SimpleEntry<>((String) answer.get("text"), (boolean) answer.get("correct"));
                         answerList.add(answerData);
                     }
                     question.setAnswerList(answerList);
                     questionList.add(question);
                 }
-                test.setQuestions(questionList);
+                test.setQuestionList(questionList);
                 Course.Lesson lesson = new Course.Lesson((String) entry.get("title"), (String) entry.get("description"), (String) entry.get("content"), test);
                 course.addLesson(lesson);
             }

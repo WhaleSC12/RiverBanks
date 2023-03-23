@@ -1,4 +1,3 @@
-import org.json.simple.JSONArray;
 import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 
@@ -6,13 +5,13 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Course {
+public class Course implements JSONAware {
 
     private final UUID uuid;
     private String title;
     private String description;
     private UUID authorUUID;
-    private ArrayList<Lesson> lessons;
+    private ArrayList<Lesson> lessonList;
     private Language language;
 
     public Course(String title, String description, UUID authorUUID, Language language) {
@@ -25,7 +24,7 @@ public class Course {
         this.description = description;
         this.authorUUID = authorUUID;
         this.language = language;
-        this.lessons = new ArrayList<>();
+        this.lessonList = new ArrayList<>();
     }
 
     public UUID getUUID() {
@@ -56,20 +55,20 @@ public class Course {
         this.authorUUID = authorUUID;
     }
 
-    public ArrayList<Lesson> getLessons() {
-        return lessons;
+    public ArrayList<Lesson> getLessonList() {
+        return lessonList;
     }
 
-    public void setLessons(ArrayList<Lesson> lessons) {
-        this.lessons = lessons;
+    public void setLessonList(ArrayList<Lesson> lessonList) {
+        this.lessonList = lessonList;
     }
 
     public void addLesson(Lesson lesson) {
-        lessons.add(lesson);
+        lessonList.add(lesson);
     }
 
     public void setLesson(int place, Lesson lesson) {
-        lessons.set(place, lesson);
+        lessonList.set(place, lesson);
     }
 
     public Language getLanguage() {
@@ -86,24 +85,10 @@ public class Course {
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", authorUUID=" + authorUUID +
-                ", lessons=" + lessons +
+                ", lessons=" + lessonList +
                 ", language=" + language +
                 ", uuid=" + uuid +
                 '}';
-    }
-
-    public JSONObject getUserCourseData() {
-        JSONObject stuff = new JSONObject();
-        stuff.put("courseTitle", title);
-        stuff.put("description", description);
-        stuff.put("authorUUID", authorUUID.toString()); // FIX
-        stuff.put("language", language.toString());
-        ArrayList<JSONObject> lessonArr = new ArrayList<>();
-        for (Lesson l : getLessons()) {
-            lessonArr.add(l.getLessonData());
-        }
-        stuff.put("lessons", lessonArr); // TODO properly implement jsonaware instead of this trash
-        return stuff;
     }
 
     private void appendToStringBuilderJSONStyle(String key, String value, StringBuilder sb) {
@@ -117,7 +102,42 @@ public class Course {
         sb.append('"');
     }
 
-    public static class Lesson {
+    @Override
+    public String toJSONString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append('{');
+
+        appendToStringBuilderJSONStyle("title", title, sb);
+        sb.append(',');
+        appendToStringBuilderJSONStyle("description", description, sb);
+        sb.append(',');
+        appendToStringBuilderJSONStyle("language", language.toString(), sb);
+        sb.append(',');
+        appendToStringBuilderJSONStyle("authorUUID", authorUUID.toString(), sb);
+        sb.append(',');
+        sb.append('"');
+        sb.append("lessons");
+        sb.append('"');
+        sb.append(":");
+        sb.append('[');
+
+        boolean first = true;
+        for (Lesson l : lessonList) {
+            if (!first) sb.append(',');
+            else first = false;
+
+            sb.append(l.toJSONString());
+
+        }
+
+        sb.append(']');
+
+        sb.append('}');
+
+        return sb.toString();
+    }
+
+    public static class Lesson implements JSONAware {
 
         private String title;
         private String description;
@@ -173,40 +193,74 @@ public class Course {
             this.test = test;
         }
 
-        public JSONObject getLessonData() {
-            JSONObject jobj = new JSONObject();
-            jobj.put("title", title);
-            jobj.put("content", content);
-            JSONArray test = new JSONArray();
-            for (Test.Question q :
-                    getTest().getQuestions()) {
-                test.add(q);
-            }
-            jobj.put("test", test);
-
-            return jobj;
+        private void appendToStringBuilderJSONStyle(String key, String value, StringBuilder sb) {
+            // looks like "key":"value"
+            sb.append('"');
+            sb.append(key);
+            sb.append('"');
+            sb.append(":");
+            sb.append('"');
+            sb.append(value);
+            sb.append('"');
         }
 
-        public static class Test {
+        @Override
+        public String toJSONString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append('{');
 
-            private ArrayList<Question> questions;
+            appendToStringBuilderJSONStyle("title", title, sb);
+            sb.append(',');
+            appendToStringBuilderJSONStyle("description", description, sb);
+            sb.append(',');
+            appendToStringBuilderJSONStyle("content", content, sb);
+            sb.append(',');
+            sb.append('"');
+            sb.append("test");
+            sb.append('"');
+            sb.append(":");
+            sb.append(test.toJSONString());
+
+            sb.append('}');
+
+            return sb.toString();
+        }
+
+        public static class Test implements JSONAware {
+
+            private ArrayList<Question> questionList;
 
             public Test() {
             }
 
-            public ArrayList<Question> getQuestions() {
-                return questions;
+            public ArrayList<Question> getQuestionList() {
+                return questionList;
             }
 
-            public void setQuestions(ArrayList<Question> questions) {
-                this.questions = questions;
+            public void setQuestionList(ArrayList<Question> questionList) {
+                this.questionList = questionList;
             }
 
             @Override
             public String toString() {
                 return "Course.Lesson.Test{" +
-                        "questions=" + questions +
+                        "questions=" + questionList +
                         '}';
+            }
+
+            @Override
+            public String toJSONString() {
+                StringBuilder sb = new StringBuilder();
+                sb.append('[');
+                boolean first = true;
+                for (Question q : questionList) {
+                    if (!first) sb.append(',');
+                    else first = false;
+                    sb.append(q.toJSONString());
+                }
+                sb.append(']');
+
+                return sb.toString();
             }
 
             public static class Question implements JSONAware {
@@ -230,32 +284,34 @@ public class Course {
                     this.prompt = prompt;
                 }
 
-                private void appendToStringBuilderJSONStyle(String key, String value, StringBuilder sb) {
-                    // looks like "key":"value"
-                    sb.append('"');
-                    sb.append(key);
-                    sb.append('"');
-                    sb.append(":");
-                    sb.append('"');
-                    sb.append(value);
-                    sb.append('"');
-                }
-
                 @Override
                 public String toJSONString() {
                     StringBuilder sb = new StringBuilder();
                     sb.append('{');
 
-                    appendToStringBuilderJSONStyle("prompt", prompt, sb);
+                    sb.append("\"prompt\":");
+                    sb.append('"');
+                    sb.append(prompt);
+                    sb.append('"');
                     sb.append(',');
                     sb.append("\"answers\":");
                     sb.append('[');
                     boolean first = true;
-                    for (var v :
-                            answerList) {
-                        if (!first);
+                    for (var v : answerList) {
+                        if (!first) sb.append(',');
+                        else first = false;
+                        sb.append('{');
+                        sb.append("\"text\":");
+                        sb.append('"');
+                        sb.append(v.getKey());
+                        sb.append('"');
+                        sb.append(',');
+                        sb.append("\"correct\":");
+                        sb.append(v.getValue());
+                        sb.append('}');
                     }
                     sb.append(']');
+
                     sb.append('}');
 
                     return sb.toString();

@@ -92,7 +92,7 @@ public class JSONWriter implements AutoCloseable {
      * @param newData JSONAware object to be written into the file opened on instantiation of this writer
      * @return -1 on failure (IOException), else 0
      */
-    public int write(JSONAware newData) {
+    public void write(JSONAware newData) {
         currentPlace = root;
         for (int i = 0; i < keys.size() - 1; i++) {
             currentPlace = (JSONObject) currentPlace.get(keys.get(i));
@@ -104,7 +104,6 @@ public class JSONWriter implements AutoCloseable {
             throw new RuntimeException(e);
         }
         keys.remove(keys.size() - 1);
-        return 0;
     }
 
     @Override

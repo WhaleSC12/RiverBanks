@@ -1,1 +1,20 @@
-{"f025f1f5-7697-4c64-beaa-dec0ddde9359":{"firstName":"first name","lastName":"last name","password":"fancypassword","phoneNumber":"phone number","clearance":"clearance","email":"email","username":"username"},"8c3eedf7-ae54-4543-b60e-30750467b1d1":{"firstName":"first name","lastName":"last name","email":"email","phoneNumber":"phone number","username":"username2","password":"password","clearance":"clearance"}}
+{
+  "f025f1f5-7697-4c64-beaa-dec0ddde9359": {
+    "firstName": "first name",
+    "lastName": "last name",
+    "password": "fancypassword",
+    "phoneNumber": "phone number",
+    "clearance": "clearance",
+    "email": "email",
+    "username": "username"
+  },
+  "8c3eedf7-ae54-4543-b60e-30750467b1d1": {
+    "firstName": "first name",
+    "lastName": "last name",
+    "email": "email",
+    "phoneNumber": "phone number",
+    "username": "username2",
+    "password": "password",
+    "clearance": "clearance"
+  }
+}
