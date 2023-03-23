@@ -38,16 +38,35 @@ public void Intro() {
     }
 
     private void login() {
-
+    System.out.println("Enter your username");
+    System.out.println("Enter q to cancel");
+    String usernameinput = scanner.nextLine();
+    
+    if(input == "q") {
+        /*return to main menu */
+    } else {
+    System.out.println("Enter your password");
+    String passwordinput = scanner.nextline();
+    }
     }
     private void createAccount() {
-
+    System.out.println("Create a username");
+    System.out.println("Enter q to cancel");
+        String newusernameinput = scanner.nextline();
+    System.out.println("Create a password");
+    String newpasswordinput = scanner.nextline();
     }
     private void createCourse() {
-        
+    System.out.println("Enter 1 to add to an existing course. Enter 2 to create a new course.");
+    }
+    private void existingCourse() {
+    
+    }
+    private void newCourse() {
+     
     }
     private void logout() {
-
+    /*return to main menu */
     }
 }
 
