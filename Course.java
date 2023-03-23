@@ -317,11 +317,6 @@ public class Course implements JSONAware {
                     return sb.toString();
                 }
 
-                public JSONObject getJSONObject() {
-
-                    return null;
-                }
-
                 @Override
                 public String toString() {
                     return "Course.Lesson.Test.Question{" +
