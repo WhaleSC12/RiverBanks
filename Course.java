@@ -15,6 +15,7 @@ public class Course implements JSONAware {
     private ArrayList<Lesson> lessonList;
     private Language language;
 
+
     public Course(String title, String description, UUID authorUUID, Language language) {
         this(UUID.randomUUID(), title, description, authorUUID, language);
     }
@@ -82,14 +83,7 @@ public class Course implements JSONAware {
 
     @Override
     public String toString() {
-        return "Course{" +
-                "title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", authorUUID=" + authorUUID +
-                ", lessons=" + lessonList +
-                ", language=" + language +
-                ", uuid=" + uuid +
-                '}';
+        return "Course{" + "title='" + title + '\'' + ", description='" + description + '\'' + ", authorUUID=" + authorUUID + ", lessons=" + lessonList + ", language=" + language + ", uuid=" + uuid + '}';
     }
 
     private void appendToStringBuilderJSONStyle(String key, String value, StringBuilder sb) {
@@ -140,6 +134,7 @@ public class Course implements JSONAware {
 
     public static class Lesson implements JSONAware {
 
+        private final ArrayList<Comment> commentList;
         private String title;
         private String description;
         private String content;
@@ -150,16 +145,16 @@ public class Course implements JSONAware {
             this.content = content;
             this.description = description;
             this.test = test;
+            this.commentList = new ArrayList<>();
+
+        }
+        public ArrayList<Comment> getCommentList() {
+            return commentList;
         }
 
         @Override
         public String toString() {
-            return "Course.Lesson{" +
-                    "title='" + title + '\'' +
-                    ", description='" + description + '\'' +
-                    ", content='" + content + '\'' +
-                    ", test=" + test +
-                    '}';
+            return "Course.Lesson{" + "title='" + title + '\'' + ", description='" + description + '\'' + ", content='" + content + '\'' + ", test=" + test + '}';
         }
 
         public String getTitle() {
@@ -217,6 +212,21 @@ public class Course implements JSONAware {
             appendToStringBuilderJSONStyle("content", content, sb);
             sb.append(',');
             sb.append('"');
+            sb.append("comments");
+            sb.append('"');
+            sb.append(":");
+            sb.append('[');
+
+            boolean first = true;
+            for (Comment c : commentList) {
+                if (first) first = false;
+                else sb.append(',');
+                c.toJSONString();
+            }
+
+            sb.append(']');
+            sb.append(',');
+            sb.append('"');
             sb.append("test");
             sb.append('"');
             sb.append(":");
@@ -230,12 +240,8 @@ public class Course implements JSONAware {
         public static class Test implements JSONAware {
 
             private ArrayList<Question> questionList;
-            private String testTitle;
-            private String testDescription;
 
-            public Test(String testTitle, String testDescription) {
-                this.testTitle = testTitle;
-                this.testDescription = testDescription;
+            public Test() {
             }
 
             public ArrayList<Question> getQuestionList() {
@@ -248,9 +254,7 @@ public class Course implements JSONAware {
 
             @Override
             public String toString() {
-                return "Course.Lesson.Test{" +
-                        "questions=" + questionList +
-                        '}';
+                return "Course.Lesson.Test{" + "questions=" + questionList + '}';
             }
 
             @Override
@@ -324,10 +328,7 @@ public class Course implements JSONAware {
 
                 @Override
                 public String toString() {
-                    return "Course.Lesson.Test.Question{" +
-                            "prompt='" + prompt + '\'' +
-                            ", answerList=" + answerList +
-                            '}';
+                    return "Course.Lesson.Test.Question{" + "prompt='" + prompt + '\'' + ", answerList=" + answerList + '}';
                 }
             }
         }

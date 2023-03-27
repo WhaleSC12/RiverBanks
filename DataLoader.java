@@ -58,6 +58,25 @@ public class DataLoader {
     }
 
     /**
+     * Helper method used to recursively get all comments
+     *
+     * @param commentArray json comment array filled with all the necessary data
+     * @return an arraylist<comment> filled with all comment data to any depth
+     */
+    private static ArrayList<Comment> getDeepCommentArray(JSONArray commentArray) {
+        ArrayList<Comment> commentList = new ArrayList<>();
+        for (var v : commentArray) {
+            JSONObject jsonComment = (JSONObject) v;
+            Comment comment = new Comment(UUID.fromString((String) jsonComment.get("userUUID")), (String) jsonComment.get("content"));
+            commentList.add(comment);
+            ArrayList<Comment> replyList = comment.getCommentList();
+            JSONArray comArr = (JSONArray) jsonComment.get("comments");
+            replyList.addAll(getDeepCommentArray(comArr));
+        }
+        return commentList;
+    }
+
+    /**
      * returns an arraylist containing all courses in the course file and returns it
      *
      * @return arraylist of courses
@@ -69,7 +88,6 @@ public class DataLoader {
             String key = (String) objectKey;
             HashMap<String, Object> value = (HashMap<String, Object>) courseData.get(objectKey);
             Course course = new Course(UUID.fromString(key), (String) value.get("title"), (String) value.get("description"), UUID.fromString((String) value.get("authorUUID")), Language.valueOf((String) value.get("language")));
-            ArrayList<Course.Lesson> lessonList = new ArrayList<>();
             JSONArray jsonLessonList = (JSONArray) value.get("lessons");
             for (var l : jsonLessonList) {
                 HashMap<String, Object> entry = (HashMap<String, Object>) l;
@@ -92,12 +110,16 @@ public class DataLoader {
                 }
                 test.setQuestionList(questionList);
                 Course.Lesson lesson = new Course.Lesson((String) entry.get("title"), (String) entry.get("description"), (String) entry.get("content"), test);
+                JSONArray arr = (JSONArray) entry.get("comments");
+                ArrayList<Comment> commentList = lesson.getCommentList();
+                commentList.addAll(getDeepCommentArray(arr));
                 course.addLesson(lesson);
             }
             courseList.add(course);
         }
         return courseList;
     }
+
 
     /**
      * returns a map of usercoursedata sorted by useruuid and course uuid

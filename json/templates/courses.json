@@ -9,6 +9,13 @@
         "title": "Title",
         "description": "lesson description",
         "content": "Content",
+        "comments": [
+          {
+            "userUUID": "author",
+            "content": "content",
+            "comments": []
+          }
+        ],
         "test": [
           {
             "prompt": "QuestionPrompt",
