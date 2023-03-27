@@ -48,6 +48,9 @@ public void Intro() {
     System.out.println("Enter your password");
     String passwordinput = scanner.nextline();
     }
+    /*call facade after getting the login */
+    /*set current user to you */
+    /*when they log out set current user to null */
     }
     private void createAccount() {
     System.out.println("Create a username");
@@ -60,10 +63,14 @@ public void Intro() {
     System.out.println("Enter 1 to add to an existing course. Enter 2 to create a new course.");
     }
     private void existingCourse() {
-    
+    System.out.println("Choose a course");
     }
     private void newCourse() {
-     
+    System.out.println("Make a title");
+    System.out.println("Write a short description");
+    System.out.println("What language is the course on?");
+    System.out.println("How many questions are there?");
+
     }
     private void logout() {
     /*return to main menu */
