@@ -230,8 +230,12 @@ public class Course implements JSONAware {
         public static class Test implements JSONAware {
 
             private ArrayList<Question> questionList;
+            private String testTitle;
+            private String testDescription;
 
-            public Test() {
+            public Test(String testTitle, String testDescription) {
+                this.testTitle = testTitle;
+                this.testDescription = testDescription;
             }
 
             public ArrayList<Question> getQuestionList() {
