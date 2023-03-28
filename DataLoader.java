@@ -91,7 +91,7 @@ public class DataLoader {
             JSONArray jsonLessonList = (JSONArray) value.get("lessons");
             for (var l : jsonLessonList) {
                 HashMap<String, Object> entry = (HashMap<String, Object>) l;
-                Course.Lesson.Test test = new Course.Lesson.Test();
+                Course.Lesson.Test test = new Course.Lesson.Test(key, key);
                 ArrayList<Course.Lesson.Test.Question> questionList = new ArrayList<>();
                 JSONArray jsonQuestionArray = (JSONArray) entry.get("test");
                 for (var obj : jsonQuestionArray) {

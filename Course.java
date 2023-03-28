@@ -238,10 +238,13 @@ public class Course implements JSONAware {
         }
 
         public static class Test implements JSONAware {
-
+            private String Testitle;
+            private String Testdescription;
             private ArrayList<Question> questionList;
 
-            public Test() {
+            public Test(String Testitle, String Testdescription) {
+            this.Testitle = Testitle;
+                this.Testdescription = Testdescription;
             }
 
             public ArrayList<Question> getQuestionList() {

@@ -32,7 +32,7 @@ public class Facade {
     }
 
 /**
- * Takes in the users info and creates a new Login for the user and generates them a unique UUID 
+ * Takes in the users info and creates a new Login for the user and generates them a unique UUID and then adds them to the UserList
  * @param username    Username the user uses to log in
  * @param password    Password the user uses to log in
  * @param firstName   User's first name
@@ -61,7 +61,7 @@ public class Facade {
 * @param course       basic course info and holds all lessons
 * @param Lesson       basic lesson info such as name and description and hold all test
 * @param test         basic test info such as name and description and hools all questions
-* @param question     basic question infor such as question and answers choices and holds correct choice
+* @param question     basic question info such as question and answers choices and holds correct choice
 */
     public void createLesson() 
     {

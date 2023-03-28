@@ -12,7 +12,7 @@ public class DataWriterTest {
         DataWriter.writeUserData(testUser);
 
         Course testCourse = new Course("course title", "course desc", testUUID, Language.Cpp);
-        Course.Lesson.Test test = new Course.Lesson.Test();
+        Course.Lesson.Test test = new Course.Lesson.Test(null, null);
         Course.Lesson.Test.Question question = new Course.Lesson.Test.Question();
         question.setPrompt("prompt");
         ArrayList<AbstractMap.SimpleEntry<String, Boolean>> answerList = new ArrayList<>();

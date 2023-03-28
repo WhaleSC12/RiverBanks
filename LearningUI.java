@@ -36,35 +36,46 @@ public void Intro() {
 
     }
     }
-
+/** void login method that asks the users username and passwords
+ * and then calls the Login method in the Facade
+ * @return null
+ */
     private void login() {
     System.out.println("Enter your username");
     System.out.println("Enter q to cancel");
     String usernameinput = scanner.nextLine();
     
-    if(input == "q") {
+    if(usernameinput == "q") {
         /*return to main menu */
     } else {
     System.out.println("Enter your password");
-    String passwordinput = scanner.nextline();
+    String passwordinput = scanner.nextLine();
     }
     /*call facade after getting the login */
     /*set current user to you */
     /*when they log out set current user to null */
     }
+
+/** void createAccount method that asks for info to create an accout such as an 
+ * username, password, first name, last name, email and phone number
+ * @return null
+ */
     private void createAccount() {
     System.out.println("Create a username");
     System.out.println("Enter q to cancel");
-        String newusernameinput = scanner.nextline();
+        String newusernameinput = scanner.nextLine();
     System.out.println("Create a password");
-    String newpasswordinput = scanner.nextline();
+    String newpasswordinput = scanner.nextLine();
     }
+
     private void createCourse() {
     System.out.println("Enter 1 to add to an existing course. Enter 2 to create a new course.");
     }
+
     private void existingCourse() {
     System.out.println("Choose a course");
     }
+
     private void newCourse() {
     System.out.println("Make a title");
     System.out.println("Write a short description");
@@ -88,7 +99,9 @@ private int getUserChoice(int numCommands) {
     return -1;
 }
 
-
+/** void methods that displays the main menu options in the UI
+ * @return null
+ */
 public void displayMainMenu() {
     System.out.println(mainMenu);
     for(int i=0; i< mainMenu.length; i++) {
