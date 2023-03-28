@@ -10,9 +10,10 @@ public class Facade {
     private static final UserData userData = UserData.getInstance();
     private UserData currenUserData;
     private Course course;
-    private Course.Lesson lesson;
-    private Course.Lesson.Test test;
-    private Course.Lesson.Test.Question question;
+    private Module module;
+    private Lesson lesson;
+    private Test test;
+    private Question question;
 
 /**
  * 
@@ -32,7 +33,7 @@ public class Facade {
     }
 
 /**
- * Takes in the users info and creates a new Login for the user and generates them a unique UUID 
+ * Takes in the users info and creates a new Login for the user and generates them a unique UUID and then adds them to the UserList
  * @param username    Username the user uses to log in
  * @param password    Password the user uses to log in
  * @param firstName   User's first name
@@ -61,7 +62,7 @@ public class Facade {
 * @param course       basic course info and holds all lessons
 * @param Lesson       basic lesson info such as name and description and hold all test
 * @param test         basic test info such as name and description and hools all questions
-* @param question     basic question infor such as question and answers choices and holds correct choice
+* @param question     basic question info such as question and answers choices and holds correct choice
 */
     public void createLesson() 
     {
@@ -88,7 +89,7 @@ public class Facade {
             System.out.print("Enter lesson content: ");
             String lessonContent = scanner.nextLine();
 
-            ArrayList<Course.Lesson.Test> tests = new ArrayList<>();
+            ArrayList<Test> tests = new ArrayList<>();
 
             while (true) {
                 System.out.print("Add a test? (y/n): ");
@@ -100,9 +101,9 @@ public class Facade {
                 String testTitle = scanner.nextLine();
                 System.out.print("Enter test description: ");
                 String testDescription = scanner.nextLine();
-                Course.Lesson.Test test = new Course.Lesson.Test(testTitle, testDescription);
+                Test test = new Test(testTitle, testDescription);
 
-                ArrayList<Course.Lesson.Test.Question> questions = new ArrayList<>();
+                ArrayList<Question> questions = new ArrayList<>();
                 while (true) {
                     System.out.print("Add a question? (y/n): ");
                     String addQuestion = scanner.nextLine();
@@ -113,7 +114,7 @@ public class Facade {
                     String questionText = scanner.nextLine();
                     System.out.print("Enter answer: ");
                     String answer = scanner.nextLine();
-                    Course.Lesson.Test.Question question = new Course.Lesson.Test.Question();
+                    Question question = new Question();
                     questions.add(question);
                 }
 
@@ -121,9 +122,10 @@ public class Facade {
                 tests.add(test);
             }
 
-            Course.Lesson lesson = new Course.Lesson(lessonTitle, lessonDescription, lessonContent, test);
-            lesson.setTest(test);
+            Lesson lesson = new Lesson(lessonTitle, lessonDescription, lessonContent);
+            module.setTest(test);
             course.addLesson(lesson);
+            
         }
 
         System.out.println("Course created:");

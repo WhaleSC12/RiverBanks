@@ -3,10 +3,13 @@ import org.json.simple.JSONAware;
 import java.util.ArrayList;
 
 public class Test implements JSONAware {
-
+    private String testTitle;
+    private String testDescription;
     private ArrayList<Question> questionList;
 
-    public Test() {
+    public Test(String testTitle, String testDescription) {
+        this.testTitle = testTitle;
+        this.testDescription = testDescription;
     }
 
     public ArrayList<Question> getQuestionList() {
