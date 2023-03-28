@@ -22,19 +22,23 @@
             "comments": []
           }
         ],
-        "test": [
-          {
-            "prompt": "QuestionPrompt",
-            "answers": [
-              {
-                "text": "answerTextShownToStudent",
-                "correct": false
-              },
-              {}
-            ]
-          },
-          {}
-        ]
+        "test": {
+          "title": "title",
+          "description": "description",
+          "questions": [
+            {
+              "prompt": "QuestionPrompt",
+              "answers": [
+                {
+                  "text": "answerTextShownToStudent",
+                  "correct": false
+                },
+                {}
+              ]
+            },
+            {}
+          ]
+        }
       },
       {}
     ]
