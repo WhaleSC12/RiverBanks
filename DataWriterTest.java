@@ -12,17 +12,17 @@ public class DataWriterTest {
         DataWriter.writeUserData(testUser);
 
         Course testCourse = new Course("course title", "course desc", testUUID, Language.Cpp);
-        Course.Lesson.Test test = new Course.Lesson.Test();
-        Course.Lesson.Test.Question question = new Course.Lesson.Test.Question();
+        Test test = new Test();
+        Question question = new Question();
         question.setPrompt("prompt");
         ArrayList<AbstractMap.SimpleEntry<String, Boolean>> answerList = new ArrayList<>();
         AbstractMap.SimpleEntry<String, Boolean> answer = new AbstractMap.SimpleEntry<>("answer", false);
         answerList.add(answer);
         question.setAnswerList(answerList);
-        ArrayList<Course.Lesson.Test.Question> questionList = new ArrayList<>();
+        ArrayList<Question> questionList = new ArrayList<>();
         questionList.add(question);
         test.setQuestionList(questionList);
-        Course.Lesson lesson = new Course.Lesson("lesson title", "lesson description", "lesson content", test);
+        Lesson lesson = new Lesson("lesson title", "lesson description", test);
         testCourse.addLesson(lesson);
         DataWriter.writeCourseData(testCourse);
 

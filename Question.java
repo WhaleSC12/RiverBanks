@@ -24,15 +24,23 @@ public class Question implements JSONAware {
         this.prompt = prompt;
     }
 
+    private void appendToStringBuilderJSONStyle(String key, String value, StringBuilder sb) {
+        // looks like "key":"value"
+        sb.append('"');
+        sb.append(key);
+        sb.append('"');
+        sb.append(":");
+        sb.append('"');
+        sb.append(value);
+        sb.append('"');
+    }
+
     @Override
     public String toJSONString() {
         StringBuilder sb = new StringBuilder();
         sb.append('{');
 
-        sb.append("\"prompt\":");
-        sb.append('"');
-        sb.append(prompt);
-        sb.append('"');
+        appendToStringBuilderJSONStyle("prompt", prompt, sb);
         sb.append(',');
         sb.append("\"answers\":");
         sb.append('[');
