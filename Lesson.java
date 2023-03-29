@@ -72,7 +72,7 @@ public class Lesson implements JSONAware {
         for (Comment c : commentList) {
             if (first) first = false;
             else sb.append(',');
-            c.toJSONString();
+            sb.append(c.toJSONString());
         }
 
         sb.append(']');
@@ -87,7 +87,7 @@ public class Lesson implements JSONAware {
         for (Module m : moduleList) {
             if (first) first = false;
             else sb.append(',');
-            m.toJSONString();
+            sb.append(m.toJSONString());
         }
 
         sb.append(']');

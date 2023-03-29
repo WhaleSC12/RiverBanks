@@ -1,6 +1,6 @@
 {
-  "1253f2de-cf10-4a29-b8f8-c2591bb67ef0": {
-    "title": "title1",
+  "9d8d499c-36f0-4b7b-9ba0-01be25180804": {
+    "title": "course title",
     "description": "course desc",
     "language": "Cpp",
     "authorUUID": "8c3eedf7-ae54-4543-b60e-30750467b1d1",
@@ -8,103 +8,14 @@
       {
         "title": "lesson title",
         "description": "lesson description",
-        "content": "lesson content",
-        "test": [
+        "comments": [],
+        "modules": [
           {
-            "prompt": "prompt",
-            "answers": [
-              {
-                "text": "answer",
-                "correct": false
-              }
-            ]
+            "title": "title",
+            "description": "desc",
+            "content": "content"
           }
-        ]
-      }
-    ]
-  },
-  "b6dcabf5-e762-4a62-9493-b9f4559bf546": {
-    "title": "title2",
-    "description": "course desc",
-    "language": "Cpp",
-    "authorUUID": "8c3eedf7-ae54-4543-b60e-30750467b1d1",
-    "lessons": [
-      {
-        "title": "lesson title",
-        "description": "lesson description",
-        "content": "lesson content",
-        "test": [
-          {
-            "prompt": "prompt",
-            "answers": [
-              {
-                "text": "answer",
-                "correct": false
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "bf88b33d-7254-44e0-8a92-4bdcf11bd269": {
-    "title": "title3",
-    "description": "course desc",
-    "language": "Cpp",
-    "authorUUID": "8c3eedf7-ae54-4543-b60e-30750467b1d1",
-    "lessons": [
-      {
-        "title": "lesson title",
-        "description": "lesson description",
-        "content": "lesson content",
-        "test": [
-          {
-            "prompt": "prompt",
-            "answers": [
-              {
-                "text": "answer",
-                "correct": false
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "df20311e-bc85-4103-a31a-84f12975bb22": {
-    "title": "null",
-    "description": "course desc",
-    "language": "Cpp",
-    "authorUUID": "8c3eedf7-ae54-4543-b60e-30750467b1d1",
-    "lessons": [
-      {
-        "title": "lesson title",
-        "description": "lesson description",
-        "content": "lesson content",
-        "test": [
-          {
-            "prompt": "prompt",
-            "answers": [
-              {
-                "text": "answer",
-                "correct": false
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "181e924e-db15-47c3-a046-5379c9af338c": {
-    "title": "null",
-    "description": "course desc",
-    "language": "Cpp",
-    "authorUUID": "8c3eedf7-ae54-4543-b60e-30750467b1d1",
-    "lessons": [
-      {
-        "title": "lesson title",
-        "description": "lesson description",
-        "content": "lesson content",
+        ],
         "test": [
           {
             "prompt": "prompt",

@@ -12,7 +12,7 @@ public class DataWriterTest {
         DataWriter.writeUserData(testUser);
 
         Course testCourse = new Course("course title", "course desc", testUUID, Language.Cpp);
-        Test test = new Test();
+        Test test = new Test("title", "description");
         Question question = new Question();
         question.setPrompt("prompt");
         ArrayList<AbstractMap.SimpleEntry<String, Boolean>> answerList = new ArrayList<>();
@@ -23,6 +23,8 @@ public class DataWriterTest {
         questionList.add(question);
         test.setQuestionList(questionList);
         Lesson lesson = new Lesson("lesson title", "lesson description", test);
+        ArrayList<Module> moduleList = lesson.getModuleList();
+        moduleList.add(new Module("title", "desc", "content"));
         testCourse.addLesson(lesson);
         DataWriter.writeCourseData(testCourse);
 

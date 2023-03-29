@@ -86,9 +86,10 @@ public class DataLoader {
         return moduleList;
     }
 
-    private static Test getTest(JSONArray questionArray) {
-        Test test = new Test();
+    private static Test getTest(JSONObject testObject) {
+        Test test = new Test((String) testObject.get("title"), (String) testObject.get("description"));
         ArrayList<Question> questionList = new ArrayList<>();
+        JSONArray questionArray = (JSONArray) testObject.get("questions");
         for (var v : questionArray) {
             JSONObject jsonQuestion = (JSONObject) v;
             Question question = new Question();
@@ -111,12 +112,15 @@ public class DataLoader {
         ArrayList<Lesson> lessonList = new ArrayList<>();
         for (var v : lessonArray) {
             JSONObject jsonLesson = (JSONObject) v;
-            JSONArray jsonTest = (JSONArray) jsonLesson.get("test");
+            JSONObject jsonTest = (JSONObject) jsonLesson.get("test");
             Test test = getTest(jsonTest);
             Lesson lesson = new Lesson((String) jsonLesson.get("title"), (String) jsonLesson.get("description"), test);
             ArrayList<Comment> commentList = lesson.getCommentList();
             JSONArray jsonCommentArray = (JSONArray) jsonLesson.get("comments");
             commentList.addAll(getCommentList(jsonCommentArray));
+            ArrayList<Module> moduleList = lesson.getModuleList();
+            JSONArray modulesObject = (JSONArray) jsonLesson.get("modules");
+            moduleList.addAll(getModuleArray(modulesObject));
             lessonList.add(lesson);
         }
         return lessonList;
