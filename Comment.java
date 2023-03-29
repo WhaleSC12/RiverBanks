@@ -6,12 +6,13 @@ import java.util.UUID;
 public class Comment implements JSONAware {
     private final UUID author;
     private final String content;
-
-    public void setCommentList(ArrayList<Comment> commentList) {
-        this.commentList = commentList;
-    }
-
     private ArrayList<Comment> commentList;
+
+    public Comment(UUID author, String content) {
+        this.author = author;
+        this.content = content;
+        this.commentList = new ArrayList<>();
+    }
 
     public UUID getAuthor() {
         return author;
@@ -25,10 +26,8 @@ public class Comment implements JSONAware {
         return commentList;
     }
 
-    public Comment(UUID author, String content) {
-        this.author = author;
-        this.content = content;
-        this.commentList = new ArrayList<>();
+    public void setCommentList(ArrayList<Comment> commentList) {
+        this.commentList = commentList;
     }
 
     private void appendToStringBuilderJSONStyle(String key, String value, StringBuilder sb) {

@@ -16,9 +16,9 @@ import java.util.ArrayList;
  */
 public class JSONWriter implements AutoCloseable {
     private final JSONObject root;
-    private JSONObject currentPlace;
     private final ArrayList<String> keys = new ArrayList<>();
     private final FileWriter fileWriter;
+    private JSONObject currentPlace;
 
     /**
      * @param filePath JSON file which contains the object being written into
@@ -32,7 +32,7 @@ public class JSONWriter implements AutoCloseable {
     }
 
     /**
-     * @param filePath JSON file which contains the object being written into
+     * @param filePath  JSON file which contains the object being written into
      * @param overwrite if true, completely overwrites the file completely
      * @throws IOException    if the given file does not exist, IOException is thrown
      * @throws ParseException if the given JSON cannot be parsed, ParseException is thrown

@@ -99,7 +99,7 @@ public class DataWriter {
                             .atKey(v.getKey().toString())
                             .data(v.getValue());
                 }
-                    jsonWriter.emptyKeys();
+                jsonWriter.emptyKeys();
             }
             jsonWriter.write();
         } catch (IOException | ParseException e) {

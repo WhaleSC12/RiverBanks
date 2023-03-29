@@ -10,16 +10,16 @@ public class Lesson implements JSONAware {
     private String title;
     private String description;
 
-    public ArrayList<Module> getModuleList() {
-        return moduleList;
-    }
-
     public Lesson(String title, String description, Test test) {
         this.title = title;
         this.description = description;
         this.commentList = new ArrayList<>();
         this.moduleList = new ArrayList<>();
         this.test = test;
+    }
+
+    public ArrayList<Module> getModuleList() {
+        return moduleList;
     }
 
     public ArrayList<Comment> getCommentList() {

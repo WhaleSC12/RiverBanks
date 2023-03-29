@@ -6,6 +6,12 @@ public class Module implements JSONAware {
     private String content;
 
 
+    public Module(String title, String description, String content) {
+        this.title = title;
+        this.description = description;
+        this.content = content;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -27,12 +33,6 @@ public class Module implements JSONAware {
     }
 
     public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Module(String title, String description, String content) {
-        this.title = title;
-        this.description = description;
         this.content = content;
     }
 
