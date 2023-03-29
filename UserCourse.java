@@ -46,7 +46,12 @@ public class UserCourse implements JSONAware {
 
     @Override
     public String toString() {
-        return "UserCourseData{" + "userUUID=" + userUUID + ", courseUUID=" + courseUUID + ", lessonsCompleted=" + lessonsCompleted + ", lessonGrades=" + lessonGrades + '}';
+        return "UserCourse{" +
+                "userUUID=" + userUUID +
+                ", courseUUID=" + courseUUID +
+                ", lessonsCompleted=" + lessonsCompleted +
+                ", lessonGrades=" + lessonGrades +
+                '}';
     }
 
     private void appendToStringBuilderJSONStyle(String key, Object value, StringBuilder sb) {
@@ -59,6 +64,7 @@ public class UserCourse implements JSONAware {
         sb.append(value);
         sb.append('"');
     }
+
 
     @Override
     public String toJSONString() {

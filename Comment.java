@@ -14,6 +14,15 @@ public class Comment implements JSONAware {
         this.commentList = new ArrayList<>();
     }
 
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "author=" + author +
+                ", content='" + content + '\'' +
+                ", commentList=" + commentList +
+                '}';
+    }
+
     public UUID getAuthor() {
         return author;
     }

@@ -54,6 +54,17 @@ public class Lesson implements JSONAware {
     }
 
     @Override
+    public String toString() {
+        return "Lesson{" +
+                "commentList=" + commentList +
+                ", moduleList=" + moduleList +
+                ", test=" + test +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
+    @Override
     public String toJSONString() {
         StringBuilder sb = new StringBuilder();
         sb.append('{');

@@ -62,6 +62,20 @@ public class User implements JSONAware {
         this.clearance = clearance;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "uuid=" + uuid +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", clearance='" + clearance + '\'' +
+                '}';
+    }
+
     public UUID getUUID() {
         return uuid;
     }
@@ -120,20 +134,6 @@ public class User implements JSONAware {
 
     public void setClearance(String clearance) {
         this.clearance = clearance;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "uuid=" + uuid +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", clearance='" + clearance + '\'' +
-                '}';
     }
 
     private void appendToStringBuilderJSONStyle(String key, String value, StringBuilder sb) {

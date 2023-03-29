@@ -16,6 +16,14 @@ public class Question implements JSONAware {
         this.answerList = answerList;
     }
 
+    @Override
+    public String toString() {
+        return "Question{" +
+                "prompt='" + prompt + '\'' +
+                ", answerList=" + answerList +
+                '}';
+    }
+
     public String getPrompt() {
         return prompt;
     }
@@ -65,8 +73,4 @@ public class Question implements JSONAware {
         return sb.toString();
     }
 
-    @Override
-    public String toString() {
-        return "Course.Lesson.Test.Question{" + "prompt='" + prompt + '\'' + ", answerList=" + answerList + '}';
-    }
 }

@@ -20,11 +20,6 @@ public class Test implements JSONAware {
         this.questionList = questionList;
     }
 
-    @Override
-    public String toString() {
-        return "Course.Lesson.Test{" + "questions=" + questionList + '}';
-    }
-
     private void appendToStringBuilderJSONStyle(String key, String value, StringBuilder sb) {
         // looks like "key":"value"
         sb.append('"');
@@ -34,6 +29,15 @@ public class Test implements JSONAware {
         sb.append('"');
         sb.append(value);
         sb.append('"');
+    }
+
+    @Override
+    public String toString() {
+        return "Test{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", questionList=" + questionList +
+                '}';
     }
 
     @Override

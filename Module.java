@@ -36,6 +36,15 @@ public class Module implements JSONAware {
         this.content = content;
     }
 
+    @Override
+    public String toString() {
+        return "Module{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", content='" + content + '\'' +
+                '}';
+    }
+
     private void appendToStringBuilderJSONStyle(String key, String value, StringBuilder sb) {
         // looks like "key":"value"
         sb.append('"');
