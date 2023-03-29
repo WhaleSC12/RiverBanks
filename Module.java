@@ -1,6 +1,6 @@
 import org.json.simple.JSONAware;
 
-public class Module implements JSONAware {
+public class Module implements JSONAware, TextFileAware {
     private String title;
     private String description;
     private String content;
@@ -66,5 +66,19 @@ public class Module implements JSONAware {
         appendToStringBuilderJSONStyle("content", content, sb);
         sb.append('}');
         return sb.toString();
+    }
+
+    @Override
+    public String toFileString() {
+        return this.title +
+                "\n" +
+                this.description +
+                "\n" +
+                this.content;
+    }
+
+    @Override
+    public String getFileName() {
+        return this.title;
     }
 }
