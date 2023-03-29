@@ -23,6 +23,8 @@ public class DataWriterTest {
         questionList.add(question);
         test.setQuestionList(questionList);
         Lesson lesson = new Lesson("lesson title", "lesson description", test);
+        ArrayList<Comment> commentList = lesson.getCommentList();
+        commentList.add(new Comment(UUID.randomUUID(), "comment content"));
         ArrayList<Module> moduleList = lesson.getModuleList();
         moduleList.add(new Module("title", "desc", "content"));
         testCourse.addLesson(lesson);

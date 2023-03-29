@@ -81,11 +81,6 @@ public class Course implements JSONAware {
         this.language = language;
     }
 
-    @Override
-    public String toString() {
-        return "Course{" + "title='" + title + '\'' + ", description='" + description + '\'' + ", authorUUID=" + authorUUID + ", lessons=" + lessonList + ", language=" + language + ", uuid=" + uuid + '}';
-    }
-
     private void appendToStringBuilderJSONStyle(String key, String value, StringBuilder sb) {
         // looks like "key":"value"
         sb.append('"');
@@ -130,5 +125,17 @@ public class Course implements JSONAware {
         sb.append('}');
 
         return sb.toString();
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "uuid=" + uuid +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", authorUUID=" + authorUUID +
+                ", lessonList=" + lessonList +
+                ", language=" + language +
+                '}';
     }
 }
