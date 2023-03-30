@@ -6,6 +6,7 @@ private static final String Welcome = "Welcome to the Learning Management System
 private String[] mainMenu = {"Login","Create Account"," Search Course", "Create Course", "Logout"};
 private Scanner scanner;
 private Facade facade;
+Facade facade = new Facade();
 
 public void Intro() {
     System.out.println(Welcome);
@@ -41,10 +42,10 @@ public void Intro() {
  * @return null
  */
     public static void loginMethod() {
-    Facade.Login();
     System.out.println("Enter your username");
     System.out.println("Enter q to cancel");
-    String usernameinput = scanner.nextLine();
+    Facade.Login();
+String usernameinput = scanner.nextLine();
 
     if(usernameinput == "q") {
         /*return to main menu */

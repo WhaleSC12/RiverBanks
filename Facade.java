@@ -24,7 +24,7 @@ public class Facade {
  * @return
  */
 
-    public User Lo                          gin(String username, String password) 
+    public User Login(String username, String password) 
     {
         for(User u : userData.userList) {
             if(u.getUsername().equals(username) && u.getPassword().equals(password)) { 
