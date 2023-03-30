@@ -6,9 +6,8 @@ import java.util.UUID;
 
 //Where all the method will go that will be used in the LearningUI 
 public class Facade {
-    private static static User currentUser;
+    private static  User currentUser;
     private static final UserData userData = UserData.getInstance();
-    private UserData currenUserData;
     private Course course;
     private Module module;
     private Lesson lesson;
@@ -22,7 +21,7 @@ public class Facade {
      * @return
      */
 
-    public static static User Login(String username, String password) {
+    public static  User Login(String username, String password) {
         for (User u : userData.userList) {
             if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
                 return userData.getUser(username);
@@ -42,7 +41,7 @@ public class Facade {
      * @param phoneNumber User's phone number
      * @param clearance   User's clearance level
      */
-    public static static void createLogin(String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) {
+    public static void createLogin(String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) {
         currentUser = new User(username, password, firstName, lastName, email, phoneNumber, clearance);
         userData.userList.add(currentUser);
     }
@@ -56,23 +55,7 @@ public class Facade {
         return false;
     }
 
-    /**
-     * void method that allows Teacher to create Lesson
-     * asking user to enter name,description,lanuage and amount of lessons for the course and then
-     * asks the user how many lessons they want and if they want to add a Test to it and write the test with
-     * the questions and answer choices
-     *
-     * @param course   basic course info and holds all lessons within modules
-     * @param module   sub-topics within lessons which contain the actual informative content
-     * @param Lesson   lessons are groups of modules centered around some topic
-     * @param test     basic test info such as name and description and holds all questions
-     * @param question basic question info such as question and answers choices and holds correct choice
-     */
-    public static Course creatCourse(UUID uuid, String title, String description, UUID authorUUID, Language language) {
-        Course course = new Course(title, description, authorUUID, language);
 
-        System.out.print("Enter the number of modules: ");
-        int numModules = Integer.parseInt(scanner.nextLine());
 /** void method that allows Teacher to create Lesson 
 * asking user to enter name,description,lanuage and amount of lessons for the course and then
 * asks the user how many lessons they want and if they want to add a Test to it and write the test with 
