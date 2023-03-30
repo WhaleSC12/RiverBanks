@@ -76,6 +76,12 @@ public class DataLoader {
         return commentList;
     }
 
+    /**
+     * Creates an arraylist of modules from the passed JSONArray containing module data
+     *
+     * @param moduleArray JSONArray containing module data
+     * @return Arraylist of modules created from ModuleArray
+     */
     private static ArrayList<Module> getModuleArray(JSONArray moduleArray) {
         ArrayList<Module> moduleList = new ArrayList<>();
         for (var v : moduleArray) {
@@ -86,6 +92,12 @@ public class DataLoader {
         return moduleList;
     }
 
+    /**
+     * Creates a test object from its jsonobject
+     *
+     * @param testObject JSONObject containing the test data, obtained by calling .get("test") on a lesson object
+     * @return a Test form the JSONObject testObject
+     */
     private static Test getTest(JSONObject testObject) {
         Test test = new Test((String) testObject.get("title"), (String) testObject.get("description"));
         ArrayList<Question> questionList = new ArrayList<>();
@@ -108,6 +120,12 @@ public class DataLoader {
         return test;
     }
 
+    /**
+     * Creates an arraylist of lessons from a JSONArray, typically acquired by calling .get("lessons") on the course object
+     *
+     * @param lessonArray JSONArray which contains the lesson data
+     * @return an arraylist of lessons generated from the data
+     */
     private static ArrayList<Lesson> getLessonList(JSONArray lessonArray) {
         ArrayList<Lesson> lessonList = new ArrayList<>();
         for (var v : lessonArray) {

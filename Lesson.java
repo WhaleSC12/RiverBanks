@@ -2,6 +2,9 @@ import org.json.simple.JSONAware;
 
 import java.util.ArrayList;
 
+/**
+ * Lessons are groups of modules centered around some topic
+ */
 public class Lesson implements JSONAware {
 
     private final ArrayList<Comment> commentList;

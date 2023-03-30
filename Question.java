@@ -3,6 +3,9 @@ import org.json.simple.JSONAware;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 
+/**
+ * Questions held within a Test
+ */
 public class Question implements JSONAware {
     private String prompt;
     // string is the text displayed to the user, bool is whether the user gets point for choosing that answer

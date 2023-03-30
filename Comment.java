@@ -3,6 +3,9 @@ import org.json.simple.JSONAware;
 import java.util.ArrayList;
 import java.util.UUID;
 
+/**
+ * Holds text, author, and replies for some user to comment upon a lesson
+ */
 public class Comment implements JSONAware {
     private final UUID author;
     private final String content;

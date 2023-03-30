@@ -1,5 +1,8 @@
 import org.json.simple.JSONAware;
 
+/**
+ * Modules are sub-topics within lessons which contain the actual informative content
+ */
 public class Module implements JSONAware, TextFileAware {
     private String title;
     private String description;

@@ -138,6 +138,9 @@ public class DataWriter {
         }
     }
 
+    /**
+     * General use save which calls all the prior save functions using the singleton structures in the project
+     */
     public static void saveAll() {
         UserData userData = UserData.getInstance();
         writeUserData(userData.userData);

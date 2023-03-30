@@ -15,10 +15,28 @@ public class Course implements JSONAware {
     private Language language;
 
 
+    /**
+     * Course constructor meant to be called when creating a new course, as said new course will lack a uuid.
+     * This is equivalent to simply calling the normal constructor with UUID.randomUUID() for the first parameter.
+     *
+     * @param title Course Title
+     * @param description course description
+     * @param authorUUID author uuid
+     * @param language coding Language the course teaches
+     */
     public Course(String title, String description, UUID authorUUID, Language language) {
         this(UUID.randomUUID(), title, description, authorUUID, language);
     }
 
+    /**
+     * Common course constructor, used to create course objects from existing data
+     *
+     * @param uuid UUID of the course
+     * @param title Course Title
+     * @param description course description
+     * @param authorUUID author uuid
+     * @param language coding Language the course teaches
+     */
     public Course(UUID uuid, String title, String description, UUID authorUUID, Language language) {
         this.uuid = uuid;
         this.title = title;

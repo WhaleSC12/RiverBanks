@@ -2,6 +2,9 @@ import org.json.simple.JSONAware;
 
 import java.util.ArrayList;
 
+/**
+ * Test class used by lessons for teachers to create a series of questions through which to judge a student's level of knowledge
+ */
 public class Test implements JSONAware {
     private String title;
     private String description;
