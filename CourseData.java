@@ -7,10 +7,10 @@ import java.util.UUID;
  */
 public class CourseData {
     private static CourseData instance;
-    public final ArrayList<Course> courseData;
+    public final ArrayList<Course> courseList;
 
-    private CourseData(ArrayList<Course> courseData) {
-        this.courseData = courseData;
+    private CourseData(ArrayList<Course> courseList) {
+        this.courseList = courseList;
     }
 
     public static CourseData getInstance() {
@@ -19,14 +19,14 @@ public class CourseData {
     }
 
     public Course getCourse(String title) {
-        for (Course course : courseData) {
+        for (Course course : courseList) {
             if (Objects.equals(course.getTitle(), title)) return course;
         }
         return null;
     }
 
     public Course getCourse(UUID uuid) {
-        for (Course course : courseData) {
+        for (Course course : courseList) {
             if (course.getUUID() == uuid) return course;
         }
         return null;

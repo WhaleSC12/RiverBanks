@@ -6,10 +6,10 @@ import java.util.UUID;
  */
 public class UserCourseData {
     private static UserCourseData instance;
-    public final HashMap<UUID, HashMap<UUID, UserCourse>> userCourseData;
+    public final HashMap<UUID, HashMap<UUID, UserCourse>> courseDataList;
 
-    private UserCourseData(HashMap<UUID, HashMap<UUID, UserCourse>> userCourseData) {
-        this.userCourseData = userCourseData;
+    private UserCourseData(HashMap<UUID, HashMap<UUID, UserCourse>> courseDataList) {
+        this.courseDataList = courseDataList;
     }
 
     public static UserCourseData getInstance() {
@@ -17,7 +17,7 @@ public class UserCourseData {
         return instance;
     }
 
-    public UserCourse getUserCourseData(UUID userUUID, UUID courseUUID) {
-        return userCourseData.get(userUUID).get(courseUUID);
+    public UserCourse getUserCourse(UUID userUUID, UUID courseUUID) {
+        return courseDataList.get(userUUID).get(courseUUID);
     }
 }

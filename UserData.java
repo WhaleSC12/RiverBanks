@@ -7,10 +7,10 @@ import java.util.UUID;
  */
 public class UserData {
     private static UserData instance;
-    public final ArrayList<User> userData;
+    public final ArrayList<User> userList;
 
-    private UserData(ArrayList<User> userData) {
-        this.userData = userData;
+    private UserData(ArrayList<User> userList) {
+        this.userList = userList;
     }
 
     public static UserData getInstance() {
@@ -19,14 +19,14 @@ public class UserData {
     }
 
     public User getUser(String username) {
-        for (User u : userData) {
+        for (User u : userList) {
             if (Objects.equals(u.getUsername(), username)) return u;
         }
         return null;
     }
 
     public User getUser(UUID uuid) {
-        for (User u : userData) {
+        for (User u : userList) {
             if (uuid.equals(u.getUUID())) return u;
         }
         return null;

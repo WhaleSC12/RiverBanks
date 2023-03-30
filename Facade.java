@@ -26,7 +26,7 @@ public class Facade {
 
     public User Lo                          gin(String username, String password) 
     {
-        for(User u : userData.userData) { 
+        for(User u : userData.userList) {
             if(u.getUsername().equals(username) && u.getPassword().equals(password)) { 
                 return userData.getUser(username);
             }
@@ -47,7 +47,7 @@ public class Facade {
     public void createLogin(String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) 
     {
         currentUser = new User(username, password, firstName, lastName, email, phoneNumber, clearance);
-        userData.userData.add(currentUser);
+        userData.userList.add(currentUser);
     }
 
     /**  search function that searches by name of course
