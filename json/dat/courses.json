@@ -1,5 +1,5 @@
 {
-  "7f0fdeb3-685d-41b8-87f1-b26e84528a79": {
+  "683172b6-86a0-439c-9993-1265214cf909": {
     "title": "course title",
     "description": "course desc",
     "language": "Cpp",
@@ -10,7 +10,7 @@
         "description": "lesson description",
         "comments": [
           {
-            "userUUID": "e4178dab-0eed-468d-882e-2b19d5225623"
+            "userUUID": "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a",
             "content": "comment content",
             "comments": []
           }

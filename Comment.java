@@ -58,6 +58,7 @@ public class Comment implements JSONAware {
         StringBuilder sb = new StringBuilder();
         sb.append('{');
         appendToStringBuilderJSONStyle("userUUID", getAuthor().toString(), sb);
+        sb.append(',');
         appendToStringBuilderJSONStyle("content", getContent(), sb);
 
         sb.append(',');

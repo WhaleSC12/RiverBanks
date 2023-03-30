@@ -26,9 +26,7 @@ public class JSONWriter implements AutoCloseable {
      * @throws ParseException if the given JSON cannot be parsed, ParseException is thrown
      */
     public JSONWriter(String filePath) throws IOException, ParseException {
-        this.root = fetchRoot(filePath);
-        this.currentPlace = root;
-        fileWriter = new FileWriter(filePath);
+        this(filePath, true);
     }
 
     /**
