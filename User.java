@@ -52,14 +52,7 @@ public class User implements JSONAware {
      * @param clearance   User's clearance level
      */
     public User(String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) {
-        this.uuid = UUID.randomUUID();
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.clearance = clearance;
+        this(UUID.randomUUID(), username, password, firstName, lastName, email, phoneNumber, clearance);
     }
 
     @Override
