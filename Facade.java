@@ -19,8 +19,8 @@ public class Facade {
 
 /**
  * 
- * @param username      username used to look for person
- * @param password      password used to secure the User to Login
+ * @param username      username used to look for people's data
+ * @param password      password used to correctly identify the correct User
  * @return
  */
 
@@ -61,9 +61,10 @@ public class Facade {
 * asking user to enter name,description,lanuage and amount of lessons for the course and then
 * asks the user how many lessons they want and if they want to add a Test to it and write the test with 
 * the questions and answer choices
-* @param course       basic course info and holds all lessons
-* @param Lesson       basic lesson info such as name and description and hold all test
-* @param test         basic test info such as name and description and hools all questions
+* @param course       basic course info and holds all lessons within modules
+* @param module       sub-topics within lessons which contain the actual informative content
+* @param Lesson       lessons are groups of modules centered around some topic
+* @param test         basic test info such as name and description and holds all questions
 * @param question     basic question info such as question and answers choices and holds correct choice
 */public  Course creatCourse(UUID uuid, String title, String description, UUID authorUUID, Language language)
 { 
