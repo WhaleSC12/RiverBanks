@@ -143,10 +143,10 @@ public class DataWriter {
      */
     public static void saveAll() {
         UserData userData = UserData.getInstance();
-        writeUserData(userData.userData);
+        writeUserData(userData.userList);
         UserCourseData userCourseData = UserCourseData.getInstance();
-        writeUserCourseData(userCourseData.userCourseData);
+        writeUserCourseData(userCourseData.courseDataList);
         CourseData courseData = CourseData.getInstance();
-        writeCourseData(courseData.courseData);
+        writeCourseData(courseData.courseList);
     }
 }
