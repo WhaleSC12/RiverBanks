@@ -2,25 +2,27 @@ import org.json.simple.JSONAware;
 
 import java.util.ArrayList;
 
+/**
+ * Lessons are groups of modules centered around some topic
+ */
 public class Lesson implements JSONAware {
 
     private final ArrayList<Comment> commentList;
     private final ArrayList<Module> moduleList;
+    private Test test;
     private String title;
     private String description;
-    private String content;
 
-    public ArrayList<Module> getModuleList() {
-        return moduleList;
-    }
-
-    public Lesson(String title, String description, String content) {
+    public Lesson(String title, String description, Test test) {
         this.title = title;
-        this.content = content;
         this.description = description;
         this.commentList = new ArrayList<>();
         this.moduleList = new ArrayList<>();
+        this.test = test;
+    }
 
+    public ArrayList<Module> getModuleList() {
+        return moduleList;
     }
 
     public ArrayList<Comment> getCommentList() {
@@ -43,14 +45,6 @@ public class Lesson implements JSONAware {
         this.description = description;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     private void appendToStringBuilderJSONStyle(String key, String value, StringBuilder sb) {
         // looks like "key":"value"
         sb.append('"');
@@ -63,6 +57,17 @@ public class Lesson implements JSONAware {
     }
 
     @Override
+    public String toString() {
+        return "Lesson{" +
+                "commentList=" + commentList +
+                ", moduleList=" + moduleList +
+                ", test=" + test +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
+    @Override
     public String toJSONString() {
         StringBuilder sb = new StringBuilder();
         sb.append('{');
@@ -70,8 +75,6 @@ public class Lesson implements JSONAware {
         appendToStringBuilderJSONStyle("title", title, sb);
         sb.append(',');
         appendToStringBuilderJSONStyle("description", description, sb);
-        sb.append(',');
-        appendToStringBuilderJSONStyle("content", content, sb);
         sb.append(',');
         sb.append('"');
         sb.append("comments");
@@ -83,7 +86,7 @@ public class Lesson implements JSONAware {
         for (Comment c : commentList) {
             if (first) first = false;
             else sb.append(',');
-            c.toJSONString();
+            sb.append(c.toJSONString());
         }
 
         sb.append(']');
@@ -98,10 +101,13 @@ public class Lesson implements JSONAware {
         for (Module m : moduleList) {
             if (first) first = false;
             else sb.append(',');
-            m.toJSONString();
+            sb.append(m.toJSONString());
         }
 
         sb.append(']');
+        sb.append(',');
+        sb.append("\"test\":");
+        sb.append(test.toJSONString());
 
         sb.append('}');
 

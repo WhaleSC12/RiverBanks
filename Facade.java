@@ -3,9 +3,13 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import java.util.Scanner;
+<<<<<<< HEAD
 
 
 //Where all the method will go that will be used in the LearningUI 
+=======
+//Where all the method will go that will be used in the LearningUI
+>>>>>>> 725a5eaade0ef6ade6e0e383e90f06a6806f8105
 public class Facade {
     private User currentUser;
     private static final UserData userData = UserData.getInstance();
@@ -18,16 +22,16 @@ public class Facade {
     Scanner scanner = new Scanner(System.in); 
 
 /**
- * 
+ *
  * @param username      username used to look for person
  * @param password      password used to secure the User to Login
  * @return
  */
 
-    public User Login(String username, String password) 
+    public User Login(String username, String password)
     {
-        for(User u : userData.userData) { 
-            if(u.getUsername().equals(username) && u.getPassword().equals(password)) { 
+        for(User u : userData.userData) {
+            if(u.getUsername().equals(username) && u.getPassword().equals(password)) {
                 return userData.getUser(username);
             }
         }
@@ -44,7 +48,7 @@ public class Facade {
  * @param phoneNumber User's phone number
  * @param clearance   User's clearance level
  */
-    public void createLogin(String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) 
+    public void createLogin(String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance)
     {
         currentUser = new User(username, password, firstName, lastName, email, phoneNumber, clearance);
         userData.userData.add(currentUser);
@@ -53,19 +57,20 @@ public class Facade {
     /**  search function that searches by name of course
      * @param bool   returns true if course is there
      */
-    public boolean searchCourse(String courseName) 
+    public boolean searchCourse(String courseName)
     {
         return false;
     }
-/** void method that allows Teacher to create Lesson 
+/** void method that allows Teacher to create Lesson
 * asking user to enter name,description,lanuage and amount of lessons for the course and then
-* asks the user how many lessons they want and if they want to add a Test to it and write the test with 
+* asks the user how many lessons they want and if they want to add a Test to it and write the test with
 * the questions and answer choices
 * @param course       basic course info and holds all lessons
 * @param Lesson       basic lesson info such as name and description and hold all test
 * @param test         basic test info such as name and description and hools all questions
 * @param question     basic question info such as question and answers choices and holds correct choice
 */
+<<<<<<< HEAD
 public static void createCouse(String title, String description, UUID authorUUID, Language language) { 
     Scanner scanner = new Scanner(System.in);
 
@@ -164,8 +169,11 @@ public static void createCouse(String title, String description, UUID authorUUID
 
 /**
  * public void createCourse() 
+=======
+    public void createLesson()
+>>>>>>> 725a5eaade0ef6ade6e0e383e90f06a6806f8105
     {
-        Scanner scanner = new Scanner(System.in); 
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter Course title");
         String title = scanner.nextLine();
         System.out.print("Enter course description: ");
@@ -224,7 +232,7 @@ public static void createCouse(String title, String description, UUID authorUUID
             Lesson lesson = new Lesson(lessonTitle, lessonDescription, lessonContent);
             module.setTest(test);
             course.addLesson(lesson);
-            
+
         }
 
         System.out.println("Course created:");

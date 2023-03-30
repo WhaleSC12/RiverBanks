@@ -11,15 +11,15 @@ public void Intro() {
     System.out.println(Welcome);
     while(true) {
     displayMainMenu();
-    
+
     int userChoice = getUserChoice(mainMenu.length);
 
     if(userChoice == -1) {
         System.out.println("Invalid input");
         continue;
-    } 
+    }
     if(userChoice == mainMenu.length -1) break;
-		
+
     switch(userChoice) {
         case(0):
             login();
@@ -44,7 +44,7 @@ public void Intro() {
     System.out.println("Enter your username");
     System.out.println("Enter q to cancel");
     String usernameinput = scanner.nextLine();
-    
+
     if(usernameinput == "q") {
         /*return to main menu */
     } else {
@@ -56,7 +56,7 @@ public void Intro() {
     /*when they log out set current user to null */
     }
 
-/** void createAccount method that asks for info to create an accout such as an 
+/** void createAccount method that asks for info to create an accout such as an
  * username, password, first name, last name, email and phone number
  * @return null
  */
@@ -90,12 +90,12 @@ public void Intro() {
 
 private int getUserChoice(int numCommands) {
     System.out.print("Enter a number: ");
-    
+
     String input = scanner.nextLine();
     int command = Integer.parseInt(input) - 1;
-    
+
     if(command >= 0 && command <= numCommands -1) return command;
-    
+
     return -1;
 }
 
@@ -107,5 +107,5 @@ public void displayMainMenu() {
     for(int i=0; i< mainMenu.length; i++) {
         System.out.println((i+1) + ". " + mainMenu[i]);
     }
-    
+
 }

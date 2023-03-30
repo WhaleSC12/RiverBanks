@@ -13,7 +13,7 @@ public class DataLoaderTest {
 //        UserCourseData userCourseData = UserCourseData.getInstance();
 //        CourseData courseData = CourseData.getInstance();
 //        userData.getUser(UUID.fromString("f025f1f5-7697-4c64-beaa-dec0ddde9359")).setEmail("totally an email");
-        DataWriter.saveAll();
+//        DataWriter.saveAll();
 //        UserCourseData userCourseData = UserCourseData.getInstance();
 //        DataWriter.writeUserCourseData(userCourseData.userCourseData);
 //        DataWriter.writeUserData(userData.userData.get(0));
@@ -32,5 +32,9 @@ public class DataLoaderTest {
 //        } catch (ParseException | IOException e) {
 //            throw new RuntimeException(e);
 //        }
+        User user = UserData.getInstance().getUser("username");
+        System.out.println(user);
+        Course course = CourseData.getInstance().getCourse("course title");
+        System.out.println(course);
     }
 }

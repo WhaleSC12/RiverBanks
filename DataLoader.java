@@ -63,7 +63,7 @@ public class DataLoader {
      * @param commentArray json comment array filled with all the necessary data
      * @return an arraylist<comment> filled with all comment data to any depth
      */
-    private static ArrayList<Comment> getDeepCommentArray(JSONArray commentArray) {
+    private static ArrayList<Comment> getCommentList(JSONArray commentArray) {
         ArrayList<Comment> commentList = new ArrayList<>();
         for (var v : commentArray) {
             JSONObject jsonComment = (JSONObject) v;
@@ -71,9 +71,77 @@ public class DataLoader {
             commentList.add(comment);
             ArrayList<Comment> replyList = comment.getCommentList();
             JSONArray comArr = (JSONArray) jsonComment.get("comments");
-            replyList.addAll(getDeepCommentArray(comArr));
+            replyList.addAll(getCommentList(comArr));
         }
         return commentList;
+    }
+
+    /**
+     * Creates an arraylist of modules from the passed JSONArray containing module data
+     *
+     * @param moduleArray JSONArray containing module data
+     * @return Arraylist of modules created from ModuleArray
+     */
+    private static ArrayList<Module> getModuleArray(JSONArray moduleArray) {
+        ArrayList<Module> moduleList = new ArrayList<>();
+        for (var v : moduleArray) {
+            JSONObject jsonModule = (JSONObject) v;
+            Module module = new Module((String) jsonModule.get("title"), (String) jsonModule.get("description"), (String) jsonModule.get("content"));
+            moduleList.add(module);
+        }
+        return moduleList;
+    }
+
+    /**
+     * Creates a test object from its jsonobject
+     *
+     * @param testObject JSONObject containing the test data, obtained by calling .get("test") on a lesson object
+     * @return a Test form the JSONObject testObject
+     */
+    private static Test getTest(JSONObject testObject) {
+        Test test = new Test((String) testObject.get("title"), (String) testObject.get("description"));
+        ArrayList<Question> questionList = new ArrayList<>();
+        JSONArray questionArray = (JSONArray) testObject.get("questions");
+        for (var v : questionArray) {
+            JSONObject jsonQuestion = (JSONObject) v;
+            Question question = new Question();
+            question.setPrompt((String) jsonQuestion.get("prompt"));
+            ArrayList<AbstractMap.SimpleEntry<String, Boolean>> answerList = new ArrayList<>();
+            JSONArray jsonAnswerList = (JSONArray) jsonQuestion.get("answers");
+            for (var z : jsonAnswerList) {
+                JSONObject jsonAnswer = (JSONObject) z;
+                AbstractMap.SimpleEntry<String, Boolean> answer = new AbstractMap.SimpleEntry<>((String) jsonAnswer.get("text"), (boolean) jsonAnswer.get("correct"));
+                answerList.add(answer);
+            }
+            question.setAnswerList(answerList);
+            questionList.add(question);
+        }
+        test.setQuestionList(questionList);
+        return test;
+    }
+
+    /**
+     * Creates an arraylist of lessons from a JSONArray, typically acquired by calling .get("lessons") on the course object
+     *
+     * @param lessonArray JSONArray which contains the lesson data
+     * @return an arraylist of lessons generated from the data
+     */
+    private static ArrayList<Lesson> getLessonList(JSONArray lessonArray) {
+        ArrayList<Lesson> lessonList = new ArrayList<>();
+        for (var v : lessonArray) {
+            JSONObject jsonLesson = (JSONObject) v;
+            JSONObject jsonTest = (JSONObject) jsonLesson.get("test");
+            Test test = getTest(jsonTest);
+            Lesson lesson = new Lesson((String) jsonLesson.get("title"), (String) jsonLesson.get("description"), test);
+            ArrayList<Comment> commentList = lesson.getCommentList();
+            JSONArray jsonCommentArray = (JSONArray) jsonLesson.get("comments");
+            commentList.addAll(getCommentList(jsonCommentArray));
+            ArrayList<Module> moduleList = lesson.getModuleList();
+            JSONArray modulesObject = (JSONArray) jsonLesson.get("modules");
+            moduleList.addAll(getModuleArray(modulesObject));
+            lessonList.add(lesson);
+        }
+        return lessonList;
     }
 
     /**
@@ -89,32 +157,8 @@ public class DataLoader {
             HashMap<String, Object> value = (HashMap<String, Object>) courseData.get(objectKey);
             Course course = new Course(UUID.fromString(key), (String) value.get("title"), (String) value.get("description"), UUID.fromString((String) value.get("authorUUID")), Language.valueOf((String) value.get("language")));
             JSONArray jsonLessonList = (JSONArray) value.get("lessons");
-            for (var l : jsonLessonList) {
-                HashMap<String, Object> entry = (HashMap<String, Object>) l;
-                Course.Lesson.Test test = new Course.Lesson.Test(key, key);
-                ArrayList<Course.Lesson.Test.Question> questionList = new ArrayList<>();
-                JSONArray jsonQuestionArray = (JSONArray) entry.get("test");
-                for (var obj : jsonQuestionArray) {
-                    JSONObject jsonQuestion = (JSONObject) obj;
-                    Course.Lesson.Test.Question question = new Course.Lesson.Test.Question();
-                    question.setPrompt((String) jsonQuestion.get("prompt"));
-                    JSONArray jsonQuestionAnswerList = (JSONArray) jsonQuestion.get("answers");
-                    ArrayList<AbstractMap.SimpleEntry<String, Boolean>> answerList = new ArrayList<>();
-                    for (var objAnswer : jsonQuestionAnswerList) {
-                        JSONObject answer = (JSONObject) objAnswer;
-                        AbstractMap.SimpleEntry<String, Boolean> answerData = new AbstractMap.SimpleEntry<>((String) answer.get("text"), (boolean) answer.get("correct"));
-                        answerList.add(answerData);
-                    }
-                    question.setAnswerList(answerList);
-                    questionList.add(question);
-                }
-                test.setQuestionList(questionList);
-                Course.Lesson lesson = new Course.Lesson((String) entry.get("title"), (String) entry.get("description"), (String) entry.get("content"), test);
-                JSONArray arr = (JSONArray) entry.get("comments");
-                ArrayList<Comment> commentList = lesson.getCommentList();
-                commentList.addAll(getDeepCommentArray(arr));
-                course.addLesson(lesson);
-            }
+            ArrayList<Lesson> lessonList = course.getLessonList();
+            lessonList.addAll(getLessonList(jsonLessonList));
             courseList.add(course);
         }
         return courseList;

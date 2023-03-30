@@ -6,6 +6,76 @@ import java.util.UUID;
  * User data object which holds pertinent user personal data
  */
 public class User implements JSONAware {
+    // changed from private final UUID uuid to private UUID uuid
+    private final UUID uuid;
+    private String username;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String phoneNumber;
+    private String clearance;
+
+    /**
+     * Constructor meant to be called when loading user from existing data
+     *
+     * @param uuid        UserUniqueIdentifier, the unique string used to differentiate users
+     * @param username    Username the user uses to log in
+     * @param password    Password the user uses to log in
+     * @param firstName   User's first name
+     * @param lastName    User's last name
+     * @param email       User's email address
+     * @param phoneNumber User's phone number
+     * @param clearance   User's clearance level
+     */
+    public User(UUID uuid, String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) {
+        this.uuid = uuid;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.clearance = clearance;
+    }
+
+    /**
+     * Constructor meant to be called when creating a new user
+     * Generates a new UUID and assigns it on construction
+     *
+     * @param username    Username the user uses to log in
+     * @param password    Password the user uses to log in
+     * @param firstName   User's first name
+     * @param lastName    User's last name
+     * @param email       User's email address
+     * @param phoneNumber User's phone number
+     * @param clearance   User's clearance level
+     */
+    public User(String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) {
+        this.uuid = UUID.randomUUID();
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.clearance = clearance;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "uuid=" + uuid +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", clearance='" + clearance + '\'' +
+                '}';
+    }
+
     public UUID getUUID() {
         return uuid;
     }
@@ -64,79 +134,6 @@ public class User implements JSONAware {
 
     public void setClearance(String clearance) {
         this.clearance = clearance;
-    }
-
-// changed from private final UUID uuid to private UUID uuid 
-    private final UUID uuid;
-    private String username;
-    private String password;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phoneNumber;
-    private String clearance;
-
-    /**
-     * Constructor meant to be called when loading user from existing data
-     *
-     * 
-     * @param uuid        UserUniqueIdentifier, the unique string used to differentiate users
-     * @param username    Username the user uses to log in
-     * @param password    Password the user uses to log in
-     * @param firstName   User's first name
-     * @param lastName    User's last name
-     * @param email       User's email address
-     * @param phoneNumber User's phone number
-     * @param clearance   User's clearance level
-     */
-    public User(UUID uuid, String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) {
-        this.uuid = uuid;
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.clearance = clearance;
-    }
-
-
-    /**
-     * Constructor meant to be called when creating a new user
-     * Generates a new UUID and assigns it on construction
-     *
-     * 
-     * @param username    Username the user uses to log in
-     * @param password    Password the user uses to log in
-     * @param firstName   User's first name
-     * @param lastName    User's last name
-     * @param email       User's email address
-     * @param phoneNumber User's phone number
-     * @param clearance   User's clearance level
-     */
-    public User(String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) {
-        this.uuid = UUID.randomUUID();
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.clearance = clearance;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "uuid=" + uuid +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", clearance='" + clearance + '\'' +
-                '}';
     }
 
     private void appendToStringBuilderJSONStyle(String key, String value, StringBuilder sb) {

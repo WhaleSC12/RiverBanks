@@ -99,7 +99,7 @@ public class DataWriter {
                             .atKey(v.getKey().toString())
                             .data(v.getValue());
                 }
-                    jsonWriter.emptyKeys();
+                jsonWriter.emptyKeys();
             }
             jsonWriter.write();
         } catch (IOException | ParseException e) {
@@ -138,6 +138,9 @@ public class DataWriter {
         }
     }
 
+    /**
+     * General use save which calls all the prior save functions using the singleton structures in the project
+     */
     public static void saveAll() {
         UserData userData = UserData.getInstance();
         writeUserData(userData.userData);

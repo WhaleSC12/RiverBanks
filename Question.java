@@ -3,6 +3,9 @@ import org.json.simple.JSONAware;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 
+/**
+ * Questions held within a Test
+ */
 public class Question implements JSONAware {
     private String prompt;
     // string is the text displayed to the user, bool is whether the user gets point for choosing that answer
@@ -16,6 +19,14 @@ public class Question implements JSONAware {
         this.answerList = answerList;
     }
 
+    @Override
+    public String toString() {
+        return "Question{" +
+                "prompt='" + prompt + '\'' +
+                ", answerList=" + answerList +
+                '}';
+    }
+
     public String getPrompt() {
         return prompt;
     }
@@ -24,15 +35,23 @@ public class Question implements JSONAware {
         this.prompt = prompt;
     }
 
+    private void appendToStringBuilderJSONStyle(String key, String value, StringBuilder sb) {
+        // looks like "key":"value"
+        sb.append('"');
+        sb.append(key);
+        sb.append('"');
+        sb.append(":");
+        sb.append('"');
+        sb.append(value);
+        sb.append('"');
+    }
+
     @Override
     public String toJSONString() {
         StringBuilder sb = new StringBuilder();
         sb.append('{');
 
-        sb.append("\"prompt\":");
-        sb.append('"');
-        sb.append(prompt);
-        sb.append('"');
+        appendToStringBuilderJSONStyle("prompt", prompt, sb);
         sb.append(',');
         sb.append("\"answers\":");
         sb.append('[');
@@ -57,8 +76,4 @@ public class Question implements JSONAware {
         return sb.toString();
     }
 
-    @Override
-    public String toString() {
-        return "Course.Lesson.Test.Question{" + "prompt='" + prompt + '\'' + ", answerList=" + answerList + '}';
-    }
 }

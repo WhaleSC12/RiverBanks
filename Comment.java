@@ -3,15 +3,28 @@ import org.json.simple.JSONAware;
 import java.util.ArrayList;
 import java.util.UUID;
 
+/**
+ * Holds text, author, and replies for some user to comment upon a lesson
+ */
 public class Comment implements JSONAware {
     private final UUID author;
     private final String content;
+    private ArrayList<Comment> commentList;
 
-    public void setCommentList(ArrayList<Comment> commentList) {
-        this.commentList = commentList;
+    public Comment(UUID author, String content) {
+        this.author = author;
+        this.content = content;
+        this.commentList = new ArrayList<>();
     }
 
-    private ArrayList<Comment> commentList;
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "author=" + author +
+                ", content='" + content + '\'' +
+                ", commentList=" + commentList +
+                '}';
+    }
 
     public UUID getAuthor() {
         return author;
@@ -25,10 +38,8 @@ public class Comment implements JSONAware {
         return commentList;
     }
 
-    public Comment(UUID author, String content) {
-        this.author = author;
-        this.content = content;
-        this.commentList = new ArrayList<>();
+    public void setCommentList(ArrayList<Comment> commentList) {
+        this.commentList = commentList;
     }
 
     private void appendToStringBuilderJSONStyle(String key, String value, StringBuilder sb) {
