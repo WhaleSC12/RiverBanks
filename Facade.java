@@ -7,15 +7,14 @@ import java.util.Scanner;
 
 //Where all the method will go that will be used in the LearningUI 
 public class Facade {
-    private User currentUser;
+    private static User currentUser;
     private static final UserData userData = UserData.getInstance();
     private UserData currenUserData;
     private Course course;
     private Module module;
     private Lesson lesson;
-    private Test test;
+    private static Test test;
     private Question question;
-    Scanner scanner = new Scanner(System.in); 
 
 /**
  * 
@@ -24,7 +23,7 @@ public class Facade {
  * @return
  */
 
-    public User Login(String username, String password) 
+    public static User Login(String username, String password) 
     {
         for(User u : userData.userList) {
             if(u.getUsername().equals(username) && u.getPassword().equals(password)) { 
@@ -44,7 +43,7 @@ public class Facade {
  * @param phoneNumber User's phone number
  * @param clearance   User's clearance level
  */
-    public void createLogin(String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) 
+    public static void createLogin(String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) 
     {
         currentUser = new User(username, password, firstName, lastName, email, phoneNumber, clearance);
         userData.userList.add(currentUser);
@@ -66,8 +65,10 @@ public class Facade {
 * @param Lesson       lessons are groups of modules centered around some topic
 * @param test         basic test info such as name and description and holds all questions
 * @param question     basic question info such as question and answers choices and holds correct choice
-*/public  Course creatCourse(UUID uuid, String title, String description, UUID authorUUID, Language language)
+*/public static Course creatCourse(UUID uuid, String title, String description, UUID authorUUID, Language language)
 { 
+    Scanner scanner = new Scanner(System.in); 
+
    Course course = new Course(title, description, authorUUID, language);
     
    System.out.print("Enter the number of modules: ");

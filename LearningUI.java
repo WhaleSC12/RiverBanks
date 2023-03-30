@@ -48,7 +48,6 @@ public class LearningUI {
     public static void loginMethod() {
         System.out.println("Enter your username");
         System.out.println("Enter q to cancel");
-        Facade.Login();
         String usernameinput = scanner.nextLine();
 
         if (usernameinput == "q") {
@@ -57,7 +56,7 @@ public class LearningUI {
             System.out.println("Enter your password");
             String passwordinput = scanner.nextLine();
         }
-
+        Facade.Login(usernameinput,passwordinput);
 
         /*call facade after getting the login */
         /*set current user to you */
