@@ -3,13 +3,9 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import java.util.Scanner;
-<<<<<<< HEAD
 
 
 //Where all the method will go that will be used in the LearningUI 
-=======
-//Where all the method will go that will be used in the LearningUI
->>>>>>> 725a5eaade0ef6ade6e0e383e90f06a6806f8105
 public class Facade {
     private User currentUser;
     private static final UserData userData = UserData.getInstance();
@@ -22,16 +18,16 @@ public class Facade {
     Scanner scanner = new Scanner(System.in); 
 
 /**
- *
+ * 
  * @param username      username used to look for person
  * @param password      password used to secure the User to Login
  * @return
  */
 
-    public User Login(String username, String password)
+    public User Login(String username, String password) 
     {
-        for(User u : userData.userData) {
-            if(u.getUsername().equals(username) && u.getPassword().equals(password)) {
+        for(User u : userData.userData) { 
+            if(u.getUsername().equals(username) && u.getPassword().equals(password)) { 
                 return userData.getUser(username);
             }
         }
@@ -48,7 +44,7 @@ public class Facade {
  * @param phoneNumber User's phone number
  * @param clearance   User's clearance level
  */
-    public void createLogin(String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance)
+    public void createLogin(String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) 
     {
         currentUser = new User(username, password, firstName, lastName, email, phoneNumber, clearance);
         userData.userData.add(currentUser);
@@ -57,104 +53,104 @@ public class Facade {
     /**  search function that searches by name of course
      * @param bool   returns true if course is there
      */
-    public boolean searchCourse(String courseName)
+    public boolean searchCourse(String courseName) 
     {
         return false;
     }
-/** void method that allows Teacher to create Lesson
+/** void method that allows Teacher to create Lesson 
 * asking user to enter name,description,lanuage and amount of lessons for the course and then
-* asks the user how many lessons they want and if they want to add a Test to it and write the test with
+* asks the user how many lessons they want and if they want to add a Test to it and write the test with 
 * the questions and answer choices
 * @param course       basic course info and holds all lessons
 * @param Lesson       basic lesson info such as name and description and hold all test
 * @param test         basic test info such as name and description and hools all questions
 * @param question     basic question info such as question and answers choices and holds correct choice
-*/
-<<<<<<< HEAD
-public static void createCouse(String title, String description, UUID authorUUID, Language language) { 
-    Scanner scanner = new Scanner(System.in);
+*/public  Course creatCourse(UUID uuid, String title, String description, UUID authorUUID, Language language)
+{ 
+   Course course = new Course(title, description, authorUUID, language);
+    
+   System.out.print("Enter the number of modules: ");
+   int numModules = Integer.parseInt(scanner.nextLine());
 
-    // get course title and description
-    System.out.print("Enter course title: ");
-    String courseTitle = scanner.nextLine();
+   ArrayList<Module> modules = new ArrayList<>();
+   for (int i = 0; i < numModules; i++) {
+       System.out.println("Creating module " + (i + 1) + "...");
+       System.out.print("Enter the module name: ");
+       String moduleName = scanner.nextLine();
 
-    System.out.print("Enter course description: ");
-    String courseDescription = scanner.nextLine();
+       System.out.print("Enter the module description: ");
+       String moduleDescription = scanner.nextLine();
 
-    // create list of modules
-    ArrayList<Module> moduleList = new ArrayList<>();
+       System.out.print("Enter the module content: ");
+       String moduleContent = scanner.nextLine();
 
-    // create modules
-    while (true) {
-        // get module title and description
-        System.out.print("Enter module title (or 'quit' to finish): ");
-        String moduleTitle = scanner.nextLine();
+       System.out.print("Enter the number of lessons: ");
+       int numLessons = Integer.parseInt(scanner.nextLine());
 
-        if (moduleTitle.equalsIgnoreCase("quit")) {
-            break;
-        }
+       ArrayList<Lesson> lessons = new ArrayList<>();
+       for (int j = 0; j < numLessons; j++) {
+           System.out.println("Creating lesson " + (j + 1) + "...");
+           System.out.print("Enter the lesson name: ");
+           String lessonName = scanner.nextLine();
 
-        System.out.print("Enter module description: ");
-        String moduleDescription = scanner.nextLine();
+           System.out.print("Enter the lesson description: ");
+           String lessonDescription = scanner.nextLine();
 
-        System.out.print("Enter module content: ");
-        String moduleContent = scanner.nextLine();
+           System.out.print("Enter the number of tests: ");
+           int numTests = Integer.parseInt(scanner.nextLine());
+// creating tests 
+           ArrayList<Test> tests = new ArrayList<>();
+           for (int k = 0; k < numTests; k++) {
+               System.out.println("Creating test " + (k + 1) + "...");
+               System.out.print("Enter the test name: ");
+               String testName = scanner.nextLine();
 
-        // create test
-        System.out.print("Enter test title: ");
-        String testTitle = scanner.nextLine();
+               System.out.print("Enter the test description: ");
+               String testDescription = scanner.nextLine();
 
-        System.out.print("Enter test description: ");
-        String testDescription = scanner.nextLine();
+               System.out.print("Enter the number of questions: ");
+               int numQuestions = Integer.parseInt(scanner.nextLine());
+//creating questions 
+               ArrayList<Question> questions = new ArrayList<>();
+               for (int l = 0; l < numQuestions; l++) {
+                Question question = new Question();
+                   System.out.println("Creating question " + (l + 1) + "...");
+                   System.out.print("Enter the question prompt: ");
+                   String prompt = scanner.nextLine();
+                   question.setPrompt(prompt);
+                   
+                   System.out.print("Enter the number of answer choices: ");
+                   int numChoices = Integer.parseInt(scanner.nextLine());
+                   ArrayList<AbstractMap.SimpleEntry<String,Boolean>> answerList = new ArrayList<>();
 
-        Test test = new Test(testTitle, testDescription);
+                   for (int m = 0; m < numChoices; m++) {
+                      System.out.println("Enter the text for answer choice " + (m+1) + ":");
+                      String answerString = scanner.nextLine();
 
-        // create questions for test
-        while (true) {
-            System.out.print("Enter question prompt (or 'quit' to finish): ");
-            String questionPrompt = scanner.nextLine();
+                      System.out.println("Is this anser choice correct? (true/false):");
+                      boolean isCorrect = scanner.nextBoolean();
+                      answerList.add(new AbstractMap.SimpleEntry<>(answerString, isCorrect));
+                   }
+                   question.setAnswerList(answerList);
+                   questions.add(question);
+               }
 
-            if (questionPrompt.equalsIgnoreCase("quit")) {
-                break;
-            }
+               Test test = new Test(testName, testDescription);
+               tests.add(test);
+           }
 
-            ArrayList<AbstractMap.SimpleEntry<String, Boolean>> answerList = new ArrayList<>();
+           Lesson l = new Lesson(lessonName, lessonDescription, test);
+           lessons.add(l);
+       }
 
-            System.out.print("Enter number of answer choices: ");
-            int numChoices = scanner.nextInt();
-            scanner.nextLine(); // consume newline character
+       Module m = new Module(moduleName, moduleDescription, moduleContent);
+       modules.add(m);
+   }
 
-            for (int i = 0; i < numChoices; i++) {
-                System.out.print("Enter answer choice #" + (i + 1) + ": ");
-                String answerText = scanner.nextLine();
-
-                System.out.print("Is this answer choice correct? (true/false): ");
-                boolean isCorrect = scanner.nextBoolean();
-                scanner.nextLine(); // consume newline character
-
-                answerList.add(new AbstractMap.SimpleEntry<>(answerText, isCorrect));
-            }
-
-            Question question = new Question();
-            question.setPrompt(questionPrompt);
-            question.setAnswerList(answerList);
-            test.getQuestionList().add(question);
-        }
-
-        Module module = new Module(moduleTitle, moduleDescription,moduleContent);
-        module.setTest(test);
-
-        moduleList.add(module);
-    }
-
-    // create course
-    Module course = new Module(courseTitle, courseDescription,c);
-    course.setModuleList(moduleList);
-
-    return course;
+   Course c = new Course(title, description, authorUUID, language);
+   return c;
 }
 
-}
 
 
     /*
@@ -167,13 +163,11 @@ public static void createCouse(String title, String description, UUID authorUUID
 
 }
 
+
 /**
  * public void createCourse() 
-=======
-    public void createLesson()
->>>>>>> 725a5eaade0ef6ade6e0e383e90f06a6806f8105
     {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in); 
         System.out.println("Enter Course title");
         String title = scanner.nextLine();
         System.out.print("Enter course description: ");
@@ -232,7 +226,7 @@ public static void createCouse(String title, String description, UUID authorUUID
             Lesson lesson = new Lesson(lessonTitle, lessonDescription, lessonContent);
             module.setTest(test);
             course.addLesson(lesson);
-
+            
         }
 
         System.out.println("Course created:");
