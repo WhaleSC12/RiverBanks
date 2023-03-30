@@ -1,9 +1,10 @@
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.UUID;
 
-
-
 import java.util.Scanner;
+
+
 //Where all the method will go that will be used in the LearningUI 
 public class Facade {
     private User currentUser;
@@ -14,6 +15,7 @@ public class Facade {
     private Lesson lesson;
     private Test test;
     private Question question;
+    Scanner scanner = new Scanner(System.in); 
 
 /**
  * 
@@ -64,7 +66,104 @@ public class Facade {
 * @param test         basic test info such as name and description and hools all questions
 * @param question     basic question info such as question and answers choices and holds correct choice
 */
-    public void createLesson() 
+public static void createCouse(String title, String description, UUID authorUUID, Language language) { 
+    Scanner scanner = new Scanner(System.in);
+
+    // get course title and description
+    System.out.print("Enter course title: ");
+    String courseTitle = scanner.nextLine();
+
+    System.out.print("Enter course description: ");
+    String courseDescription = scanner.nextLine();
+
+    // create list of modules
+    ArrayList<Module> moduleList = new ArrayList<>();
+
+    // create modules
+    while (true) {
+        // get module title and description
+        System.out.print("Enter module title (or 'quit' to finish): ");
+        String moduleTitle = scanner.nextLine();
+
+        if (moduleTitle.equalsIgnoreCase("quit")) {
+            break;
+        }
+
+        System.out.print("Enter module description: ");
+        String moduleDescription = scanner.nextLine();
+
+        System.out.print("Enter module content: ");
+        String moduleContent = scanner.nextLine();
+
+        // create test
+        System.out.print("Enter test title: ");
+        String testTitle = scanner.nextLine();
+
+        System.out.print("Enter test description: ");
+        String testDescription = scanner.nextLine();
+
+        Test test = new Test(testTitle, testDescription);
+
+        // create questions for test
+        while (true) {
+            System.out.print("Enter question prompt (or 'quit' to finish): ");
+            String questionPrompt = scanner.nextLine();
+
+            if (questionPrompt.equalsIgnoreCase("quit")) {
+                break;
+            }
+
+            ArrayList<AbstractMap.SimpleEntry<String, Boolean>> answerList = new ArrayList<>();
+
+            System.out.print("Enter number of answer choices: ");
+            int numChoices = scanner.nextInt();
+            scanner.nextLine(); // consume newline character
+
+            for (int i = 0; i < numChoices; i++) {
+                System.out.print("Enter answer choice #" + (i + 1) + ": ");
+                String answerText = scanner.nextLine();
+
+                System.out.print("Is this answer choice correct? (true/false): ");
+                boolean isCorrect = scanner.nextBoolean();
+                scanner.nextLine(); // consume newline character
+
+                answerList.add(new AbstractMap.SimpleEntry<>(answerText, isCorrect));
+            }
+
+            Question question = new Question();
+            question.setPrompt(questionPrompt);
+            question.setAnswerList(answerList);
+            test.getQuestionList().add(question);
+        }
+
+        Module module = new Module(moduleTitle, moduleDescription,moduleContent);
+        module.setTest(test);
+
+        moduleList.add(module);
+    }
+
+    // create course
+    Module course = new Module(courseTitle, courseDescription,c);
+    course.setModuleList(moduleList);
+
+    return course;
+}
+
+}
+
+
+    /*
+     * sets all parameters to null and logs the user out
+     * @return null
+     */
+    public void Logout() {
+        currentUser.equals(null);
+    }
+
+}
+
+/**
+ * public void createCourse() 
     {
         Scanner scanner = new Scanner(System.in); 
         System.out.println("Enter Course title");
@@ -131,14 +230,4 @@ public class Facade {
         System.out.println("Course created:");
         System.out.println(course.toJSONString());
     }
-
-    /*
-     * sets all parameters to null and logs the user out
-     * @return null
-     */
-    public void Logout() {
-        currentUser.equals(null);
-    }
-
-
-}
+ */
