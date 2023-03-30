@@ -65,7 +65,7 @@ public class Facade {
 * @param Lesson       basic lesson info such as name and description and hold all test
 * @param test         basic test info such as name and description and hools all questions
 * @param question     basic question info such as question and answers choices and holds correct choice
-*/public  Course creatCourse(UUID uuid, String title, String description, UUID authorUUID, Language language)
+*/public  Course createCourse(UUID uuid, String title, String description, UUID authorUUID, Language language)
 { 
    Course course = new Course(title, description, authorUUID, language);
     
