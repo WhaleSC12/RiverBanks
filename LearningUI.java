@@ -8,13 +8,11 @@ private String[] mainMenu = {"Login","Create Account"," Search Course", "Create 
 private Scanner scanner;
 Facade facade = new Facade();
 private static User currentUser;
-currentUser.getUUID();
 public void Intro() {
     System.out.println(Welcome);
     while(true) {
     displayMainMenu();
 
-            int userChoice = getUserChoice(mainMenu.length);
             int userChoice = getUserChoice(mainMenu.length);
 
             if (userChoice == -1) {
@@ -48,17 +46,20 @@ public void Intro() {
      * @return null
      */
     public static void loginMethod() {
+    Scanner scanner = new Scanner(System.in);
     System.out.println("Enter your username");
     System.out.println("Enter q to cancel");
    String usernameinput = scanner.nextLine();
    String passwordinput;
-   Facade.Login(usernameinput, passwordinput);
-
+   currentUser = Facade.Login(usernameinput, passwordinput);
+   
+   UUID userUUID = currentUser.getUUID();
     if(usernameinput == "q") {
+        System.exit(0);
         /*return to main menu */
     } else {
     System.out.println("Enter your password");
-    passwordinput = scanner.nextline(); 
+    passwordinput = scanner.nextLine(); 
     }
     
 
@@ -88,13 +89,44 @@ public void Intro() {
     String phonenumberinput;
     String clearanceinput;
     Facade.createLogin(newusernameinput, newpasswordinput, firstnameinput, lastnameinput, emailinput, phonenumberinput, clearanceinput);
+
+    while(newusernameinput == null || newpasswordinput == null){
     System.out.println("Create a username");
     newusernameinput = scanner.nextLine();
     System.out.println("Enter q to cancel");
     System.out.println("Create a password");
     newpasswordinput = scanner.nextLine();
+    UserData userName = UserData.getInstance();
+    if (userName.getUser(newusernameinput) != null){
+        System.out.println("Username already taken");
+        continue;
+    }
+    }
+    
+    while(firstnameinput == null || lastnameinput == null || emailinput == null || phonenumberinput == null || clearanceinput == null){
+    System.out.println("Enter your first name");
+    firstnameinput = scanner.nextLine();
+    System.out.println("Enter your last name");
+    lastnameinput = scanner.nextLine();
+    System.out.println("Enter your email address");
+    emailinput = scanner.nextLine();
+    System.out.println("Enter your phone number");
+    phonenumberinput = scanner.nextLine();
+    System.out.println("Are you a teacher or a student? Enter s for student, Enter t for teacher");
+    clearanceinput = scanner.nextLine();
+    if (clearanceinput == "s"){
+    /*set user to student */
+    } else if (clearanceinput == "t"){
+    /*set user to teacher */
+    } else {
+    System.out.println("Invalid input");
+    continue;
+    }
     }
 
+    displayMainMenu();
+    
+    }
     private void createCourse() {
     UUID uniqueIdentifier = UUID.randomUUID();
     String moduleName;
@@ -105,21 +137,18 @@ public void Intro() {
     }
 
     private void existingCourse() {
-        Facade.
                 System.out.println("Choose a course");
     }
 
     private void newCourse() {
         Facade.createCourse();
-        Facade.createCourse();
     }
 
 
     private void logout() {
-        Facade.logout();
+        System.exit(0);
         /*return to main menu */
-        Facade.logout();
-        /*return to main menu */
+        
     }
 }
 
@@ -127,18 +156,12 @@ public void Intro() {
 
     private int getUserChoice(int numCommands) {
         System.out.print("Enter a number: ");
-    private int getUserChoice(int numCommands) {
-        System.out.print("Enter a number: ");
-
-        String input = scanner.nextLine();
-        int command = Integer.parseInt(input) - 1;
+    
         String input = scanner.nextLine();
         int command = Integer.parseInt(input) - 1;
 
         if (command >= 0 && command <= numCommands - 1) return command;
 
-        return -1;
-    }
         return -1;
     }
 

@@ -66,7 +66,6 @@ public class Facade {
 * @param test         basic test info such as name and description and holds all questions
 * @param question     basic question info such as question and answers choices and holds correct choice
 */public static Course creatCourse(UUID uuid, String title, String description, UUID authorUUID, Language language)
-*/public  Course createCourse(UUID uuid, String title, String description, UUID authorUUID, Language language)
 { 
     Scanner scanner = new Scanner(System.in); 
 
