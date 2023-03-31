@@ -1,6 +1,6 @@
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.UUID;
-import java.util.HashMap;
 
 
 public class LearningUI {
@@ -10,7 +10,7 @@ public class LearningUI {
     }
 
     private static final String Welcome = "Welcome to the Learning Management System";
-    private final String[] mainMenu = {"Login", "Create Account", "Search Course", "Create Course", "Logout"};
+    private final String[] mainMenu = {"Login", "Create Account", "Search Course", "Create Course", "Show Gradse", "Logout"};
     private Scanner scanner;
     Facade facade = new Facade();
     private static User currentUser;
@@ -34,8 +34,27 @@ public class LearningUI {
                 case (1) -> createAccount();
                 case (2) -> existingCourse();
                 case (3) -> createCourse();
-                case (4) -> logout();
+                case (4) -> showGrades();
+                case (5) -> logout();
             }
+        }
+    }
+
+    private void showGrades() {
+        UserCourseData userCourseData = UserCourseData.getInstance();
+        CourseData courseData = CourseData.getInstance();
+        HashMap<UUID, UserCourse> currentUserCourseData = userCourseData.courseDataList.get(currentUser.getUUID());
+        for (var v : currentUserCourseData.entrySet()) {
+            Course course = courseData.getCourse(v.getKey());
+            UserCourse userCourse = v.getValue();
+            StringBuilder sb = new StringBuilder();
+            sb.append(course.getTitle());
+            sb.append(": \n");
+            for (int i = 0; i < userCourse.lessonsCompleted; ++i) {
+                Lesson lesson = course.getLessonList().get(i);
+                sb.append("\t ").append(lesson.getTitle()).append(": ").append(userCourse.lessonGrades.get(i)).append("\n");
+            }
+            System.out.println(sb);
         }
     }
 
@@ -52,19 +71,18 @@ public class LearningUI {
         String usernameinput = scanner.nextLine();
 
 
-        
-            if (usernameinput == "q") {
-                displayMainMenu();
-            } else {
-                System.out.println("Enter your password");
-                String passwordinput = scanner.nextLine();
-                currentUser = Facade.Login(usernameinput, passwordinput);
-                UUID userUUID = currentUser.getUUID();
+        if (usernameinput == "q") {
+            displayMainMenu();
+        } else {
+            System.out.println("Enter your password");
+            String passwordinput = scanner.nextLine();
+            currentUser = Facade.Login(usernameinput, passwordinput);
+            UUID userUUID = currentUser.getUUID();
 
-            }
-            
+        }
 
-        
+
+
 
 
         /*call facade after getting the login */
@@ -99,7 +117,7 @@ public class LearningUI {
                 System.out.println("Username already taken");
                 continue;
             }
-           
+
             System.out.println("Enter your first name");
             firstnameinput = scanner.nextLine();
             System.out.println("Enter your last name");
@@ -120,8 +138,8 @@ public class LearningUI {
             }
             break;
         }
-            UserData.getInstance().userList.add(new User(UUID.randomUUID(), newusernameinput, newpasswordinput, firstnameinput, lastnameinput, emailinput, phonenumberinput, clearanceinput));
-            DataWriter.saveAll();
+        UserData.getInstance().userList.add(new User(UUID.randomUUID(), newusernameinput, newpasswordinput, firstnameinput, lastnameinput, emailinput, phonenumberinput, clearanceinput));
+        DataWriter.saveAll();
     }
 
     private void createCourse() {
@@ -140,7 +158,7 @@ public class LearningUI {
         UserCourseData courseInfo = UserCourseData.getInstance();
         CourseData courseData = CourseData.getInstance();
         HashMap<UUID, UserCourse> coursePrint = courseInfo.courseDataList.get(userUUID);
-        for ( var v : coursePrint.entrySet() ) {
+        for (var v : coursePrint.entrySet()) {
             UUID courseKey = v.getKey();
             Course someCourse = courseData.getCourse(courseKey);
             System.out.println(someCourse.getTitle());
