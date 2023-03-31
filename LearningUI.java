@@ -45,7 +45,7 @@ public void Intro() {
      *
      * @return null
      */
-    public static void loginMethod() {
+    public void loginMethod() {
     Scanner scanner = new Scanner(System.in);
     System.out.println("Enter your username");
     System.out.println("Enter q to cancel");
@@ -55,11 +55,16 @@ public void Intro() {
    
    UUID userUUID = currentUser.getUUID();
     if(usernameinput == "q") {
-        System.exit(0);
-        /*return to main menu */
+    displayMainMenu();
     } else {
     System.out.println("Enter your password");
-    passwordinput = scanner.nextLine(); 
+    passwordinput = scanner.nextLine();
+    if(usernameinput != null || passwordinput != null) {
+            
+        displayMainMenu();
+    } else {
+        continue;
+    }
     }
     
 
@@ -68,17 +73,9 @@ public void Intro() {
     /*when they log out set current user to null */
     }
 
-    /**
+    /*
      * void createAccount method that asks for info to create an accout such as an
      * username, password, first name, last name, email and phone number
-     *
-     * @return null
-     */
-    /**
-     * void createAccount method that asks for info to create an accout such as an
-     * username, password, first name, last name, email and phone number
-     *
-     * @return null
      */
     private void createAccount() {
     String newusernameinput;
@@ -94,6 +91,9 @@ public void Intro() {
     System.out.println("Create a username");
     newusernameinput = scanner.nextLine();
     System.out.println("Enter q to cancel");
+    if (newusernameinput == "q") {
+        displayMainMenu();
+    }
     System.out.println("Create a password");
     newpasswordinput = scanner.nextLine();
     UserData userName = UserData.getInstance();
@@ -146,7 +146,7 @@ public void Intro() {
 
 
     private void logout() {
-        System.exit(0);
+        displayMainMenu();
         /*return to main menu */
         
     }
