@@ -1,11 +1,8 @@
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.UUID;
-<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.ArrayList;
-=======
->>>>>>> 567c66cb9ec927f87727cbae130b1b2ba9fea453
 
 
 public class LearningUI {
@@ -61,6 +58,17 @@ public class LearningUI {
             }
             System.out.println(sb);
         }
+        System.out.println("[1] Return to Main Menu? \n[2] Print Certificate");
+        Scanner uin = new Scanner(System.in);
+        int userChoice = uin.nextInt();
+        switch (userChoice) {
+            case (1) -> {}// doesn't do anything because right now main menu calls just fall through else the stack blows
+            case (2) -> printCertificate(currentUserCourseData);
+        }
+    }
+
+    private void printCertificate(HashMap<UUID, UserCourse> currentUserCourseData) {
+
     }
 
     /**
