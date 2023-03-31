@@ -22,11 +22,10 @@ public class Facade {
      */
 
     public static User Login(String username, String password) {
-        for (User u : userData.userList) {
-            if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
-                return userData.getUser(username);
-            }
-        }
+        User tmp = userData.getUser(username);
+        if (tmp == null) return null;
+        if (tmp.getPassword().equals(password))
+            return tmp;
         return null;
     }
 
