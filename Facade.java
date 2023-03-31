@@ -132,7 +132,7 @@ public class Facade {
 
                             System.out.println("Is this anser choice correct? (true/false):");
                             boolean isCorrect = scanner.nextBoolean();
-                            scanner.nextLine();
+                            String tmp = scanner.nextLine();
                             answerList.add(new AbstractMap.SimpleEntry<>(answerString, isCorrect));
                         }
                         question.setAnswerList(answerList);
