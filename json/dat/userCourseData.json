@@ -1,1 +1,10 @@
-{"8c3eedf7-ae54-4543-b60e-30750467b1d1":{"9b44efe6-e9f3-482c-9a7f-1e94bb040f7a":{"lessonsCompleted":5,"lessonGrades":[100.0,90.0,80.0,70.0,60.0]}}}
+{
+  "8c3eedf7-ae54-4543-b60e-30750467b1d1": {
+    "9b44efe6-e9f3-482c-9a7f-1e94bb040f7a": {
+      "lessonsCompleted": 1,
+      "lessonGrades": [
+        100.0
+      ]
+    }
+  }
+}

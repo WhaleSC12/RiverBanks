@@ -1,8 +1,6 @@
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.UUID;
-import java.util.HashMap;
-import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
 
 
 public class LearningUI {
@@ -61,14 +59,42 @@ public class LearningUI {
         System.out.println("[1] Return to Main Menu? \n[2] Print Certificate");
         Scanner uin = new Scanner(System.in);
         int userChoice = uin.nextInt();
+        uin.close();
         switch (userChoice) {
-            case (1) -> {}// doesn't do anything because right now main menu calls just fall through else the stack blows
+            case (1) -> {
+            }// doesn't do anything because right now main menu calls just fall through else the stack blows
             case (2) -> printCertificate(currentUserCourseData);
         }
     }
 
     private void printCertificate(HashMap<UUID, UserCourse> currentUserCourseData) {
+        ArrayList<AbstractMap.SimpleEntry<Course, Double>> passedCourses = new ArrayList<>();
 
+        for (UserCourse userCourse : currentUserCourseData.values()) {
+            double totalGrade = 0;
+            for (double grade : userCourse.getLessonGrades())
+                totalGrade += grade;
+            totalGrade = totalGrade / userCourse.lessonsCompleted;
+            if (totalGrade >= 70.0)
+                passedCourses.add(new AbstractMap.SimpleEntry<>(CourseData.getInstance().getCourse(userCourse.getCourseUUID()), totalGrade));
+        }
+        System.out.println("Here are your passed courses: \n");
+        for (int i = 0; i < passedCourses.size(); ++i) {
+            System.out.println("[" + i + "] " + passedCourses.get(i).getKey().getTitle() + " (" + passedCourses.get(i).getValue() + ")\n");
+        }
+        System.out.println("Enter the corresponding number to the certificate you wish to print: ");
+        Scanner uin = new Scanner(System.in);
+        int userInput = scanner.nextInt();
+        try (FileWriter fileWriter = new FileWriter(passedCourses.get(userInput).getKey().getTitle())) {
+            fileWriter.write(
+                    "//////////////////////////////////////////////////\n" +
+                            "You Passed: " + passedCourses.get(userInput).getKey().getTitle() + "\n" +
+                            "With Grade: " + passedCourses.get(userInput).getValue() + "\n" +
+                            "Congratulations!" +
+                            "//////////////////////////////////////////////////\n");
+        } catch (IOException ignored) {
+            // meh
+        }
     }
 
     /**
@@ -174,32 +200,32 @@ public class LearningUI {
         for (var v : coursePrint.entrySet()) {
             UUID courseKey = v.getKey();
             Course someCourse = courseData.getCourse(courseKey);
-            
+
             System.out.println(someCourse.getTitle());
             ArrayList<Lesson> lessonList = someCourse.getLessonList();
             int i = 0;
-            for (var z:v.getValue().getLessonGrades()) {
-            System.out.println(lessonList.get(i).getTitle());
-            System.out.println(z); 
-            ++i;
+            for (var z : v.getValue().getLessonGrades()) {
+                System.out.println(lessonList.get(i).getTitle());
+                System.out.println(z);
+                ++i;
             }
-        
+
         }
         System.out.println("Choose which course to access");
         String somecourse = scanner.nextLine();
         Course someName = courseData.getCourse(somecourse);
-        
+
         for (int i = 0; i < someName.getLessonList().size(); i++) {
-        System.out.println(someName.getLessonList().get(i).getTitle());
-        
+            System.out.println(someName.getLessonList().get(i).getTitle());
+
         }
         System.out.println("Choose which lesson to access");
-        String somelesson = scanner.nextLine();        
+        String somelesson = scanner.nextLine();
         System.out.println("Enter a number to choose a module");
         int userInput = scanner.nextInt();
         Lesson someModule = someName.getLessonList().get(userInput);
         for (int i = 0; i < someModule.getModuleList().size(); i++) {
-            
+
             System.out.println(someModule.getModuleList().get(i).getTitle());
         }
         System.out.println("Choose which module to access");
