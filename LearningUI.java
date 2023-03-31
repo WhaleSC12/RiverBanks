@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.UUID;
 import java.util.HashMap;
+import java.util.ArrayList;
 
 
 public class LearningUI {
@@ -143,9 +144,42 @@ public class LearningUI {
         for ( var v : coursePrint.entrySet() ) {
             UUID courseKey = v.getKey();
             Course someCourse = courseData.getCourse(courseKey);
+            
             System.out.println(someCourse.getTitle());
-            /*System.out.println(someCourse.get);*/
+            ArrayList<Lesson> lessonList = someCourse.getLessonList();
+            int i = 0;
+            for (var z:v.getValue().getLessonGrades()) {
+            System.out.println(lessonList.get(i).getTitle());
+            System.out.println(z); 
+            ++i;
+            }
+        
         }
+        System.out.println("Choose which course to access");
+        String somecourse = scanner.nextLine();
+        Course someName = courseData.getCourse(somecourse);
+        
+        for (int i = 0; i < someName.getLessonList().size(); i++) {
+        System.out.println(someName.getLessonList().get(i).getTitle());
+        
+        }
+        System.out.println("Choose which lesson to access");
+        String somelesson = scanner.nextLine();        
+        System.out.println("Enter a number to choose a module");
+        int userInput = scanner.nextInt();
+        Lesson someModule = someName.getLessonList().get(userInput);
+        for (int i = 0; i < someModule.getModuleList().size(); i++) {
+            
+            System.out.println(someModule.getModuleList().get(i).getTitle());
+        }
+        System.out.println("Choose which module to access");
+        int UserInput = scanner.nextInt();
+        Module someQuestion = someModule.getModuleList().get(UserInput);
+        System.out.println(someQuestion.getContent());
+        System.out.println("Enter c to view comments");
+        /*System.out.println(getComments);*/
+        System.out.println("Enter ? to leave a comment, Enter ok to return to module");
+
     }
 
 
