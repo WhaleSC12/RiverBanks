@@ -131,7 +131,7 @@ public void Intro() {
     String moduleName;
     String descriptionInput;
     
-    Facade.createCourse(uniqueIdentifier, moduleName, descriptionInput, currentUser);
+    /*Facade.createCourse(uniqueIdentifier, moduleName, descriptionInput, currentUser);*/
     System.out.println("Enter 1 to add to an existing course. Enter 2 to create a new course.");
     }
 
@@ -140,7 +140,7 @@ public void Intro() {
     }
 
     private void newCourse() {
-        Facade.createCourse();
+    /*     Facade.createCourse(); */
     }
 
 
@@ -149,7 +149,7 @@ public void Intro() {
         /*return to main menu */
         
     }
-}
+    }
 
 
 
@@ -176,3 +176,4 @@ public void Intro() {
         }
 
     }
+}
