@@ -65,7 +65,8 @@ public class Facade {
 * @param Lesson       lessons are groups of modules centered around some topic
 * @param test         basic test info such as name and description and holds all questions
 * @param question     basic question info such as question and answers choices and holds correct choice
-*/public static Course creatCourse(String title, String description, UUID authorUUID, Language language)
+*/
+public static Course creatCourse(String title, String description, UUID authorUUID, Language language)
 { 
     Scanner scanner = new Scanner(System.in); 
 

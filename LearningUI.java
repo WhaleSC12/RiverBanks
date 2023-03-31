@@ -138,7 +138,7 @@ public void Intro() {
     
     String title = "Beginner Java lesson";
     String description = "A beginner's guide to early java fundamentals";
-    facade.creatCourse(title, description, uniqueIdentifier, Language.Java);
+    Facade.creatCourse(title, description, uniqueIdentifier, Language.Java);
     System.out.println("Enter 1 to add to an existing course. Enter 2 to create a new course.");
     }
 
