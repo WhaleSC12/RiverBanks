@@ -34,9 +34,12 @@ public void Intro() {
                     createAccount();
                     break;
                 case (2):
-                    createCourse();
+                    existingCourse();
                     break;
                 case (3):
+                    createCourse();
+                    break;
+                case (4):
                     logout();
                     break;
 
@@ -144,10 +147,6 @@ public void Intro() {
 
     private void existingCourse() {
                 System.out.println("Choose a course");
-    }
-
-    private void newCourse() {
-    /*     Facade.createCourse(); */
     }
 
 
