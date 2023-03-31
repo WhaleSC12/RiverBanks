@@ -3,12 +3,17 @@ import java.util.UUID;
 
 
 public class LearningUI {
+public static void main(String[] args) {
+ LearningUI runPlease = new LearningUI();
+ runPlease.Intro();
+}
 private static final String Welcome = "Welcome to the Learning Management System";
-private String[] mainMenu = {"Login","Create Account"," Search Course", "Create Course", "Logout"};
+private String[] mainMenu = {"Login","Create Account","Search Course", "Create Course", "Logout"};
 private Scanner scanner;
 Facade facade = new Facade();
 private static User currentUser;
 public void Intro() {
+    scanner = new Scanner(System.in); 
     System.out.println(Welcome);
     while(true) {
     displayMainMenu();
@@ -50,19 +55,22 @@ public void Intro() {
     System.out.println("Enter your username");
     System.out.println("Enter q to cancel");
    String usernameinput = scanner.nextLine();
-   String passwordinput;
-   currentUser = Facade.Login(usernameinput, passwordinput);
-   
-   UUID userUUID = currentUser.getUUID();
-    if(usernameinput == "q") {
+
+
+   while(true){ 
+   if(usernameinput == "q") {
     displayMainMenu();
     } else {
     System.out.println("Enter your password");
-    passwordinput = scanner.nextLine();
+    String passwordinput = scanner.nextLine();   
+    currentUser = Facade.Login(usernameinput, passwordinput);
+    UUID userUUID = currentUser.getUUID();
+
     if(usernameinput != null || passwordinput != null) {
     displayMainMenu();
     } else {
         continue;
+    }
     }
     }
     
@@ -84,9 +92,8 @@ public void Intro() {
     String emailinput;
     String phonenumberinput;
     String clearanceinput;
-    Facade.createLogin(newusernameinput, newpasswordinput, firstnameinput, lastnameinput, emailinput, phonenumberinput, clearanceinput);
 
-    while(newusernameinput == null || newpasswordinput == null){
+    while(true){
     System.out.println("Create a username");
     newusernameinput = scanner.nextLine();
     System.out.println("Enter q to cancel");
@@ -100,9 +107,10 @@ public void Intro() {
         System.out.println("Username already taken");
         continue;
     }
+    break;
     }
     
-    while(firstnameinput == null || lastnameinput == null || emailinput == null || phonenumberinput == null || clearanceinput == null){
+    while(true){
     System.out.println("Enter your first name");
     firstnameinput = scanner.nextLine();
     System.out.println("Enter your last name");
@@ -111,27 +119,26 @@ public void Intro() {
     emailinput = scanner.nextLine();
     System.out.println("Enter your phone number");
     phonenumberinput = scanner.nextLine();
-    System.out.println("Are you a teacher or a student? Enter s for student, Enter t for teacher");
+    System.out.println("Are you a teacher or a student? Enter student for student, Enter teacher for teacher");
     clearanceinput = scanner.nextLine();
-    if (clearanceinput == "s"){
-    /*set user to student */
-    } else if (clearanceinput == "t"){
-    /*set user to teacher */
+    if (clearanceinput.equals("student")){
+    String userClearance = "Student";
+    } else if (clearanceinput.equals("teacher")){
+    String userClearance = "Teacher";
     } else {
     System.out.println("Invalid input");
     continue;
     }
+    break;
     }
-
-    displayMainMenu();
     
     }
     private void createCourse() {
     UUID uniqueIdentifier = UUID.randomUUID();
-    String moduleName;
-    String descriptionInput;
     
-    /*Facade.createCourse(uniqueIdentifier, moduleName, descriptionInput, currentUser);*/
+    String title = "Beginner Java lesson";
+    String description = "A beginner's guide to early java fundamentals";
+    facade.creatCourse(title, description, uniqueIdentifier, Language.Java);
     System.out.println("Enter 1 to add to an existing course. Enter 2 to create a new course.");
     }
 
@@ -149,7 +156,7 @@ public void Intro() {
         /*return to main menu */
         
     }
-    }
+    
 
 
 
@@ -170,7 +177,6 @@ public void Intro() {
      * @return null
      */
     public void displayMainMenu() {
-        System.out.println(mainMenu);
         for (int i = 0; i < mainMenu.length; i++) {
             System.out.println((i + 1) + ". " + mainMenu[i]);
         }

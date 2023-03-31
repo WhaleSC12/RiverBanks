@@ -65,7 +65,7 @@ public class Facade {
 * @param Lesson       lessons are groups of modules centered around some topic
 * @param test         basic test info such as name and description and holds all questions
 * @param question     basic question info such as question and answers choices and holds correct choice
-*/public static Course creatCourse(UUID uuid, String title, String description, UUID authorUUID, Language language)
+*/public static Course creatCourse(String title, String description, UUID authorUUID, Language language)
 { 
     Scanner scanner = new Scanner(System.in); 
 
@@ -165,71 +165,3 @@ public class Facade {
 }
 
 
-
-public void createCourse()
-{
-Scanner scanner = new Scanner(System.in);
-System.out.println("Enter Course title");
-String title = scanner.nextLine();
-System.out.print("Enter course description: ");
-String description = scanner.nextLine();
-System.out.print("Enter course language: ");
-Language language = Language.valueOf(scanner.nextLine().toUpperCase());
-UUID authorUUID = UUID.randomUUID();
-System.out.print("Enter many lessons would you like for your course: ");
-int numLessons = scanner.nextInt();
-<p>
-Course course = new Course(title, description, authorUUID, language);
-<p>
-<p>
-for (int i = 1; i <= numLessons; i++) {
-System.out.printf("Lesson %d:\n", i);
-System.out.print("Enter lesson title: ");
-String lessonTitle = scanner.nextLine();
-System.out.print("Enter lesson description: ");
-String lessonDescription = scanner.nextLine();
-System.out.print("Enter lesson content: ");
-String lessonContent = scanner.nextLine();
-<p>
-ArrayList<Test> tests = new ArrayList<>();
-<p>
-while (true) {
-System.out.print("Add a test? (y/n): ");
-String addTest = scanner.nextLine();
-if (addTest.equalsIgnoreCase("n")) {
-break;
-}
-System.out.print("Enter test title: ");
-String testTitle = scanner.nextLine();
-System.out.print("Enter test description: ");
-String testDescription = scanner.nextLine();
-Test test = new Test(testTitle, testDescription);
-<p>
-ArrayList<Question> questions = new ArrayList<>();
-while (true) {
-System.out.print("Add a question? (y/n): ");
-String addQuestion = scanner.nextLine();
-if (addQuestion.equalsIgnoreCase("n")) {
-break;
-}
-System.out.print("Enter question text: ");
-String questionText = scanner.nextLine();
-System.out.print("Enter answer: ");
-String answer = scanner.nextLine();
-Question question = new Question();
-questions.add(question);
-}
-<p>
-test.setQuestionList(questions);
-tests.add(test);
-}
-<p>
-Lesson lesson = new Lesson(lessonTitle, lessonDescription, lessonContent);
-module.setTest(test);
-course.addLesson(lesson);
-<p>
-}
-<p>
-System.out.println("Course created:");
-System.out.println(course.toJSONString());
-}
