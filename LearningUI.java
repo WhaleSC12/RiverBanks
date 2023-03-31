@@ -10,7 +10,7 @@ public class LearningUI {
     }
 
     private static final String Welcome = "Welcome to the Learning Management System";
-    private final String[] mainMenu = {"Login", "Create Account", "Search Course", "Create Course", "Show Gradse", "Logout"};
+    private final String[] mainMenu = {"Login", "Create Account", "Search Course", "Create Course", "Show Grades", "Logout"};
     private Scanner scanner;
     Facade facade = new Facade();
     private static User currentUser;
