@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.UUID;
+import java.util.HashMap;
 
 
 public class LearningUI {
@@ -51,7 +52,7 @@ public class LearningUI {
         String usernameinput = scanner.nextLine();
 
 
-        while (true) {
+        
             if (usernameinput == "q") {
                 displayMainMenu();
             } else {
@@ -60,13 +61,10 @@ public class LearningUI {
                 currentUser = Facade.Login(usernameinput, passwordinput);
                 UUID userUUID = currentUser.getUUID();
 
-                if (usernameinput != null || passwordinput != null) {
-                    displayMainMenu();
-                } else {
-                    continue;
-                }
             }
-        }
+            
+
+        
 
 
         /*call facade after getting the login */
@@ -101,10 +99,7 @@ public class LearningUI {
                 System.out.println("Username already taken");
                 continue;
             }
-            break;
-        }
-
-        while (true) {
+           
             System.out.println("Enter your first name");
             firstnameinput = scanner.nextLine();
             System.out.println("Enter your last name");
@@ -125,7 +120,8 @@ public class LearningUI {
             }
             break;
         }
-
+            UserData.getInstance().userList.add(new User(UUID.randomUUID(), newusernameinput, newpasswordinput, firstnameinput, lastnameinput, emailinput, phonenumberinput, clearanceinput));
+            DataWriter.saveAll();
     }
 
     private void createCourse() {
@@ -138,7 +134,18 @@ public class LearningUI {
     }
 
     private void existingCourse() {
+        System.out.println(currentUser.toString());
+        UUID userUUID = currentUser.getUUID();
         System.out.println("Choose a course");
+        UserCourseData courseInfo = UserCourseData.getInstance();
+        CourseData courseData = CourseData.getInstance();
+        HashMap<UUID, UserCourse> coursePrint = courseInfo.courseDataList.get(userUUID);
+        for ( var v : coursePrint.entrySet() ) {
+            UUID courseKey = v.getKey();
+            Course someCourse = courseData.getCourse(courseKey);
+            System.out.println(someCourse.getTitle());
+            /*System.out.println(someCourse.get);*/
+        }
     }
 
 
