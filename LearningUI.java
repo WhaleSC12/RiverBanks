@@ -59,10 +59,9 @@ public class LearningUI {
         System.out.println("[1] Return to Main Menu? \n[2] Print Certificate");
         Scanner uin = new Scanner(System.in);
         int userChoice = uin.nextInt();
-        uin.close();
         switch (userChoice) {
             case (1) -> {
-            }// doesn't do anything because right now main menu calls just fall through else the stack blows
+            }// doesn't do anything because right now main menu calls just fall through; else the stack blows
             case (2) -> printCertificate(currentUserCourseData);
         }
     }
@@ -85,7 +84,7 @@ public class LearningUI {
         System.out.println("Enter the corresponding number to the certificate you wish to print: ");
         Scanner uin = new Scanner(System.in);
         int userInput = scanner.nextInt();
-        try (FileWriter fileWriter = new FileWriter(passedCourses.get(userInput).getKey().getTitle())) {
+        try (FileWriter fileWriter = new FileWriter(passedCourses.get(userInput).getKey().getTitle() + ".txt")) {
             fileWriter.write(
                     "//////////////////////////////////////////////////\n" +
                             "You Passed: " + passedCourses.get(userInput).getKey().getTitle() + "\n" +
