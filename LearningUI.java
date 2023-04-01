@@ -56,16 +56,26 @@ public class LearningUI {
             }
             System.out.println("\n" + sb);
         }
-        System.out.println("[1] Return to Main Menu? \n[2] Print Certificate");
+        System.out.println("[1] Return to Main Menu? \n[2] Print Certificate\n[3] View Lesson Grades");
         Scanner uin = new Scanner(System.in);
         int userChoice = uin.nextInt();
         switch (userChoice) {
             case (1) -> {
             }// doesn't do anything because right now main menu calls just fall through; else the stack blows
             case (2) -> printCertificate(currentUserCourseData);
+            case (3) -> {
+                System.out.println("Choose a course from the above list by entering the corresponding number.");
+                int n = new Scanner(System.in).nextInt();
+                UserCourse uc = currentUserCourseData.get(currentUserCourseData.keySet().toArray()[n]);
+                Course c = courseData.getCourse(uc.getCourseUUID());
+                for (int i = 0; i < uc.lessonsCompleted; i++) {
+                    System.out.println(c.getLessonList().get(i).getTitle() + ": " + uc.getLessonGrades().get(i));
+                }
+            }
             default -> System.out.println("Invalid input. Returning to main menu.");
         }
     }
+
 
     private void printCertificate(HashMap<UUID, UserCourse> currentUserCourseData) {
         ArrayList<AbstractMap.SimpleEntry<Course, Double>> passedCourses = new ArrayList<>();
@@ -86,12 +96,7 @@ public class LearningUI {
         Scanner uin = new Scanner(System.in);
         int userInput = uin.nextInt();
         try (FileWriter fileWriter = new FileWriter(passedCourses.get(userInput).getKey().getTitle() + ".txt")) {
-            fileWriter.write(
-                    "//////////////////////////////////////////////////\n" +
-                            "You Passed: " + passedCourses.get(userInput).getKey().getTitle() + "\n" +
-                            "With Grade: " + passedCourses.get(userInput).getValue() + "\n" +
-                            "Congratulations!" +
-                            "//////////////////////////////////////////////////\n");
+            fileWriter.write("//////////////////////////////////////////////////\n" + "You Passed: " + passedCourses.get(userInput).getKey().getTitle() + "\n" + "With Grade: " + passedCourses.get(userInput).getValue() + "\n" + "Congratulations!" + "//////////////////////////////////////////////////\n");
         } catch (IOException ignored) {
             // meh
         }
@@ -228,8 +233,7 @@ public class LearningUI {
         ArrayList<Course> courseList = CourseData.getInstance().courseList;
         ArrayList<Course> matchingCourses = new ArrayList<>();
         int i = 0;
-        for (var v :
-                courseList) {
+        for (var v : courseList) {
             if (v.getTitle().contains(input)) {
                 System.out.println("[" + i + "] " + v.getTitle());
                 matchingCourses.add(v);
@@ -309,8 +313,7 @@ public class LearningUI {
                 Test test = lesson.getTest();
                 System.out.println(test.getTitle());
                 System.out.println(test.getDescription());
-                for (Question q :
-                        test.getQuestionList()) {
+                for (Question q : test.getQuestionList()) {
                     System.out.println(q.getPrompt());
                     for (int i = 0; i < q.getAnswerList().size(); i++) {
                         System.out.println("\t" + i + 1 + "): " + q.getAnswerList().get(i).getKey() + "\t | " + q.getAnswerList().get(i).getValue().toString());
@@ -327,9 +330,9 @@ public class LearningUI {
                     System.out.println("How many answers?");
                     int num = new Scanner(System.in).nextInt();
                     for (int i = 0; i < num; i++) {
-                        System.out.println("Answer " + i + 1 + " Text: ");
+                        System.out.println("Answer " + (i + 1) + " Text: ");
                         String answer1 = new Scanner(System.in).nextLine();
-                        System.out.println("Answer " + i + 1 + " Correct? [true/false]");
+                        System.out.println("Answer " + (i + 1) + " Correct? [true/false]");
                         boolean correct = new Scanner(System.in).nextBoolean();
                         question.getAnswerList().add(new AbstractMap.SimpleEntry<>(answer1, correct));
                     }
