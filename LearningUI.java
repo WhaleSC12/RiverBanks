@@ -269,22 +269,80 @@ public class LearningUI {
         String somecourse = scanner.nextLine();
         Course someName = courseData.getCourse(somecourse);
 
+        if (currentUser.getClearance().equals("Teacher")) {
+            System.out.println("Add Lesson? [y/n]");
+            String userinput = new Scanner(System.in).nextLine();
+            if (userinput.equals("y")) {
+                System.out.println("Title?");
+                String title = new Scanner(System.in).nextLine();
+                System.out.println("Description?");
+                String description = new Scanner(System.in).nextLine();
+                Test test = new Test("null", "null");
+                someName.addLesson(new Lesson(title, description, test));
+            }
+        }
+
         for (int i = 0; i < someName.getLessonList().size(); i++) {
             System.out.println(someName.getLessonList().get(i).getTitle());
 
         }
         System.out.println("Choose which lesson to access");
-        String somelesson = scanner.nextLine();
-        System.out.println("Enter a number to choose a module");
-        int userInput = scanner.nextInt();
-        Lesson someModule = someName.getLessonList().get(userInput);
-        for (int i = 0; i < someModule.getModuleList().size(); i++) {
+        int someLesson = scanner.nextInt();
+        Lesson lesson = someName.getLessonList().get(someLesson);
 
-            System.out.println(someModule.getModuleList().get(i).getTitle());
+        if (currentUser.getClearance().equals("Teacher")) {
+            System.out.println("Add Module? [y/n]");
+            String userinput = new Scanner(System.in).nextLine();
+            if (userinput.equals("y")) {
+                System.out.println("Title?");
+                String title = new Scanner(System.in).nextLine();
+                System.out.println("Description?");
+                String description = new Scanner(System.in).nextLine();
+                System.out.println("Lesson Content?");
+                String content = new Scanner(System.in).nextLine();
+                lesson.getModuleList().add(new Module(title, description, content));
+            }
+            System.out.println("Modify Test? [y/n]");
+            userinput = new Scanner(System.in).nextLine();
+            if (userinput.equals("y")) {
+                Test test = lesson.getTest();
+                System.out.println(test.getTitle());
+                System.out.println(test.getTitle());
+                for (Question q :
+                        test.getQuestionList()) {
+                    System.out.println(q.getPrompt());
+                    for (int i = 0; i < q.getAnswerList().size(); i++) {
+                        System.out.println("\t" + i + "): " + q.getAnswerList().get(i).getKey() + "\t | " + q.getAnswerList().get(i).getValue().toString());
+                    }
+                    System.out.println("\n");
+                }
+                System.out.println("Add Question? [y/n]");
+                if (new Scanner(System.in).nextLine().equals("y")) {
+                    Question question = new Question();
+                    System.out.println("Prompt: ");
+                    String prompt = new Scanner(System.in).nextLine();
+                    question.setPrompt(prompt);
+                    question.setAnswerList(new ArrayList<>());
+                    System.out.println("How many answers?");
+                    int num = new Scanner(System.in).nextInt();
+                    for (int i = 0; i < num; i++) {
+                        System.out.println("Answer " + i + " Text: ");
+                        String answer1 = new Scanner(System.in).nextLine();
+                        System.out.println("Answer " + i + " Correct? [true/false]");
+                        boolean correct = new Scanner(System.in).nextBoolean();
+                        question.getAnswerList().add(new AbstractMap.SimpleEntry<>(answer1, correct));
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < lesson.getModuleList().size(); i++) {
+
+            System.out.println(lesson.getModuleList().get(i).getTitle());
         }
         System.out.println("Choose which module to access");
         int UserInput = scanner.nextInt();
-        Module someQuestion = someModule.getModuleList().get(UserInput);
+        Module someQuestion = lesson.getModuleList().get(UserInput);
         System.out.println(someQuestion.getContent());
         System.out.println("Enter c to view comments");
         /*System.out.println(getComments);*/
