@@ -260,20 +260,20 @@ public class LearningUI {
         for (var v : coursePrint.entrySet()) {
             UUID courseKey = v.getKey();
             Course someCourse = courseData.getCourse(courseKey);
-            
+
             System.out.println(someCourse.getTitle());
             ArrayList<Lesson> lessonList = someCourse.getLessonList();
             int i = 0;
             for (var z : v.getValue().getLessonGrades()) {
-            System.out.println(lessonList.get(i).getTitle());
-            System.out.println(z); 
-            ++i;
+                System.out.println(lessonList.get(i).getTitle());
+                System.out.println(z);
+                ++i;
             }
         }
         System.out.println("Choose which course to access");
         String somecourse = scanner.nextLine();
         Course someName = courseData.getCourse(somecourse);
-        
+
         if (currentUser.getClearance().equals("Teacher")) {
             System.out.println("Add Lesson? [y/n]");
             String userinput = new Scanner(System.in).nextLine();
@@ -288,35 +288,35 @@ public class LearningUI {
         }
 
         for (int i = 0; i < someName.getLessonList().size(); i++) {
-        System.out.println(someName.getLessonList().get(i).getTitle());
-        
+            System.out.println(someName.getLessonList().get(i).getTitle());
+
         }
         System.out.println("Choose which lesson to access");
         int someLesson = scanner.nextInt();
         Lesson lesson = someName.getLessonList().get(someLesson);
-            
+
         System.out.println("Enter c to access comments, otherwise enter anything else");
         scanner.nextLine();
-        String commentChoice = scanner.nextLine(); 
+        String commentChoice = scanner.nextLine();
         if (commentChoice.equals("c")) {
             ArrayList<Comment> clist = lesson.getCommentList();
-        while (true){
-            System.out.println("Enter your comment or enter exit to exit");
-            String commentInput = scanner.nextLine();
-            if (commentInput.equals("exit")) {
-            System.exit(0);
-            } else {
-            Comment usercomment = new Comment(userUUID, commentInput);
-            clist.add(usercomment);
-            for (int i = 0; i < clist.size(); i++){
-            System.out.println(UserData.getInstance().getUser(clist.get(i).getAuthor()).getUsername());
-            System.out.println(clist.get(i).getContent());
-            DataWriter.saveAll();
-            }
+            while (true) {
+                System.out.println("Enter your comment or enter exit to exit");
+                String commentInput = scanner.nextLine();
+                if (commentInput.equals("exit")) {
+                    System.exit(0);
+                } else {
+                    Comment usercomment = new Comment(userUUID, commentInput);
+                    clist.add(usercomment);
+                    for (int i = 0; i < clist.size(); i++) {
+                        System.out.println(UserData.getInstance().getUser(clist.get(i).getAuthor()).getUsername());
+                        System.out.println(clist.get(i).getContent());
+                        DataWriter.saveAll();
+                    }
+                }
             }
         }
-        }
-       
+
         if (currentUser.getClearance().equals("Teacher")) {
             System.out.println("Add Module? [y/n]");
             String userinput = new Scanner(System.in).nextLine();
@@ -328,7 +328,7 @@ public class LearningUI {
                 System.out.println("Lesson Content?");
                 String content = new Scanner(System.in).nextLine();
                 lesson.getModuleList().add(new Module(title, description, content));
-        }
+            }
             System.out.println("Modify Test? [y/n]");
             userinput = new Scanner(System.in).nextLine();
             if (userinput.equals("y")) {
@@ -365,7 +365,7 @@ public class LearningUI {
         }
 
         for (int i = 0; i < lesson.getModuleList().size(); i++) {
-            
+
             System.out.println(lesson.getModuleList().get(i).getTitle());
         }
         System.out.println("Choose which module to access");
@@ -379,28 +379,28 @@ public class LearningUI {
         int b = 0;
         for (int i = 0; i < test.getQuestionList().size(); i++) {
             System.out.println(test.getQuestionList().get(i).getPrompt());
-            for (int z = 0; z < test.getQuestionList().get(i).getAnswerList().size(); z++){
-            System.out.println(test.getQuestionList().get(i).getAnswerList().get(z).getKey());
-                
+            for (int z = 0; z < test.getQuestionList().get(i).getAnswerList().size(); z++) {
+                System.out.println(test.getQuestionList().get(i).getAnswerList().get(z).getKey());
             }
-        String UserAnswer = scanner.nextLine();
-                
-        for (int x = 0; x < test.getQuestionList().get(i).getAnswerList().size(); x++) {
-        if (UserAnswer.equals(test.getQuestionList().get(i).getAnswerList().get(x).getKey())){
-            b++;
+            String UserAnswer = new Scanner(System.in).nextLine();
+
+            for (int x = 0; x < test.getQuestionList().get(i).getAnswerList().size(); x++) {
+                if (UserAnswer.equals(test.getQuestionList().get(i).getAnswerList().get(x).getKey())) {
+                    b++;
+                }
             }
-        }
         }
         System.out.println(b / test.getQuestionList().size());
         double Grade = b / test.getQuestionList().size();
+        UserCourseData.getInstance().getUserCourse(currentUser.getUUID(), someName.getUUID()).getLessonGrades().ensureCapacity(someLesson);
         UserCourseData.getInstance().getUserCourse(currentUser.getUUID(), someName.getUUID()).getLessonGrades().set(someLesson, Grade);
         DataWriter.saveAll();
         System.out.println("Would you like to print the material? Enter 0 to print it.");
         int UserTextbookInput = scanner.nextInt();
-        if (UserTextbookInput == 0){
-        ToTextFile.write(someQuestion);
+        if (UserTextbookInput == 0) {
+            ToTextFile.write(someQuestion);
         }
-        
+
     }
 
 
@@ -412,7 +412,7 @@ public class LearningUI {
     private int getUserChoice(int numCommands) {
         System.out.print("Enter a number: ");
 
-        String input = scanner.nextLine();
+        String input = new Scanner(System.in).nextLine();
         int command = Integer.parseInt(input) - 1;
 
         if (command >= 0 && command <= numCommands - 1) return command;
