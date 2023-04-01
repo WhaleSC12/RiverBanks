@@ -27,7 +27,7 @@ public class LearningUI {
                 System.out.println("Invalid input");
                 continue;
             }
-            if (userChoice == mainMenu.length - 1) break;
+            if (userChoice > mainMenu.length - 1) break;
 
             switch (userChoice) {
                 case (0) -> loginMethod();
@@ -355,7 +355,9 @@ public class LearningUI {
                         boolean correct = new Scanner(System.in).nextBoolean();
                         question.getAnswerList().add(new AbstractMap.SimpleEntry<>(answer1, correct));
                     }
+                    System.out.println("Question Added");
                 }
+                System.out.println("Test Modified");
             }
         }
 
@@ -376,9 +378,7 @@ public class LearningUI {
 
 
     private void logout() {
-        displayMainMenu();
-        /*return to main menu */
-
+        currentUser = null;
     }
 
 
