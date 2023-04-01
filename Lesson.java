@@ -9,6 +9,11 @@ public class Lesson implements JSONAware {
 
     private final ArrayList<Comment> commentList;
     private final ArrayList<Module> moduleList;
+
+    public Test getTest() {
+        return test;
+    }
+
     private Test test;
     private String title;
     private String description;
