@@ -118,6 +118,7 @@ public class LearningUI {
             currentUser = Facade.Login(usernameinput, passwordinput);
             UUID userUUID = currentUser.getUUID();
 
+
         }
 
 
@@ -289,6 +290,8 @@ public class LearningUI {
         System.out.println("Choose which lesson to access");
         int someLesson = scanner.nextInt();
         Lesson lesson = someName.getLessonList().get(someLesson);
+        ArrayList<Comment> clist = lesson.getCommentList();
+        ArrayList<Comment> clist2 = clist.get(0).getCommentList();
 
         if (currentUser.getClearance().equals("Teacher")) {
             System.out.println("Add Module? [y/n]");
@@ -326,9 +329,9 @@ public class LearningUI {
                     System.out.println("How many answers?");
                     int num = new Scanner(System.in).nextInt();
                     for (int i = 0; i < num; i++) {
-                        System.out.println("Answer " + i+1 + " Text: ");
+                        System.out.println("Answer " + i + 1 + " Text: ");
                         String answer1 = new Scanner(System.in).nextLine();
-                        System.out.println("Answer " + i+1 + " Correct? [true/false]");
+                        System.out.println("Answer " + i + 1 + " Correct? [true/false]");
                         boolean correct = new Scanner(System.in).nextBoolean();
                         question.getAnswerList().add(new AbstractMap.SimpleEntry<>(answer1, correct));
                     }

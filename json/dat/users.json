@@ -7,5 +7,14 @@
     "username": "username2",
     "password": "password",
     "clearance": "Teacher"
+  },
+  "683172b6-86a0-439c-9993-1265214cf909": {
+    "firstName": "John",
+    "lastName": "Wisdom",
+    "email": "wisdomJohn@gmail.com",
+    "phoneNumber": "999-999-9990",
+    "username": "wjohn",
+    "password": "coolteacher9",
+    "clearance": "Teacher"
   }
 }
