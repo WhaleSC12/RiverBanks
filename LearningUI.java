@@ -376,7 +376,6 @@ public class LearningUI {
         Test test = lesson.getTest();
         System.out.println(test.getTitle());
         System.out.println(test.getDescription());
-        System.out.println(test.getQuestionList());
         int b = 0;
         for (int i = 0; i < test.getQuestionList().size(); i++) {
             System.out.println(test.getQuestionList().get(i).getPrompt());
