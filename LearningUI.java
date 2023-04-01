@@ -369,11 +369,36 @@ public class LearningUI {
         int UserInput = scanner.nextInt();
         Module someQuestion = lesson.getModuleList().get(UserInput);
         System.out.println(someQuestion.getContent());
-        System.out.println("Would you like to view the textbook? Enter 0 to view it.");
+
+        Test test = lesson.getTest();
+        System.out.println(test.getTitle());
+        System.out.println(test.getDescription());
+        System.out.println(test.getQuestionList());
+        int b = 0;
+        for (int i = 0; i < test.getQuestionList().size(); i++) {
+            System.out.println(test.getQuestionList().get(i).getPrompt());
+            for (int z = 0; z < test.getQuestionList().get(i).getAnswerList().size(); z++){
+            System.out.println(test.getQuestionList().get(i).getAnswerList().get(z).getKey());
+                
+            }
+        String UserAnswer = scanner.nextLine();
+                
+        for (int x = 0; x < test.getQuestionList().get(i).getAnswerList().size(); x++) {
+        if (UserAnswer.equals(test.getQuestionList().get(i).getAnswerList().get(x).getKey())){
+            b++;
+            }
+        }
+        }
+        System.out.println(b / test.getQuestionList().size());
+        double Grade = b / test.getQuestionList().size();
+        UserCourseData.getInstance().getUserCourse(currentUser.getUUID(), someName.getUUID()).getLessonGrades().set(someLesson, Grade);
+        DataWriter.saveAll();
+        System.out.println("Would you like to print the material? Enter 0 to print it.");
         int UserTextbookInput = scanner.nextInt();
         if (UserTextbookInput == 0){
         ToTextFile.write(someQuestion);
         }
+        
     }
 
 
