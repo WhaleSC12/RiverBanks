@@ -307,12 +307,12 @@ public class LearningUI {
             if (userinput.equals("y")) {
                 Test test = lesson.getTest();
                 System.out.println(test.getTitle());
-                System.out.println(test.getTitle());
+                System.out.println(test.getDescription());
                 for (Question q :
                         test.getQuestionList()) {
                     System.out.println(q.getPrompt());
                     for (int i = 0; i < q.getAnswerList().size(); i++) {
-                        System.out.println("\t" + i + "): " + q.getAnswerList().get(i).getKey() + "\t | " + q.getAnswerList().get(i).getValue().toString());
+                        System.out.println("\t" + i + 1 + "): " + q.getAnswerList().get(i).getKey() + "\t | " + q.getAnswerList().get(i).getValue().toString());
                     }
                     System.out.println("\n");
                 }
@@ -326,9 +326,9 @@ public class LearningUI {
                     System.out.println("How many answers?");
                     int num = new Scanner(System.in).nextInt();
                     for (int i = 0; i < num; i++) {
-                        System.out.println("Answer " + i + " Text: ");
+                        System.out.println("Answer " + i+1 + " Text: ");
                         String answer1 = new Scanner(System.in).nextLine();
-                        System.out.println("Answer " + i + " Correct? [true/false]");
+                        System.out.println("Answer " + i+1 + " Correct? [true/false]");
                         boolean correct = new Scanner(System.in).nextBoolean();
                         question.getAnswerList().add(new AbstractMap.SimpleEntry<>(answer1, correct));
                     }
