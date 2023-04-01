@@ -10,7 +10,7 @@ public class LearningUI {
     }
 
     private static final String Welcome = "Welcome to the Learning Management System";
-    private final String[] mainMenu = {"Login", "Create Account", "Search Course", "Create Course", "Show Grades", "Logout"};
+    private final String[] mainMenu = {"Log In", "Sign Up", "Courses", "Create Course", "Show Grades", "Logout"};
     private Scanner scanner;
     Facade facade = new Facade();
     private static User currentUser;
@@ -32,7 +32,7 @@ public class LearningUI {
             switch (userChoice) {
                 case (0) -> loginMethod();
                 case (1) -> createAccount();
-                case (2) -> existingCourse();
+                case (2) -> courses();
                 case (3) -> createCourse();
                 case (4) -> showGrades();
                 case (5) -> logout();
@@ -54,7 +54,7 @@ public class LearningUI {
                 Lesson lesson = course.getLessonList().get(i);
                 sb.append("\t ").append(lesson.getTitle()).append(": ").append(userCourse.lessonGrades.get(i)).append("\n");
             }
-            System.out.println(sb);
+            System.out.println("\n" + sb);
         }
         System.out.println("[1] Return to Main Menu? \n[2] Print Certificate");
         Scanner uin = new Scanner(System.in);
@@ -63,6 +63,7 @@ public class LearningUI {
             case (1) -> {
             }// doesn't do anything because right now main menu calls just fall through; else the stack blows
             case (2) -> printCertificate(currentUserCourseData);
+            default -> System.out.println("Invalid input. Returning to main menu.");
         }
     }
 
@@ -83,7 +84,7 @@ public class LearningUI {
         }
         System.out.println("Enter the corresponding number to the certificate you wish to print: ");
         Scanner uin = new Scanner(System.in);
-        int userInput = scanner.nextInt();
+        int userInput = uin.nextInt();
         try (FileWriter fileWriter = new FileWriter(passedCourses.get(userInput).getKey().getTitle() + ".txt")) {
             fileWriter.write(
                     "//////////////////////////////////////////////////\n" +
@@ -109,7 +110,7 @@ public class LearningUI {
         String usernameinput = scanner.nextLine();
 
 
-        if (usernameinput == "q") {
+        if (usernameinput.equals("q")) {
             displayMainMenu();
         } else {
             System.out.println("Enter your password");
@@ -189,8 +190,59 @@ public class LearningUI {
         System.out.println("Enter 1 to add to an existing course. Enter 2 to create a new course.");
     }
 
+    private void courses() {
+        System.out.println("[1] My Courses\n[2] Search for new Course");
+        Scanner k = new Scanner(System.in);
+        int uint = k.nextInt();
+        switch (uint) {
+            case (1) -> existingCourse();
+            case (2) -> searchCourse();
+            default -> System.out.println("Invalid Input. Returning to Main Menu.");
+        }
+    }
+
+    private void searchCourse() {
+        System.out.println("[1] Search by Title");
+        System.out.println("[2] Search by Author");
+        System.out.println("[3] Search by Language");
+        Scanner uin = new Scanner(System.in);
+        int input = uin.nextInt();
+        switch (input) {
+            case (1) -> searchByTitle();
+//            case (2) -> searchByAuthor();
+//            case (3) -> searchByLanguage();
+            // I will do that later if ever
+            default -> System.out.println("Invalid input, returning to main menu");
+        }
+    }
+
+    private void searchByTitle() {
+        System.out.println("Enter title or part of title: ");
+        Scanner uin = new Scanner(System.in);
+        String input = uin.nextLine();
+        ArrayList<Course> courseList = CourseData.getInstance().courseList;
+        ArrayList<Course> matchingCourses = new ArrayList<>();
+        int i = 0;
+        for (var v :
+                courseList) {
+            if (v.getTitle().contains(input)) {
+                System.out.println("[" + i + "] " + v.getTitle());
+                matchingCourses.add(v);
+            }
+            ++i;
+        }
+        System.out.println("Pick a Course");
+        int u = uin.nextInt();
+        UserCourseData userCourseData = UserCourseData.getInstance();
+        var v = userCourseData.courseDataList;
+        var dat = v.get(currentUser.getUUID());
+        UserCourse userCourse = new UserCourse(currentUser.getUUID(), matchingCourses.get(u).getUUID(), 0, new ArrayList<>());
+        dat.putIfAbsent(matchingCourses.get(u).getUUID(), userCourse);
+        System.out.println("Course added to My Courses. Returning to Main Menu.");
+    }
+
+
     private void existingCourse() {
-        System.out.println(currentUser.toString());
         UUID userUUID = currentUser.getUUID();
         System.out.println("Choose a course");
         UserCourseData courseInfo = UserCourseData.getInstance();
@@ -208,7 +260,6 @@ public class LearningUI {
                 System.out.println(z);
                 ++i;
             }
-
         }
         System.out.println("Choose which course to access");
         String somecourse = scanner.nextLine();
