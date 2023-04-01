@@ -10,6 +10,14 @@ public class Test implements JSONAware {
     private String description;
     private ArrayList<Question> questionList;
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public Test(String title, String description) {
         this.title = title;
         this.description = description;
