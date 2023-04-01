@@ -182,6 +182,10 @@ public class LearningUI {
     }
 
     private void createCourse() {
+        if (!currentUser.getClearance().equals("Teacher")) {
+            System.out.println("Only teachers can create courses");
+            return;
+        }
         UUID uniqueIdentifier = UUID.randomUUID();
 
         String title = "Beginner Java lesson";
