@@ -6,7 +6,7 @@ import java.util.UUID;
 
 //Where all the method will go that will be used in the LearningUI 
 public class Facade {
-    private static  User currentUser;
+    private static User currentUser;
     private static final UserData userData = UserData.getInstance();
     private Course course;
     private Module module;
@@ -21,12 +21,11 @@ public class Facade {
      * @return
      */
 
-    public static  User Login(String username, String password) {
-        for (User u : userData.userList) {
-            if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
-                return userData.getUser(username);
-            }
-        }
+    public static User Login(String username, String password) {
+        User tmp = userData.getUser(username);
+        if (tmp == null) return null;
+        if (tmp.getPassword().equals(password))
+            return tmp;
         return null;
     }
 
@@ -56,24 +55,26 @@ public class Facade {
     }
 
 
-/** void method that allows Teacher to create Lesson 
-* asking user to enter name,description,lanuage and amount of lessons for the course and then
-* asks the user how many lessons they want and if they want to add a Test to it and write the test with 
-* the questions and answer choices
-* @param course       basic course info and holds all lessons within modules
-* @param module       sub-topics within lessons which contain the actual informative content
-* @param Lesson       lessons are groups of modules centered around some topic
-* @param test         basic test info such as name and description and holds all questions
-* @param question     basic question info such as question and answers choices and holds correct choice
-*/
-public static Course creatCourse(String title, String description, UUID authorUUID, Language language)
-{ 
-    Scanner scanner = new Scanner(System.in); 
-
-   Course course = new Course(title, description, authorUUID, language);
+    /**
+     * void method that allows Teacher to create Lesson
+     * asking user to enter name,description,lanuage and amount of lessons for the course and then
+     * asks the user how many lessons they want and if they want to add a Test to it and write the test with
+     * the questions and answer choices
+     *
+     * @param course   basic course info and holds all lessons within modules
+     * @param module   sub-topics within lessons which contain the actual informative content
+     * @param Lesson   lessons are groups of modules centered around some topic
+     * @param test     basic test info such as name and description and holds all questions
+     * @param question basic question info such as question and answers choices and holds correct choice
+     */
     
-   System.out.print("Enter the number of modules: ");
-   int numModules = Integer.parseInt(scanner.nextLine());
+public static Course creatCourse(String title, String description, UUID authorUUID, Language language) {
+        Scanner scanner = new Scanner(System.in);
+
+        Course course = new Course(title, description, authorUUID, language);
+
+        System.out.print("Enter the number of modules: ");
+        int numModules = Integer.parseInt(scanner.nextLine());
 
         ArrayList<Module> modules = new ArrayList<>();
         for (int i = 0; i < numModules; i++) {
@@ -132,6 +133,7 @@ public static Course creatCourse(String title, String description, UUID authorUU
 
                             System.out.println("Is this anser choice correct? (true/false):");
                             boolean isCorrect = scanner.nextBoolean();
+                            String tmp = scanner.nextLine();
                             answerList.add(new AbstractMap.SimpleEntry<>(answerString, isCorrect));
                         }
                         question.setAnswerList(answerList);

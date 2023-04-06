@@ -43,7 +43,7 @@ public class CourseData {
      */
     public Course getCourse(UUID uuid) {
         for (Course course : courseList) {
-            if (course.getUUID() == uuid) return course;
+            if (course.getUUID().equals(uuid)) return course;
         }
         return null;
     }
