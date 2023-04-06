@@ -1,12 +1,759 @@
 {
-  "9b44efe6-e9f3-482c-9a7f-1e94bb040f7a": {
-    "title": "course title",
-    "description": "course desc",
-    "language": "Cpp",
-    "authorUUID": "8c3eedf7-ae54-4543-b60e-30750467b1d1",
+  "683172b6-86a0-439c-9993-1265214cf909": {
+    "title": "Cool python course",
+    "description": "A cool course about python",
+    "language": "Python",
+    "authorUUID": "683172b6-86a0-439c-9993-1265214cf909",
     "lessons": [
       {
-        "title": "lesson title",
+        "title": "python lesson 1",
+        "description": "lesson description",
+        "comments": [
+          {
+            "userUUID": "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a",
+            "content": "comment content",
+            "comments": []
+          }
+        ],
+        "modules": [
+          {
+            "title": "title",
+            "description": "desc",
+            "content": "content"
+          }
+        ],
+        "test": {
+          "title": "title",
+          "description": "description",
+          "questions": [
+            {
+              "prompt": "prompt",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "title": "dictionaries",
+        "description": "lesson description",
+        "comments": [
+          {
+            "userUUID": "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a",
+            "content": "comment content",
+            "comments": []
+          }
+        ],
+        "modules": [
+          {
+            "title": "title",
+            "description": "desc",
+            "content": "content"
+          }
+        ],
+        "test": {
+          "title": "title",
+          "description": "description",
+          "questions": [
+            {
+              "prompt": "prompt",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "title": "rabbit and tortoise",
+        "description": "lesson description",
+        "comments": [
+          {
+            "userUUID": "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a",
+            "content": "comment content",
+            "comments": []
+          }
+        ],
+        "modules": [
+          {
+            "title": "title",
+            "description": "desc",
+            "content": "content"
+          }
+        ],
+        "test": {
+          "title": "title",
+          "description": "description",
+          "questions": [
+            {
+              "prompt": "prompt",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "title": "the title of a lesson on python",
+        "description": "lesson description",
+        "comments": [
+          {
+            "userUUID": "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a",
+            "content": "comment content",
+            "comments": []
+          }
+        ],
+        "modules": [
+          {
+            "title": "title",
+            "description": "desc",
+            "content": "content"
+          }
+        ],
+        "test": {
+          "title": "title",
+          "description": "description",
+          "questions": [
+            {
+              "prompt": "prompt",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "title": "lesson not 1",
+        "description": "lesson description",
+        "comments": [
+          {
+            "userUUID": "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a",
+            "content": "comment content",
+            "comments": []
+          }
+        ],
+        "modules": [
+          {
+            "title": "title",
+            "description": "desc",
+            "content": "content"
+          }
+        ],
+        "test": {
+          "title": "title",
+          "description": "description",
+          "questions": [
+            {
+              "prompt": "prompt",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "title": "titles are hard to come up with",
+        "description": "lesson description",
+        "comments": [
+          {
+            "userUUID": "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a",
+            "content": "comment content",
+            "comments": []
+          }
+        ],
+        "modules": [
+          {
+            "title": "title",
+            "description": "desc",
+            "content": "content"
+          }
+        ],
+        "test": {
+          "title": "title",
+          "description": "description",
+          "questions": [
+            {
+              "prompt": "prompt",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "title": "catching snakes in the amazon",
+        "description": "lesson description",
+        "comments": [
+          {
+            "userUUID": "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a",
+            "content": "comment content",
+            "comments": []
+          }
+        ],
+        "modules": [
+          {
+            "title": "title",
+            "description": "desc",
+            "content": "content"
+          }
+        ],
+        "test": {
+          "title": "title",
+          "description": "description",
+          "questions": [
+            {
+              "prompt": "prompt",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "title": "how to eat ice cream (in python)",
+        "description": "lesson description",
+        "comments": [
+          {
+            "userUUID": "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a",
+            "content": "comment content",
+            "comments": []
+          }
+        ],
+        "modules": [
+          {
+            "title": "title",
+            "description": "desc",
+            "content": "content"
+          }
+        ],
+        "test": {
+          "title": "title",
+          "description": "description",
+          "questions": [
+            {
+              "prompt": "prompt",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "title": "what is a variable",
+        "description": "lesson description",
+        "comments": [
+          {
+            "userUUID": "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a",
+            "content": "comment content",
+            "comments": []
+          }
+        ],
+        "modules": [
+          {
+            "title": "title",
+            "description": "desc",
+            "content": "content"
+          }
+        ],
+        "test": {
+          "title": "title",
+          "description": "description",
+          "questions": [
+            {
+              "prompt": "prompt",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "title": "loops in python",
+        "description": "Loops are cool",
+        "comments": [
+          {
+            "userUUID": "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a",
+            "content": "comment content",
+            "comments": []
+          }
+        ],
+        "modules": [
+          {
+            "title": "for loops",
+            "description": "stuff about for loops",
+            "content": "loop for you"
+          },
+          {
+            "title": "range-based loops",
+            "description": "stuff about ranged based loops",
+            "content": "loopy loopty"
+          }
+        ],
+        "test": {
+          "title": "Loopz are hard",
+          "description": "Quiz on loops",
+          "questions": [
+            {
+              "prompt": "question 1",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "prompt": "question 2",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "prompt": "question 3",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "title": "cool python lesson",
+        "description": "lesson description",
+        "comments": [
+          {
+            "userUUID": "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a",
+            "content": "comment content",
+            "comments": []
+          }
+        ],
+        "modules": [
+          {
+            "title": "title",
+            "description": "desc",
+            "content": "content"
+          }
+        ],
+        "test": {
+          "title": "title",
+          "description": "description",
+          "questions": [
+            {
+              "prompt": "prompt",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "8c3eedf7-ae54-4543-b60e-30750467b1d1": {
+    "title": "Cool javascript course",
+    "description": "A cool course about python",
+    "language": "Python",
+    "authorUUID": "683172b6-86a0-439c-9993-1265214cf909",
+    "lessons": [
+      {
+        "title": "python lesson 1",
+        "description": "lesson description",
+        "comments": [
+          {
+            "userUUID": "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a",
+            "content": "comment content",
+            "comments": []
+          }
+        ],
+        "modules": [
+          {
+            "title": "title",
+            "description": "desc",
+            "content": "content"
+          }
+        ],
+        "test": {
+          "title": "title",
+          "description": "description",
+          "questions": [
+            {
+              "prompt": "prompt",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "title": "dictionaries",
+        "description": "lesson description",
+        "comments": [
+          {
+            "userUUID": "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a",
+            "content": "comment content",
+            "comments": []
+          }
+        ],
+        "modules": [
+          {
+            "title": "title",
+            "description": "desc",
+            "content": "content"
+          }
+        ],
+        "test": {
+          "title": "title",
+          "description": "description",
+          "questions": [
+            {
+              "prompt": "prompt",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "title": "rabbit and tortoise",
+        "description": "lesson description",
+        "comments": [
+          {
+            "userUUID": "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a",
+            "content": "comment content",
+            "comments": []
+          }
+        ],
+        "modules": [
+          {
+            "title": "title",
+            "description": "desc",
+            "content": "content"
+          }
+        ],
+        "test": {
+          "title": "title",
+          "description": "description",
+          "questions": [
+            {
+              "prompt": "prompt",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "title": "the title of a lesson on python",
+        "description": "lesson description",
+        "comments": [
+          {
+            "userUUID": "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a",
+            "content": "comment content",
+            "comments": []
+          }
+        ],
+        "modules": [
+          {
+            "title": "title",
+            "description": "desc",
+            "content": "content"
+          }
+        ],
+        "test": {
+          "title": "title",
+          "description": "description",
+          "questions": [
+            {
+              "prompt": "prompt",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "title": "lesson not 1",
+        "description": "lesson description",
+        "comments": [
+          {
+            "userUUID": "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a",
+            "content": "comment content",
+            "comments": []
+          }
+        ],
+        "modules": [
+          {
+            "title": "title",
+            "description": "desc",
+            "content": "content"
+          }
+        ],
+        "test": {
+          "title": "title",
+          "description": "description",
+          "questions": [
+            {
+              "prompt": "prompt",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "title": "titles are hard to come up with",
+        "description": "lesson description",
+        "comments": [
+          {
+            "userUUID": "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a",
+            "content": "comment content",
+            "comments": []
+          }
+        ],
+        "modules": [
+          {
+            "title": "title",
+            "description": "desc",
+            "content": "content"
+          }
+        ],
+        "test": {
+          "title": "title",
+          "description": "description",
+          "questions": [
+            {
+              "prompt": "prompt",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "title": "catching snakes in the amazon",
+        "description": "lesson description",
+        "comments": [
+          {
+            "userUUID": "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a",
+            "content": "comment content",
+            "comments": []
+          }
+        ],
+        "modules": [
+          {
+            "title": "title",
+            "description": "desc",
+            "content": "content"
+          }
+        ],
+        "test": {
+          "title": "title",
+          "description": "description",
+          "questions": [
+            {
+              "prompt": "prompt",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "title": "how to eat ice cream (in python)",
+        "description": "lesson description",
+        "comments": [
+          {
+            "userUUID": "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a",
+            "content": "comment content",
+            "comments": []
+          }
+        ],
+        "modules": [
+          {
+            "title": "title",
+            "description": "desc",
+            "content": "content"
+          }
+        ],
+        "test": {
+          "title": "title",
+          "description": "description",
+          "questions": [
+            {
+              "prompt": "prompt",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "title": "what is a variable",
+        "description": "lesson description",
+        "comments": [
+          {
+            "userUUID": "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a",
+            "content": "comment content",
+            "comments": []
+          }
+        ],
+        "modules": [
+          {
+            "title": "title",
+            "description": "desc",
+            "content": "content"
+          }
+        ],
+        "test": {
+          "title": "title",
+          "description": "description",
+          "questions": [
+            {
+              "prompt": "prompt",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "title": "loops in python",
+        "description": "Loops are cool",
+        "comments": [
+          {
+            "userUUID": "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a",
+            "content": "comment content",
+            "comments": []
+          }
+        ],
+        "modules": [
+          {
+            "title": "for loops",
+            "description": "stuff about for loops",
+            "content": "loop for you"
+          },
+          {
+            "title": "range-based loops",
+            "description": "stuff about ranged based loops",
+            "content": "loopy loopty"
+          }
+        ],
+        "test": {
+          "title": "Loopz are hard",
+          "description": "Quiz on loops",
+          "questions": [
+            {
+              "prompt": "question 1",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "prompt": "question 2",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "prompt": "question 3",
+              "answers": [
+                {
+                  "text": "answer",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "title": "cool python lesson",
         "description": "lesson description",
         "comments": [
           {
