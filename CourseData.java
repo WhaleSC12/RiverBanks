@@ -18,7 +18,7 @@ public class CourseData {
      * to prevent the need to change multiple files should something change
      */
     public static CourseData getInstance() {
-        if (instance == null) instance = new CourseData(DataLoader.getCourses());
+        if (instance == null) instance = new CourseData(DataLoader.getCourses("json/dat/courses.json"));
         return instance;
     }
 

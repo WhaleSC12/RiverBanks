@@ -18,7 +18,7 @@ public class UserData {
      * without the need to update multiple files in the event o a data structure change
      */
     public static UserData getInstance() {
-        if (instance == null) instance = new UserData(DataLoader.getUsers());
+        if (instance == null) instance = new UserData(DataLoader.getUsers("json/dat/users.json"));
         return instance;
     }
 

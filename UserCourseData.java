@@ -17,7 +17,7 @@ public class UserCourseData {
      * helper functions without needing to update them across multiple classes
      */
     public static UserCourseData getInstance() {
-        if (instance == null) instance = new UserCourseData(DataLoader.getUserCourses());
+        if (instance == null) instance = new UserCourseData(DataLoader.getUserCourses("json/dat/userCourseData.json"));
         return instance;
     }
 
