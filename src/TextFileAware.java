@@ -1,10 +1,12 @@
+package src;
+
 /**
- * Used for ToTextFile to ensure it can only be called on classes capable of being written.
+ * Used for src.ToTextFile to ensure it can only be called on classes capable of being written.
  * Also allows for easy addition of other classes to be written without changing functionality.
  */
 public interface TextFileAware {
     /**
-     * This function will be called when attempting to write a TextFileAware object to a text file
+     * This function will be called when attempting to write a src.TextFileAware object to a text file
      *
      * @return String will be written exactly as it is into a text file
      */

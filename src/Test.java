@@ -1,9 +1,11 @@
+package src;
+
 import org.json.simple.JSONAware;
 
 import java.util.ArrayList;
 
 /**
- * Test class used by lessons for teachers to create a series of questions through which to judge a student's level of knowledge
+ * src.Test class used by lessons for teachers to create a series of questions through which to judge a student's level of knowledge
  */
 public class Test implements JSONAware {
     private String title;
@@ -44,7 +46,7 @@ public class Test implements JSONAware {
 
     @Override
     public String toString() {
-        return "Test{" +
+        return "src.Test{" +
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", questionList=" + questionList +
