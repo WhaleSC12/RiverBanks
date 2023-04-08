@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
 
+//imports added for testing 
+import static org.junit.jupiter.api.Assertions.*;
 /**
  * Singleton which holds a list of all user objects
  */
