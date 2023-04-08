@@ -35,21 +35,23 @@ public class DataLoader {
     /**
      * Helper for getUsers which fetches the user file and casts it to a useful datatype
      *
+     * @param filePath path and data containing the data to be extracted
      * @return hashmap representation of the jsonobject in user file
      */
-    private static HashMap<String, HashMap<String, String>> getUserData() {
-        JSONObject root = fetchRoot("json/dat/users.json");
+    private static HashMap<String, HashMap<String, String>> getUserData(String filePath) {
+        JSONObject root = fetchRoot(filePath);
         return (HashMap<String, HashMap<String, String>>) new HashMap(root);
     }
 
     /**
      * loads an arraylist containing all users and returns it
      *
+     * @param filePath path and file containing the data to be extracted
      * @return an arraylist containing all users
      */
-    public static ArrayList<User> getUsers() {
+    public static ArrayList<User> getUsers(String filePath) {
         ArrayList<User> userList = new ArrayList<>();
-        for (var entry : getUserData().entrySet()) {
+        for (var entry : getUserData(filePath).entrySet()) {
             var val = entry.getValue();
             User user = new User(UUID.fromString(entry.getKey()), val.get("username"), val.get("password"), val.get("firstName"), val.get("lastName"), val.get("email"), val.get("phoneNumber"), val.get("clearance"));
             userList.add(user);
@@ -147,11 +149,12 @@ public class DataLoader {
     /**
      * returns an arraylist containing all courses in the course file and returns it
      *
+     * @param filePath path and file containing the data to be extracted
      * @return arraylist of courses
      */
-    public static ArrayList<Course> getCourses() {
+    public static ArrayList<Course> getCourses(String filePath) {
         ArrayList<Course> courseList = new ArrayList<>();
-        JSONObject courseData = fetchRoot("json/dat/courses.json");
+        JSONObject courseData = fetchRoot(filePath);
         for (Object objectKey : courseData.keySet()) {
             String key = (String) objectKey;
             HashMap<String, Object> value = (HashMap<String, Object>) courseData.get(objectKey);
@@ -168,11 +171,12 @@ public class DataLoader {
     /**
      * returns a map of usercoursedata sorted by useruuid and course uuid
      *
+     * @param filePath path and file containing the data to be tested
      * @return a hashmap<useruuid, hashmap<courseuuid, usercoursedata>> containing all data in file
      */
-    public static HashMap<UUID, HashMap<UUID, UserCourse>> getUserCourses() {
+    public static HashMap<UUID, HashMap<UUID, UserCourse>> getUserCourses(String filePath) {
         HashMap<UUID, HashMap<UUID, UserCourse>> out = new HashMap<>();
-        JSONObject root = fetchRoot("json/dat/userCourseData.json");
+        JSONObject root = fetchRoot(filePath);
         for (Object key : root.keySet()) {
             UUID userUUID = UUID.fromString((String) key);
             HashMap<String, HashMap<String, Object>> value = (HashMap<String, HashMap<String, Object>>) root.get(key);
