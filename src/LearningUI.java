@@ -284,8 +284,8 @@ public class LearningUI {
                 String title = new Scanner(System.in).nextLine();
                 System.out.println("Description?");
                 String description = new Scanner(System.in).nextLine();
-                Test test = new Test("null", "null");
-                someName.addLesson(new Lesson(title, description, test));
+                Quiz quiz = new Quiz("null", "null");
+                someName.addLesson(new Lesson(title, description, quiz));
             }
         }
 
@@ -334,10 +334,10 @@ public class LearningUI {
             System.out.println("Modify src.Test? [y/n]");
             userinput = new Scanner(System.in).nextLine();
             if (userinput.equals("y")) {
-                Test test = lesson.getTest();
-                System.out.println(test.getTitle());
-                System.out.println(test.getDescription());
-                for (Question q : test.getQuestionList()) {
+                Quiz quiz = lesson.getTest();
+                System.out.println(quiz.getTitle());
+                System.out.println(quiz.getDescription());
+                for (Question q : quiz.getQuestionList()) {
                     System.out.println(q.getPrompt());
                     for (int i = 0; i < q.getAnswerList().size(); i++) {
                         System.out.println("\t" + i + 1 + "): " + q.getAnswerList().get(i).getKey() + "\t | " + q.getAnswerList().get(i).getValue().toString());
@@ -375,25 +375,25 @@ public class LearningUI {
         Module someQuestion = lesson.getModuleList().get(UserInput);
         System.out.println(someQuestion.getContent());
 
-        Test test = lesson.getTest();
-        System.out.println(test.getTitle());
-        System.out.println(test.getDescription());
+        Quiz quiz = lesson.getTest();
+        System.out.println(quiz.getTitle());
+        System.out.println(quiz.getDescription());
         int b = 0;
-        for (int i = 0; i < test.getQuestionList().size(); i++) {
-            System.out.println(test.getQuestionList().get(i).getPrompt());
-            for (int z = 0; z < test.getQuestionList().get(i).getAnswerList().size(); z++) {
-                System.out.println(test.getQuestionList().get(i).getAnswerList().get(z).getKey());
+        for (int i = 0; i < quiz.getQuestionList().size(); i++) {
+            System.out.println(quiz.getQuestionList().get(i).getPrompt());
+            for (int z = 0; z < quiz.getQuestionList().get(i).getAnswerList().size(); z++) {
+                System.out.println(quiz.getQuestionList().get(i).getAnswerList().get(z).getKey());
             }
             String UserAnswer = new Scanner(System.in).nextLine();
 
-            for (int x = 0; x < test.getQuestionList().get(i).getAnswerList().size(); x++) {
-                if (UserAnswer.equals(test.getQuestionList().get(i).getAnswerList().get(x).getKey())) {
+            for (int x = 0; x < quiz.getQuestionList().get(i).getAnswerList().size(); x++) {
+                if (UserAnswer.equals(quiz.getQuestionList().get(i).getAnswerList().get(x).getKey())) {
                     b++;
                 }
             }
         }
-        System.out.println(b / test.getQuestionList().size());
-        double Grade = b / test.getQuestionList().size();
+        System.out.println(b / quiz.getQuestionList().size());
+        double Grade = b / quiz.getQuestionList().size();
         UserCourseData.getInstance().getUserCourse(currentUser.getUUID(), someName.getUUID()).getLessonGrades().ensureCapacity(someLesson);
         UserCourseData.getInstance().getUserCourse(currentUser.getUUID(), someName.getUUID()).getLessonGrades().set(someLesson, Grade);
         DataWriter.saveAll();

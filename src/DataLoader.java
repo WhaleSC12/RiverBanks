@@ -102,8 +102,8 @@ public class DataLoader {
      * @param testObject JSONObject containing the test data, obtained by calling .get("test") on a lesson object
      * @return a src.Test form the JSONObject testObject
      */
-    private static Test getTest(JSONObject testObject) {
-        Test test = new Test((String) testObject.get("title"), (String) testObject.get("description"));
+    private static Quiz getTest(JSONObject testObject) {
+        Quiz quiz = new Quiz((String) testObject.get("title"), (String) testObject.get("description"));
         ArrayList<Question> questionList = new ArrayList<>();
         JSONArray questionArray = (JSONArray) testObject.get("questions");
         for (var v : questionArray) {
@@ -120,8 +120,8 @@ public class DataLoader {
             question.setAnswerList(answerList);
             questionList.add(question);
         }
-        test.setQuestionList(questionList);
-        return test;
+        quiz.setQuestionList(questionList);
+        return quiz;
     }
 
     /**
@@ -135,8 +135,8 @@ public class DataLoader {
         for (var v : lessonArray) {
             JSONObject jsonLesson = (JSONObject) v;
             JSONObject jsonTest = (JSONObject) jsonLesson.get("test");
-            Test test = getTest(jsonTest);
-            Lesson lesson = new Lesson((String) jsonLesson.get("title"), (String) jsonLesson.get("description"), test);
+            Quiz quiz = getTest(jsonTest);
+            Lesson lesson = new Lesson((String) jsonLesson.get("title"), (String) jsonLesson.get("description"), quiz);
             ArrayList<Comment> commentList = lesson.getCommentList();
             JSONArray jsonCommentArray = (JSONArray) jsonLesson.get("comments");
             commentList.addAll(getCommentList(jsonCommentArray));

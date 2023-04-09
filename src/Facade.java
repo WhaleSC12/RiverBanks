@@ -13,7 +13,7 @@ public class Facade {
     private Course course;
     private Module module;
     private Lesson lesson;
-    private static Test test;
+    private static Quiz quiz;
     private Question question;
     static Scanner scanner = new Scanner(System.in);
 
@@ -105,7 +105,7 @@ public static Course creatCourse(String title, String description, UUID authorUU
                 System.out.print("Enter the number of tests: ");
                 int numTests = Integer.parseInt(scanner.nextLine());
 // creating tests 
-                ArrayList<Test> tests = new ArrayList<>();
+                ArrayList<Quiz> quizzes = new ArrayList<>();
                 for (int k = 0; k < numTests; k++) {
                     System.out.println("Creating test " + (k + 1) + "...");
                     System.out.print("Enter the test name: ");
@@ -142,11 +142,11 @@ public static Course creatCourse(String title, String description, UUID authorUU
                         questions.add(question);
                     }
 
-                    Test test = new Test(testName, testDescription);
-                    tests.add(test);
+                    Quiz quiz = new Quiz(testName, testDescription);
+                    quizzes.add(quiz);
                 }
 
-                Lesson l = new Lesson(lessonName, lessonDescription, test);
+                Lesson l = new Lesson(lessonName, lessonDescription, quiz);
                 lessons.add(l);
             }
 

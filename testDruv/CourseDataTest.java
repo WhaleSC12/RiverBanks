@@ -3,7 +3,6 @@ import src.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.lang.reflect.Array;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -14,7 +13,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class CourseDataTest { 
+class CourseDataTest {
 
     @BeforeClass
     public static void oneTimeSetup()
@@ -81,7 +80,7 @@ class CourseDataTest {
        ArrayList<Question> questions = new ArrayList<>();
        question.setAnswerList(answerList);
        questions.add(question);
-       Test tests = new Test("Intro Test", "Used in testing case");
+       Quiz tests = new Quiz("Intro Test", "Used in testing case");
        tests.setQuestionList(questions);
        Lesson lessons = new Lesson("Testing", "Testing code", tests);
        assertEquals(lessons.getTest(),tests);
@@ -97,10 +96,10 @@ class CourseDataTest {
        ArrayList<Question> questions = new ArrayList<>();
        question.setAnswerList(answerList);
        questions.add(question);
-       src.Test tests = (src.Test) new Test("Intro Test", "Used in testing case");
+       Quiz tests = (Quiz) new Quiz("Intro Test", "Used in testing case");
        String testing = ((Course) tests).getTitle();
        tests.setQuestionList(questions);
-       assertEquals(((Course) tests).getTitle(),testing);S
+       assertEquals(((Course) tests).getTitle(),testing);
      }
 
      @Test

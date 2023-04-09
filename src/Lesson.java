@@ -12,20 +12,20 @@ public class Lesson implements JSONAware {
     private final ArrayList<Comment> commentList;
     private final ArrayList<Module> moduleList;
 
-    public Test getTest() {
-        return test;
+    public Quiz getTest() {
+        return quiz;
     }
 
-    private Test test;
+    private Quiz quiz;
     private String title;
     private String description;
 
-    public Lesson(String title, String description, Test test) {
+    public Lesson(String title, String description, Quiz quiz) {
         this.title = title;
         this.description = description;
         this.commentList = new ArrayList<>();
         this.moduleList = new ArrayList<>();
-        this.test = test;
+        this.quiz = quiz;
     }
 
     public ArrayList<Module> getModuleList() {
@@ -68,7 +68,7 @@ public class Lesson implements JSONAware {
         return "src.Lesson{" +
                 "commentList=" + commentList +
                 ", moduleList=" + moduleList +
-                ", test=" + test +
+                ", test=" + quiz +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 '}';
@@ -114,7 +114,7 @@ public class Lesson implements JSONAware {
         sb.append(']');
         sb.append(',');
         sb.append("\"test\":");
-        sb.append(test.toJSONString());
+        sb.append(quiz.toJSONString());
 
         sb.append('}');
 
