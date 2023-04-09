@@ -1,1 +1,29 @@
-{"a1c1bf36-1793-496e-9d8b-e1ae9fd6573a":{"firstName":"Allie","lastName":"Anderson","email":"email","phoneNumber":"phone number","username":"Allie Anderson","password":"password","clearance":"Student"},"683172b6-86a0-439c-9993-1265214cf909":{"firstName":"John","lastName":"Wisdom","email":"wisdomJohn@gmail.com","phoneNumber":"999-999-9990","username":"wjohn","password":"coolteacher9","clearance":"Teacher"},"8c3eedf7-ae54-4543-b60e-30750467b1d1":{"firstName":"Scout","lastName":"Solace","email":"email","phoneNumber":"phone number","username":"scout","password":"password","clearance":"Student"}}
+{
+  "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a": {
+    "firstName": "Allie",
+    "lastName": "Anderson",
+    "email": "email",
+    "phoneNumber": "phone number",
+    "username": "Allie Anderson",
+    "password": "password",
+    "clearance": "Student"
+  },
+  "683172b6-86a0-439c-9993-1265214cf909": {
+    "firstName": "John",
+    "lastName": "Wisdom",
+    "email": "wisdomJohn@gmail.com",
+    "phoneNumber": "999-999-9990",
+    "username": "wjohn",
+    "password": "coolteacher9",
+    "clearance": "Teacher"
+  },
+  "8c3eedf7-ae54-4543-b60e-30750467b1d1": {
+    "firstName": "Scout",
+    "lastName": "Solace",
+    "email": "email",
+    "phoneNumber": "phone number",
+    "username": "scout",
+    "password": "password",
+    "clearance": "Student"
+  }
+}
