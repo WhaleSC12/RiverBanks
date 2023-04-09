@@ -1,0 +1,11 @@
+{
+  "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a": {
+    "firstName": "FIRSTNAME",
+    "lastName": "LASTNAME",
+    "email": "EMAIL",
+    "phoneNumber": "PHONENUMBER",
+    "username": "USERNAME",
+    "password": "PASSWORD",
+    "clearance": "Student"
+  }
+}
