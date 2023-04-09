@@ -6,136 +6,20 @@
     "authorUUID": "683172b6-86a0-439c-9993-1265214cf909",
     "lessons": [
       {
-        "title": "LESSON1",
-        "description": "LESSONDESCRIPTION1",
-        "comments": [
-          {
-            "userUUID": "683172b6-86a0-439c-9993-1265214cf909",
-            "content": "COMMENT1",
-            "comments": []
-          }
-        ],
-        "modules": [
-          {
-            "title": "MODULETITLE1",
-            "description": "MODULEDESCRIPTION1",
-            "content": "MODULECONTENT1"
-          },
-          {
-            "title": "MODULETITLE2",
-            "description": "MODULEDESCRIPTION2",
-            "content": "MODULECONTENT2"
-          }
-        ],
-        "test": {
-          "title": "TESTTITLE",
-          "description": "TESTDESCRIPTION",
-          "questions": [
-            {
-              "prompt": "QUESTIONPROMPT1",
-              "answers": [
-                {
-                  "text": "ANSWER1",
-                  "correct": false
-                },
-                {
-                  "text": "ANSWER2",
-                  "correct": false
-                },
-                {
-                  "text": "ANSWER3",
-                  "correct": true
-                },
-                {
-                  "text": "ANSWER4",
-                  "correct": true
-                }
-              ]
-            },
-            {
-              "prompt": "QUESTIONPROMPT2",
-              "answers": [
-                {
-                  "text": "ANSWER1",
-                  "correct": false
-                },
-                {
-                  "text": "ANSWER2",
-                  "correct": false
-                },
-                {
-                  "text": "ANSWER3",
-                  "correct": true
-                },
-                {
-                  "text": "ANSWER4",
-                  "correct": true
-                }
-              ]
-            }
-          ]
-        }
-      },
-      {
-        "title": "LESSON2",
-        "description": "LESSONDESCRIPTION2",
-        "comments": [
-          {
-            "userUUID": "683172b6-86a0-439c-9993-1265214cf909",
-            "content": "COMMENT1",
-            "comments": []
-          }
-        ],
-        "modules": [
-          {
-            "title": "MODULETITLE1",
-            "description": "MODULEDESCRIPTION1",
-            "content": "MODULECONTENT1"
-          }
-        ],
-        "test": {
-          "title": "TESTTITLE1",
-          "description": "TESTDESCRIPTION1",
-          "questions": [
-            {
-              "prompt": "QUESTIONPROMPT1",
-              "answers": [
-                {
-                  "text": "ANSWER1",
-                  "correct": false
-                },
-                {
-                  "text": "ANSWER2",
-                  "correct": false
-                },
-                {
-                  "text": "ANSWER3",
-                  "correct": true
-                },
-                {
-                  "text": "ANSWER4",
-                  "correct": true
-                }
-              ]
-            }
-          ]
-        }
-      },
-      {
-        "title": "LESSON3",
+        "title": "LESSONTITLE",
         "description": "LESSONDESCRIPTION",
         "comments": [
           {
             "userUUID": "683172b6-86a0-439c-9993-1265214cf909",
-            "content": "COMMENT1",
+            "content": "COMMENTCONTENT",
             "comments": []
           }
         ],
         "modules": [
           {
-            "title": "MODULETITLE1",
-            "description": "MODULEDESCRIPTION1",
-            "content": "MODULECONTENT1"
+            "title": "MODULETITLE",
+            "description": "MODULEDESCRIPTION",
+            "content": "MODULECONTENT"
           }
         ],
         "test": {
@@ -143,23 +27,11 @@
           "description": "TESTDESCRIPTION",
           "questions": [
             {
-              "prompt": "QUESTION1",
+              "prompt": "QUESTIONPROMPT",
               "answers": [
                 {
-                  "text": "ANSWER1",
+                  "text": "ANSWERTEXT",
                   "correct": false
-                },
-                {
-                  "text": "ANSWER2",
-                  "correct": false
-                },
-                {
-                  "text": "ANSWER3",
-                  "correct": true
-                },
-                {
-                  "text": "ANSWER4",
-                  "correct": true
                 }
               ]
             }
