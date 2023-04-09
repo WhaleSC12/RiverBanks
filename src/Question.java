@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Question implements JSONAware {
     private String prompt;
     // string is the text displayed to the user, bool is whether the user gets point for choosing that answer
-    private ArrayList<AbstractMap.SimpleEntry<String, Boolean>> answerList;
+    private ArrayList<AbstractMap.SimpleEntry<String, Boolean>> answerList = new ArrayList<>();
 
     public ArrayList<AbstractMap.SimpleEntry<String, Boolean>> getAnswerList() {
         return answerList;
