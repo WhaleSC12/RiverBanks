@@ -3,6 +3,9 @@ import src.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.lang.reflect.Array;
+import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import org.junit.AfterClass;
@@ -70,12 +73,47 @@ class CourseDataTest {
      
      @Test
      public void getLessonTest(){ 
-        //need to be completed
-     }
+       //needs to be completed make it pass
+       Question question = new Question();
+       String test = "Test Question in Test";
+       ArrayList<AbstractMap.SimpleEntry<String, Boolean>>answerList = new ArrayList<>();
+       answerList.add(new AbstractMap.SimpleEntry<>(test, true));
+       ArrayList<Question> questions = new ArrayList<>();
+       question.setAnswerList(answerList);
+       questions.add(question);
+       Test tests = new Test("Intro Test", "Used in testing case");
+       tests.setQuestionList(questions);
+       Lesson lessons = new Lesson("Testing", "Testing code", tests);
+       assertEquals(lessons.getTest(),tests);
+    }
      
      @Test
-     public void getTestTest() { 
-        //need to be completed
+     public void getMadeTestTest() { 
+        //need to be completed make it fall
+        Question question = new Question();
+       String test = "Test Question in Test";
+       ArrayList<AbstractMap.SimpleEntry<String, Boolean>>answerList = new ArrayList<>();
+       answerList.add(new AbstractMap.SimpleEntry<>(test, true));
+       ArrayList<Question> questions = new ArrayList<>();
+       question.setAnswerList(answerList);
+       questions.add(question);
+       src.Test tests = (src.Test) new Test("Intro Test", "Used in testing case");
+       String testing = ((Course) tests).getTitle();
+       tests.setQuestionList(questions);
+       assertEquals(((Course) tests).getTitle(),testing);S
+     }
+
+     @Test
+     public void getQuestion() { 
+        Question question = new Question();
+       String test = "Test Question in Test";
+       ArrayList<AbstractMap.SimpleEntry<String, Boolean>>answerList = new ArrayList<>();
+       answerList.add(new AbstractMap.SimpleEntry<>(test, true));
+       ArrayList<Question> questions = new ArrayList<>();
+       question.setAnswerList(answerList);
+       questions.add(question);
+       String Qtest = question.getPrompt();
+       assertEquals(question.getPrompt(), Qtest);
      }
 
 }
