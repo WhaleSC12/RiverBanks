@@ -1,3 +1,5 @@
+package src;
+
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -18,7 +20,7 @@ public class DataWriter {
     private static final String COURSES_JSON = "json/dat/courses.json";
 
     /**
-     * Save the user's data (not course progress and grades) into the User JSON
+     * Save the user's data (not course progress and grades) into the src.User JSON
      *
      * @param user user whose data should be saved
      */
@@ -31,7 +33,7 @@ public class DataWriter {
     }
 
     /**
-     * Save the user's data (not course progress and grades) into the User JSON
+     * Save the user's data (not course progress and grades) into the src.User JSON
      * Iterates over any iterable collection of users
      *
      * @param userList list of users whose data should be saved

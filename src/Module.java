@@ -1,3 +1,5 @@
+package src;
+
 import org.json.simple.JSONAware;
 
 /**
@@ -41,7 +43,7 @@ public class Module implements JSONAware, TextFileAware {
 
     @Override
     public String toString() {
-        return "Module{" +
+        return "src.Module{" +
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", content='" + content + '\'' +

@@ -1,6 +1,10 @@
+package src;
+
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
+
+//imports added for testing
 
 /**
  * Singleton which holds a list of all user objects

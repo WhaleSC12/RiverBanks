@@ -1,10 +1,12 @@
+package src;
+
 import org.json.simple.JSONAware;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
 
 /**
- * Questions held within a Test
+ * Questions held within a src.Test
  */
 public class Question implements JSONAware {
     private String prompt;
@@ -21,7 +23,7 @@ public class Question implements JSONAware {
 
     @Override
     public String toString() {
-        return "Question{" +
+        return "src.Question{" +
                 "prompt='" + prompt + '\'' +
                 ", answerList=" + answerList +
                 '}';

@@ -1,3 +1,5 @@
+package src;
+
 import org.json.simple.JSONAware;
 
 import java.util.ArrayList;
@@ -63,7 +65,7 @@ public class Lesson implements JSONAware {
 
     @Override
     public String toString() {
-        return "Lesson{" +
+        return "src.Lesson{" +
                 "commentList=" + commentList +
                 ", moduleList=" + moduleList +
                 ", test=" + test +

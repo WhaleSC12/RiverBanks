@@ -1,3 +1,5 @@
+package src;
+
 import org.json.simple.JSONAware;
 
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ public class Comment implements JSONAware {
 
     @Override
     public String toString() {
-        return "Comment{" +
+        return "src.Comment{" +
                 "author=" + author +
                 ", content='" + content + '\'' +
                 ", commentList=" + commentList +

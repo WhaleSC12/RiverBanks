@@ -1,10 +1,12 @@
+package src;
+
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
 
 
-//Where all the method will go that will be used in the LearningUI 
+//Where all the method will go that will be used in the src.LearningUI
 public class Facade {
     private static User currentUser;
     private static final UserData userData = UserData.getInstance();
@@ -17,7 +19,7 @@ public class Facade {
 
     /**
      * @param username username used to look for people's data
-     * @param password password used to correctly identify the correct User
+     * @param password password used to correctly identify the correct src.User
      * @return
      */
 
@@ -34,11 +36,11 @@ public class Facade {
      *
      * @param username    Username the user uses to log in
      * @param password    Password the user uses to log in
-     * @param firstName   User's first name
-     * @param lastName    User's last name
-     * @param email       User's email address
-     * @param phoneNumber User's phone number
-     * @param clearance   User's clearance level
+     * @param firstName   src.User's first name
+     * @param lastName    src.User's last name
+     * @param email       src.User's email address
+     * @param phoneNumber src.User's phone number
+     * @param clearance   src.User's clearance level
      */
     public static void createLogin(String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) {
         currentUser = new User(username, password, firstName, lastName, email, phoneNumber, clearance);
@@ -56,9 +58,9 @@ public class Facade {
 
 
     /**
-     * void method that allows Teacher to create Lesson
+     * void method that allows Teacher to create src.Lesson
      * asking user to enter name,description,lanuage and amount of lessons for the course and then
-     * asks the user how many lessons they want and if they want to add a Test to it and write the test with
+     * asks the user how many lessons they want and if they want to add a src.Test to it and write the test with
      * the questions and answer choices
      *
      * @param course   basic course info and holds all lessons within modules

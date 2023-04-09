@@ -1,9 +1,11 @@
+package src;
+
 import org.json.simple.JSONAware;
 
 import java.util.UUID;
 
 /**
- * User data object which holds pertinent user personal data
+ * src.User data object which holds pertinent user personal data
  */
 public class User implements JSONAware {
     // changed from private final UUID uuid to private UUID uuid
@@ -22,11 +24,11 @@ public class User implements JSONAware {
      * @param uuid        UserUniqueIdentifier, the unique string used to differentiate users
      * @param username    Username the user uses to log in
      * @param password    Password the user uses to log in
-     * @param firstName   User's first name
-     * @param lastName    User's last name
-     * @param email       User's email address
-     * @param phoneNumber User's phone number
-     * @param clearance   User's clearance level
+     * @param firstName   src.User's first name
+     * @param lastName    src.User's last name
+     * @param email       src.User's email address
+     * @param phoneNumber src.User's phone number
+     * @param clearance   src.User's clearance level
      */
     public User(UUID uuid, String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) {
         this.uuid = uuid;
@@ -45,11 +47,11 @@ public class User implements JSONAware {
      *
      * @param username    Username the user uses to log in
      * @param password    Password the user uses to log in
-     * @param firstName   User's first name
-     * @param lastName    User's last name
-     * @param email       User's email address
-     * @param phoneNumber User's phone number
-     * @param clearance   User's clearance level
+     * @param firstName   src.User's first name
+     * @param lastName    src.User's last name
+     * @param email       src.User's email address
+     * @param phoneNumber src.User's phone number
+     * @param clearance   src.User's clearance level
      */
     public User(String username, String password, String firstName, String lastName, String email, String phoneNumber, String clearance) {
         this(UUID.randomUUID(), username, password, firstName, lastName, email, phoneNumber, clearance);
@@ -57,7 +59,7 @@ public class User implements JSONAware {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "src.User{" +
                 "uuid=" + uuid +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +

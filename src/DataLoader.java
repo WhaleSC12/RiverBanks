@@ -1,3 +1,5 @@
+package src;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -98,7 +100,7 @@ public class DataLoader {
      * Creates a test object from its jsonobject
      *
      * @param testObject JSONObject containing the test data, obtained by calling .get("test") on a lesson object
-     * @return a Test form the JSONObject testObject
+     * @return a src.Test form the JSONObject testObject
      */
     private static Test getTest(JSONObject testObject) {
         Test test = new Test((String) testObject.get("title"), (String) testObject.get("description"));

@@ -1,3 +1,5 @@
+package src;
+
 import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -56,7 +58,7 @@ public class JSONWriter implements AutoCloseable {
     }
 
     /**
-     * Use to traverse downwards from the root in the JSON file this JSONWriter was created at
+     * Use to traverse downwards from the root in the JSON file this src.JSONWriter was created at
      * Can be chained
      *
      * @param key key of the value being traversed into
@@ -68,7 +70,7 @@ public class JSONWriter implements AutoCloseable {
     }
 
     /**
-     * Empties the key list so that traversal can being from root without recreating JSONWriter
+     * Empties the key list so that traversal can being from root without recreating src.JSONWriter
      */
     public void emptyKeys() {
         keys.clear();
@@ -109,7 +111,7 @@ public class JSONWriter implements AutoCloseable {
     }
 
     /**
-     * Writes the data in the JSONWriter
+     * Writes the data in the src.JSONWriter
      * This closes the file, as a new filewriter must be created to write again
      */
     public void write() throws IOException {

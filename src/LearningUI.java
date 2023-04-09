@@ -1,3 +1,5 @@
+package src;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
@@ -10,7 +12,7 @@ public class LearningUI {
     }
 
     private static final String Welcome = "Welcome to the Learning Management System";
-    private final String[] mainMenu = {"Log In", "Sign Up", "Courses", "Create Course", "Show Grades", "Logout"};
+    private final String[] mainMenu = {"Log In", "Sign Up", "Courses", "Create src.Course", "Show Grades", "Logout"};
     private Scanner scanner;
     Facade facade = new Facade();
     private static User currentUser;
@@ -56,7 +58,7 @@ public class LearningUI {
             }
             System.out.println("\n" + sb);
         }
-        System.out.println("[1] Return to Main Menu? \n[2] Print Certificate\n[3] View Lesson Grades");
+        System.out.println("[1] Return to Main Menu? \n[2] Print Certificate\n[3] View src.Lesson Grades");
         Scanner uin = new Scanner(System.in);
         int userChoice = uin.nextInt();
         switch (userChoice) {
@@ -104,7 +106,7 @@ public class LearningUI {
 
     /**
      * void login method that asks the users username and passwords
-     * and then calls the Login method in the Facade
+     * and then calls the Login method in the src.Facade
      *
      * @return null
      */
@@ -201,7 +203,7 @@ public class LearningUI {
     }
 
     private void courses() {
-        System.out.println("[1] My Courses\n[2] Search for new Course");
+        System.out.println("[1] My Courses\n[2] Search for new src.Course");
         Scanner k = new Scanner(System.in);
         int uint = k.nextInt();
         switch (uint) {
@@ -214,7 +216,7 @@ public class LearningUI {
     private void searchCourse() {
         System.out.println("[1] Search by Title");
         System.out.println("[2] Search by Author");
-        System.out.println("[3] Search by Language");
+        System.out.println("[3] Search by src.Language");
         Scanner uin = new Scanner(System.in);
         int input = uin.nextInt();
         switch (input) {
@@ -240,14 +242,14 @@ public class LearningUI {
             }
             ++i;
         }
-        System.out.println("Pick a Course");
+        System.out.println("Pick a src.Course");
         int u = uin.nextInt();
         UserCourseData userCourseData = UserCourseData.getInstance();
         var v = userCourseData.courseDataList;
         var dat = v.get(currentUser.getUUID());
         UserCourse userCourse = new UserCourse(currentUser.getUUID(), matchingCourses.get(u).getUUID(), 0, new ArrayList<>());
         dat.putIfAbsent(matchingCourses.get(u).getUUID(), userCourse);
-        System.out.println("Course added to My Courses. Returning to Main Menu.");
+        System.out.println("src.Course added to My Courses. Returning to Main Menu.");
     }
 
 
@@ -275,7 +277,7 @@ public class LearningUI {
         Course someName = courseData.getCourse(somecourse);
 
         if (currentUser.getClearance().equals("Teacher")) {
-            System.out.println("Add Lesson? [y/n]");
+            System.out.println("Add src.Lesson? [y/n]");
             String userinput = new Scanner(System.in).nextLine();
             if (userinput.equals("y")) {
                 System.out.println("Title?");
@@ -318,18 +320,18 @@ public class LearningUI {
         }
 
         if (currentUser.getClearance().equals("Teacher")) {
-            System.out.println("Add Module? [y/n]");
+            System.out.println("Add src.Module? [y/n]");
             String userinput = new Scanner(System.in).nextLine();
             if (userinput.equals("y")) {
                 System.out.println("Title?");
                 String title = new Scanner(System.in).nextLine();
                 System.out.println("Description?");
                 String description = new Scanner(System.in).nextLine();
-                System.out.println("Lesson Content?");
+                System.out.println("src.Lesson Content?");
                 String content = new Scanner(System.in).nextLine();
                 lesson.getModuleList().add(new Module(title, description, content));
             }
-            System.out.println("Modify Test? [y/n]");
+            System.out.println("Modify src.Test? [y/n]");
             userinput = new Scanner(System.in).nextLine();
             if (userinput.equals("y")) {
                 Test test = lesson.getTest();
@@ -342,7 +344,7 @@ public class LearningUI {
                     }
                     System.out.println("\n");
                 }
-                System.out.println("Add Question? [y/n]");
+                System.out.println("Add src.Question? [y/n]");
                 if (new Scanner(System.in).nextLine().equals("y")) {
                     Question question = new Question();
                     System.out.println("Prompt: ");
@@ -358,9 +360,9 @@ public class LearningUI {
                         boolean correct = new Scanner(System.in).nextBoolean();
                         question.getAnswerList().add(new AbstractMap.SimpleEntry<>(answer1, correct));
                     }
-                    System.out.println("Question Added");
+                    System.out.println("src.Question Added");
                 }
-                System.out.println("Test Modified");
+                System.out.println("src.Test Modified");
             }
         }
 
