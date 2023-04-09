@@ -35,15 +35,14 @@ class UserDataTest {
 
     @Test
     public void testSearchUserName() {
-        //uncomment the code later
-       // UserData data = UserData.getInstance();
+        UserData data = UserData.getInstance();
 
-       // User user1 = new User("JoneTest1","Test123", "Jone","Bell", "JoneBell212@gmail.com", "8633636514", "Teacher");
-       // data.userList.add(user1);
+       User user1 = new User("JoneTest1","Test123", "Jone","Bell", "JoneBell212@gmail.com", "8633636514", "Teacher");
+       data.userList.add(user1);
 
-     //   User user2 = new User("JaneHill14","Hill1414", "Jane","Hill", "HillJ45@gmail.com", "7049053356", "Teacher");
-      //  data.userList.add(user2);
-      // assertEquals(user1, data.getUser("JoneTest1"));
+      User user2 = new User("JaneHill14","Hill1414", "Jane","Hill", "HillJ45@gmail.com", "7049053356", "Teacher");
+      data.userList.add(user2);
+      assertEquals(user1, data.getUser("JoneTest1"));
     }
 
     @Test
