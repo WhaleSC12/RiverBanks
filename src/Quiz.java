@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Quiz implements JSONAware {
     private String title;
     private String description;
-    private ArrayList<Question> questionList;
+    private ArrayList<Question> questionList = new ArrayList<>();
 
     public String getTitle() {
         return title;
