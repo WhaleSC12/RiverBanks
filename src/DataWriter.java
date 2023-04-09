@@ -15,9 +15,21 @@ import java.util.UUID;
  * then writing back to the JSON.
  */
 public class DataWriter {
-    private static final String USERS_JSON = "json/dat/users.json"; // to point refs later more easily, ideally we use a singleton or something
-    private static final String USER_COURSE_DATA_JSON = "json/dat/userCourseData.json";
-    private static final String COURSES_JSON = "json/dat/courses.json";
+    private static String USERS_JSON = "json/dat/users.json"; // to point refs later more easily, ideally we use a singleton or something
+    private static String USER_COURSE_DATA_JSON = "json/dat/userCourseData.json";
+    private static String COURSES_JSON = "json/dat/courses.json";
+
+    public static void setUSERS_JSON(String USERS_JSON) {
+        DataWriter.USERS_JSON = USERS_JSON;
+    }
+
+    public static void setUSER_COURSE_DATA_JSON(String USER_COURSE_DATA_JSON) {
+        DataWriter.USER_COURSE_DATA_JSON = USER_COURSE_DATA_JSON;
+    }
+
+    public static void setCOURSES_JSON(String COURSES_JSON) {
+        DataWriter.COURSES_JSON = COURSES_JSON;
+    }
 
     /**
      * Save the user's data (not course progress and grades) into the src.User JSON
