@@ -1,0 +1,46 @@
+{
+  "courseUUID": {
+    "title": "CourseTitle",
+    "description": "desc",
+    "language": "C++|Python|etc.",
+    "authorUUID": "AuthorUUID",
+    "lessons": [
+      {
+        "title": "Title",
+        "description": "lesson description",
+        "modules": [
+          {
+            "title": "title",
+            "description": "description",
+            "content": "content"
+          }
+        ],
+        "comments": [
+          {
+            "userUUID": "author",
+            "content": "content",
+            "comments": []
+          }
+        ],
+        "test": {
+          "title": "title",
+          "description": "description",
+          "questions": [
+            {
+              "prompt": "QuestionPrompt",
+              "answers": [
+                {
+                  "text": "answerTextShownToStudent",
+                  "correct": false
+                },
+                {}
+              ]
+            },
+            {}
+          ]
+        }
+      },
+      {}
+    ]
+  }
+}

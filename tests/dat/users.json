@@ -1,0 +1,20 @@
+{
+  "a1c1bf36-1793-496e-9d8b-e1ae9fd6573a": {
+    "firstName": "FIRSTNAME",
+    "lastName": "LASTNAME",
+    "email": "EMAIL",
+    "phoneNumber": "PHONENUMBER",
+    "username": "USERNAME",
+    "password": "PASSWORD",
+    "clearance": "Student"
+  },
+  "683172b6-86a0-439c-9993-1265214cf909": {
+    "firstName": "FIRSTNAME2",
+    "lastName": "LASTNAME2",
+    "email": "EMAIL2",
+    "phoneNumber": "PHONENUMBER2",
+    "username": "USERNAME2",
+    "password": "PASSWORD2",
+    "clearance": "Student2"
+  }
+}

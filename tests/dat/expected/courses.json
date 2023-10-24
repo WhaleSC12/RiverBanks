@@ -1,0 +1,43 @@
+{
+  "683172b6-86a0-439c-9993-1265214cf909": {
+    "title": "COURSETITLE",
+    "description": "COURSEDESCRIPTION",
+    "language": "Python",
+    "authorUUID": "683172b6-86a0-439c-9993-1265214cf909",
+    "lessons": [
+      {
+        "title": "LESSONTITLE",
+        "description": "LESSONDESCRIPTION",
+        "comments": [
+          {
+            "userUUID": "683172b6-86a0-439c-9993-1265214cf909",
+            "content": "COMMENTCONTENT",
+            "comments": []
+          }
+        ],
+        "modules": [
+          {
+            "title": "MODULETITLE",
+            "description": "MODULEDESCRIPTION",
+            "content": "MODULECONTENT"
+          }
+        ],
+        "test": {
+          "title": "TESTTITLE",
+          "description": "TESTDESCRIPTION",
+          "questions": [
+            {
+              "prompt": "QUESTIONPROMPT",
+              "answers": [
+                {
+                  "text": "ANSWERTEXT",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
